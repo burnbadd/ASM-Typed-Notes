@@ -1,0 +1,408 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Advanced Statistical Mechanics}\\Part III Physics, Unversity of Cambridge}
+\author{\huge{Lawrence Wu}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+%
+%=======================================
+%Lecture 1
+%=======================================
+%
+\chapter{Lecture 1: Revision of equilibrium stochastic physics}
+\section{Prerequisite: Canonical coordinates and Phase space}
+In mathematics and classical mechanics, canonical coordinates are sets of coordinates on phase space which can be used to describe a physical system at any given point in time. In dynamical system theory, a phase space is a space in which all possible states of a system are represented, with each possible state corresponding to one unique point in the phase space.
+\section{Micro-canonical ensemble}
+In statistical mechanics, the microcanonical ensemble is a statistical ensemble that represents the possible states of a mechanical system whose total energy is exactly specified. The system is assumed to be isolated in the sense that it cannot exchange energy or particles with its environment, so that (by conservation of energy) the energy of the system does not change with time. In the Micro-canonical ensemble, the Hamiltonian for the system is usually defined as a function of the canonical coordinates momentum $\bmp$ and position $\bmq$:
+\begin{align}
+    \SH = \SH (\bmp, \bmq)
+\end{align}
+which allows the different states of the system to be represented in phase space $\PP$ and $\QQ$. The energy of system E would be the weighted mean of $\SH$ in phase space. Rather than solving for the behaviour of a particular set of initial conditions, let us hypothesise that the energy is all we need to describe the equilibrium state. This leads us to a statistical mechanical description of the equilibrium state of our system as an ensemble of all possible states with energy E—the microcanonical ensemble.
+Now consider the scenario where, for a given E, we introduce a small positive change dE in energy and the volume of the allowed states in phase space is changed. We define:
+\begin{align}
+    \Omega(E)\ dE & = \intphase \quad (\text{for states with } E <  \ham < E + dE)                             \\
+                  & =\intphase \Theta(E+dE-H)-\Theta(E-H) \quad (\Theta\text{ is the Heaviside step function}) \\
+                  & =d E \cdot \intphase \left[\frac{\partial\Theta(\E-H)}{\partial E}\right]                        \\
+\end{align}
+and we reach the conclusion:
+\dfn{Number of states with hamiltonian $\SH$ equal to given energy E.}{$$\Rightarrow \Omega(E) = \intphase \delta(E - \ham$$)}
+\noindent We then define the "entropy" S to be:
+\dfn{Entropy}{$$\bmS(E) = k_B \ln \Omega(E)$$}
+Now let's talk about probability $\rho(E)$. But how do we define it and how is it useful? Let's consider a quantity of the system $X(\bmp, \bmq)$ and we're trying to deduce its expectation value $\langle X \rangle$. We'll want to integrate over all states with the constraint $\SH = E$:
+\begin{align}
+    \langle X(\bmp, \bmq) \rangle & = \frac{1}{\Omega(E)}\intphase X(\bmp, \bmq) \delta(E - \ham)
+\end{align}
+where we can read out the normalised probability $\rho(E)$ to be:
+\dfn{Normalised probability}{$$\rho(E) = \frac{1}{\Omega(E)}\delta(E - \ham)$$}
+\noindent There is a useful spooky relation when it comes to relating $\Omega$s for different energies:
+\qs{}{Check that for a system consisting of two subsystems with total energy E:$$\Omega(E)=\int \Omega_1\left(E_1\right) \Omega_2\left(E-E_1\right) d E_1$$ as should be intuitively clear}
+\section{Canonical ensemble}
+In comparison with the micro-canonical ensemble, a canonical ensemble is a statistical ensemble that represents the possible states of a mechanical system in thermal equilibrium with a heat bath at a fixed temperature. The system can exchange energy with the heat bath so that the states of the system will differ in total energy. Since the energy is not fixed, we assign a probability P to each distinct state that's related to their energy:
+\begin{align}
+    P \propto e^{-\beta E}
+\end{align}
+\noindent and for P to be normalised, we define the normalisation factor Z aka the partition function to be:
+\dfn{The partition function}{
+    \begin{align}
+        Z & = \sum_{All\ states} e^{-\beta E} = \intphase e^{\beta \ham} \\
+          & = \sum_{Microstates(E)} \Omega(E) e^{-\beta E}               \\
+          & = \sum_{Microstates(E)} e^{-\beta (E-k_B T \ln \Omega(E))}   \\
+    \end{align}
+}
+\noindent Where we often call the value in the exponent the "Free energy" of a microstate.
+\dfn{Free energy}{$$F(E) = E - TS(E)$$}
+\noindent After normalisation, our normalised probability becomes:
+\dfn{Probabilty for the system to have energy E}{$$\rho(E) = \frac{1}{Z} e^{\beta(E-TS)}$$}
+\noindent From the relation above, we can see that the probability is maximised when the free energy F is minimised. And for a large system, this gives the equilibrium state due to the central limit theorem. (We will go further into this in the later lectures.)
+
+In conclusion, minimising the free energy allow us to find the balance between the two incompatible demands in statistical physics: 1. Minimising energy E 2. Maximising entropy S(E), and ignoring the fluctuation in the system about this preferred microstate. But in this course, we aim to look at two non-equilibrium questions: 1. How long does it take to reach such an equilibrium state from an initial state? 2. Are there barriers and metastabilities states?
+\section{Different types of systems (Hohenberg-Halperin 1977)}
+\subsection{Model A: No conservation laws}
+An order parameter $\phi$ is defined to be a variable that can be used to describe a system and gives a complete description of the hamiltonian. In other words, the Hamiltonian can be written in the form $\SH(\phi)$. And when there are no conservation laws in a system for this parameter $\phi$, we call it a Model A system. For example, the magnetisation of a magnetic system is an order parameter of Model A since it does not have to be conserved at all. For models like this we can make a classical mechanical analogy (Think of $\phi$ as the cartesian coordinates of a particle):
+\begin{align}
+    \text{"driving force"}                    & = \text{"friction force"}                 \\
+    -\frac{\partial \SH(\phi)}{\partial \phi} & = \gamma \frac{\partial \phi}{\partial t}
+\end{align}
+\noindent And this will be the principal which controls the evolution of the system towards equilibrium. This is in contrast with another type of system that we call Model B:
+\subsection{Model B: Conserved fields}
+For this type of system, we have a conservation law of the form:
+\begin{align}
+    \int \phi(\bmx) d\bmx = constant
+\end{align}
+\noindent and for this type of system, since we can only change the distribution of this parameter but not the total quantity, the characteristic equation will be the classical continuity equation:
+\begin{align}
+    \del{\phi}{t} = -D \nabla^2 \del{\SH(\phi)}{\phi}
+    \intertext{where the flux J is:}
+    \bmJ = -D \nabla \del{\SH}{\phi}
+\end{align}
+\subsection{Model C-F...}
+Model C describes a field $\phi$ that is coupled to a conserved auxiliary field and such analysis goes down all the way to Model F. There's no need to know all of them and the above sections are just raising awareness that these mechanical analysis exists.
+
+%
+%=======================================
+%Lecture 2
+%=======================================
+%
+\chapter{Lecture 2: Basic definitions of probability theory}
+\section{Random Variables and Probabilty}
+
+As the title suggests, this lecture covers the basic of probability theory so there is a common language that we can use to describe stochastic systems. Let's start with the definition of "Random variables" or "Stochastic variables". A random variable $x$ with a microscopic probability $P(x)$ has the definitions:
+\dfn{EV and Variance}{
+    \begin{align}
+        Expectation value:& \ \langle x \rangle=\int x \cdot P(x) dx\\
+        Variance:& \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
+    \end{align}
+}
+\noindent We then introduce the concept of characteristic function $\phi_x(k)$ that most of you probably have not seen before, which is the expectation value of $e^{ikx}$:
+\dfn{Characteristic function}{
+    \begin{align}
+        \phi_x(k) = \langle e^{ikx}\rangle_{P(x)} = \int e^{ikx} P(x) dx
+    \end{align}
+}
+\noindent where we can see is just simply the Fourier Transform of $P(x)$! But if we expand the exponential in terms of the Taylor series:
+\begin{align}
+    \phi_x(k) &= \int e^{ikx} P(x) dx\\
+    &= \int \sum_{n=0}^{\infty} \frac{1}{n!} (ikx)^n P(x) dx\\
+    &= \sum_{n=0}^{\infty} \frac{(ik)^n}{n!} \langle x^n \rangle\\
+\end{align}
+\noindent where we call $\langle x^n \rangle$ the $n^{th}$ moment of the probability $P(X)$. 
+\dfn{Moments of P(x)}{
+    \begin{align}
+        n^{th} \ moment: \langle x^n \rangle = \int x^n P(x) dx
+    \end{align}
+}
+\noindent We can also express the characteristic equation in terms of an exponential of a sum:
+\begin{align}
+    \phi_x(k)=\exp \left[\sum_{n=0}^{\infty} \frac{(i k)^n}{n !} C_n\right]
+\end{align}
+\noindent where we call the coefficient $C_n$ the cumulants of P(x) and we can calculate them directly from a probability distribution $P(x)$:
+\dfn{Cumulants}{
+    \begin{align}
+        C_n = \frac{d^n}{d(i k)^n} \ln \phi_x(k)\ |_{k=0}
+    \end{align}
+}
+\ex{$C_1$}{
+    \begin{align}
+        C_1&=\frac{d}{d\left(ik\right)} \ln \left(\sum_{n=0}^{\infty} \frac{(i k)^n}{n !}\left\langle x^a\right\rangle\right)_{k=0}\\
+        &=\left[\frac{1}{i} \frac{i \sum_m \frac{1}{(m-1)}(i k)^{m-1}\left\langle x^m\right\rangle}{\sum_n(i k)^n / m !\left\langle x^n\right\rangle}\right]_{k=0}\\
+        &= \langle x \rangle
+    \end{align}
+}
+\qs{$C_2$}{Check that $C_2 = \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2$}
+\noindent due to the Fourier transform nature of the characteristic function, we can see that if $P(x)$ is a Gaussian, then so is $\phi_x(k)$:
+\begin{align}
+    P = exp\left(-\frac{\left(x-x_0\right)^2}{2\sigma^2}\right) \Leftrightarrow \phi_x(k) = e\left(-\frac{\sigma^2 k^2}{2}+i k x_0\right)
+\end{align}
+\section{Random Walk}
+Let's now consider a linked sequence $y_N$ of random variables $x_i$ with identical probability distributions $P(x)$ (For example the length of a polymer chain with N identical links randomly folded), we call this a "random walk" or a "stochastic process":
+\dfn{Random walk}{
+    \begin{align}
+        y_N = \sum_{i=1}^{N}x_i\\
+        \left\langle y_N\right\rangle=N\langle x\rangle\\
+        \sigma_y^2 = \left\langle y_N^2\right\rangle-\langle y_N\rangle^2 = N \sigma^2
+    \end{align}
+}
+where the variance relationship came from:
+\begin{align}
+\left\langle y^2\right\rangle-\langle y\rangle^2&=\sum_i \sum_j\left\langle x_i x_j\right\rangle-\sum_i\left\langle x_i\right\rangle \sum_j\left\langle x_j\right\rangle \\
+&=N\left\langle x^2\right\rangle+N(N-1)\langle x\rangle^2-N^2\langle x\rangle^2 \\
+&=N\left(\left\langle x^2\right\rangle-\langle x)^2\right)=N \sigma^2
+\end{align}
+Now we introduce the normalised random walk $S_N = y_N/N$ where $\ev{S_N} = \ev{x_N}$ and $\sigma_S^2 = \sigma_x^2/N$, and the central limit theorem suggests that no matter what $P(x)$ is, $P(S_N)$ will always converge to a Gaussian:
+\thm{Central Limit theorem}{
+    For a normalised random walk $S_N$ where:
+    \begin{align}
+        S_N &= \frac{y_N}{N}\\
+        \ev{S_N} &= \ev{x}\\
+        \sigma_S^2 &= \frac{\sigma_x^2}{N}\\
+    \end{align}
+    The probability distribution for $S_N$: $P(S)$ converges to a Gaussian with the same EV and Variance for large N.
+}
+\begin{myproof} (This is a very rough proof)\\
+    We start with the characteristic function $\phi_S(k)$:
+    \begin{align}
+        \phi_s(k)&=\left\langle e^{i k s}\right\rangle=\left\langle exp\left(i \frac{k}{N} \sum_m x_m\right)\right\rangle \\
+        &=\left\langle e^{\frac{i k}{N} x}\right\rangle_{P(x)}^N = \left[\phi_x(\frac{k}{N})\right]^N
+    \end{align}
+    On the other hand, we can also express $\phi_S(k)$ and $\phi_x(k)$ as:
+    \begin{align}
+        \phi_s(k) & =\exp \left[\sum_{m=0}^{\infty} \frac{\left({i k}\right)^m}{m !} C_m(s)\right] \\
+        & =\left[\phi_x(k / N)\right]^N \\
+        & =\left[\exp \left(\sum_{m=0}^N \frac{\left({i k}\right)^m}{m!N^m} C_m(x)\right)\right]^N \\
+        & =\exp \left(\sum_{m=0}^N \frac{(i k)^m}{m ! N^{m-1}} C_m(x)\right)
+    \end{align}
+    From here, it is not hard to convince yourself that as N increases the terms in the sum with $m>1$ will slowly disappear. So if we consider only the first two terms in the sum:
+    \begin{align}
+        \phi_S(k) &\approx \exp \left(N+i k C_1(x)-\frac{k^2}{2 N} C_2(x)\right)\\
+        &= \exp \left(N+i k \ev{x} - \frac{k^2}{2 N} \sigma_x^2\right)
+    \end{align}
+    This is just the Fourier Transform of a Gaussian with the mean and variance mentioned above! Therefore, FTing it back to $P(S)$ gives us our desired result.
+\end{myproof}
+\section{Random walk in time}
+If we replace N in the random walk with time t, we reach a stochastic process $y(t)$ where we're randomly drifting around over continuous time. In this section, we go through a few key properties of this stochastic process.
+\subsection{probabilities}
+We can then define a set of probabilities:
+\dfn{Probabilities for random walks in time}{
+    \begin{align}
+        P_1(y,t)&: the\ probability\ of\ being\ at\ value\ y\ at\ time\ t\\
+        P_2(y_1, y_2| t_1, t_2)&: probability\ of\ being\ at\ (y_1,t_1)\ and\ then\ (y_2,t_2)\\
+        \vdots & \ \ and\ so\ on
+    \end{align}
+}
+\subsection{Normalisation}
+These probabilities are normalised by:
+\begin{align}
+    1&=\int d y_1 \ldots d y_N \ P_N\left(y_1, y_2 \ldots y_N \mid t_1, t_2 \ldots t_N\right)\\
+\end{align}
+which is saying if we consider all possible $y_i$ at the given times $t=t_i$, we should have a total probability of 1.
+\ex{}{
+    \begin{align}
+        1&=\int d y P_1(y, t)
+    \end{align}
+}
+\subsection{Reduction}
+\thm{Reduction}{
+    The probability $P_N$ can be reduced into $P_{N-1}$ by reduction:
+    \begin{align}
+        \int d y_N P_N\left(y_1 y_2 \ldots y_N \mid \cdots\right)=P_{N-1}\left(y_1, \cdots y_{N-1}\right) \label{eq:reduction}
+    \end{align}
+}
+\ex{}{
+    \begin{align}
+        \int P_2\left(y_1 y_2 \mid t_1 t_2\right) d y_2=P_1\left(y_1 \mid t_1\right)
+    \end{align}
+}
+\subsection{Correlation functions}
+Correlation functions are defined in the following ways:
+\dfn{Correlation functions}{
+    \begin{align}
+        \ev{y(t)} &= \int y \cdot P(y,t) dy\\
+        \left\langle y_1\left(t_1\right) y_2\left(t_2\right)\right\rangle&=\int y_1 y_2 p_2\left(y_1 y_2 \mid t_1 t_2\right)dy_1dy_2\\
+        etc&\cdots
+    \end{align}
+}
+\subsection{Stationary process}
+A stationary process is defined when $P_1(y,t)$ is invariant under time shift, in other words, not time dependent. For such process, the correlation function $\ev{y(t)}$ has no time dependence and the second correlation $\left\langle y_1\left(t_1\right) y_2\left(t_2\right)\right\rangle$ will only depend on $\Delta t = t_1 - t_2$.
+\subsection{Conditional probability}
+For the case where $t_2>t_1$ it is very intuitive to think the probability $\left\langle y_1\left(t_1\right) y_2\left(t_2\right)\right\rangle$ can be written in terms of the product of $P_1(y_1|t_1)$ and some other function G, where G is the conditional probability of $y=y_2$ when $t=t_2$ given that $y=y_1$ when $t=t_1$.
+\dfn{The propagator G}{
+    \begin{align}
+        \left.P_2\left(y_2 y_1 \mid t_2 t_1\right)=G(2 \mid 1) P_1\left(y_1 \mid t_2\right.\right) \label{eq:propagator}
+    \end{align}
+}
+\subsection{Markov Process}
+A Markov process is a stochastic process in which the probability of each event depends only on the state attained in the previous event, or we say it's "memoryless". In our case, the probability of all $P_i$ depends only on the single probability $P_1$ and our propagator G since the process has no "memory" of what happened before. Therefore if we want to calculate for example $P_4$, all we need is $P_1$ and then apply the propagator 3 more times.
+\thm{Markov Process}{
+    Any higher level probability $P_i$ can be constructed by using just the single probability $P_1$ and the propagator G.
+}
+\subsection{Evolution relation}
+If we consider the setting mentioned in the propagator section, we can actually combine the reduction relation Eq.\eqref{eq:reduction} with the propagator Eq.\eqref{eq:propagator} to reach something called the evolution relation:
+\begin{align}
+    P_1\left(y_2 t_2\right)=\int G\left(y_2 y_1 \mid t_2 t_1\right) P_1\left(y_1 t_1\right) dy_1 \label{eq:evolution_relation}
+\end{align}
+\subsection{Kolmogorov-Chapman relation}
+The last relation we're gonna talk about in this section is the Kolmogorov-Chapman relation. Now imagine we start with state 0 $(y_0,t_0)$, go through a transition state 1 $(y_1,t_1)$ at a given time $t=t_1$ and end up in state 2 $(y_2,t_2)$. The propagator between state 0 and state 2 can be expressed by:
+\begin{align}
+    G\left(y_2, y_0 \mid t_2, t_0\right)=\int G\left(y_2, y_1\mid t_2, t_1\right) G\left(y_1, y_0 \mid t_1, t_0\right) dy_1
+\end{align}
+
+%
+%=======================================
+%Lecture 3
+%=======================================
+%
+\chapter{Lecture 3:The Poisson Process}
+As we mentioned in the last chapter, a stationary Markov process is a process where 1. its higher probabilities $P_i$ can all be derived from the single probability $P_1$ and the propagator G 2. The probabilities are all invariant with respect to time shifts. Two stationary Markov processes are particularly important - the Poisson Process and the Wiener Process:
+\begin{enumerate}
+    \item Poisson Process:
+    \begin{itemize}
+        \item Independent steps
+        \item Only forward steps
+        \item Either go forward or not move after each step.
+    \end{itemize}
+    \item Wiener Process:
+    \begin{itemize}
+        \item Independent steps
+        \item Can go both forward and backward
+        \item Must go either forward or backwards after each step, must move!
+    \end{itemize}
+\end{enumerate}
+\section{Poisson Process}
+Let's give some examples so we can have a clearer understanding. Imagine shooting a target with a pistol, let's call every time a bullet is fired a "step". So the number of bullets that hit the target is a Poisson Process since after each step the number can only increase by one (go forward 1 step) or not change if we miss (not move).
+
+Formulating the above example in maths, we have a status of the system $N(t)$ and a parameter $\nu$ which is the rate of a single forward step (N=n-1 to n) to happen (or else we don't move). The probability $P_+$ to make a step in time dt is $P_+ = \nu \cdot dt$. And $N(t)$ is our stochastic process. And the most common answers that we're looking for when using this model are: 1. How far forward would we go in time t? 2. How much time would it take for us to reach a certain point n?
+
+\dfn{Poisson Process}{
+    \begin{enumerate}
+        \item Status of the system (integer): $N(t)$
+        \item Rate of going forward: $\nu$
+        \item Probability to go forward a step in time dt: $P_+ = \nu \cdot dt$
+    \end{enumerate}
+}
+
+If the system is in the state $N(t) = n-1$ and we look into this single step going from (n-1) to (n), we can ask two questions: 1. What is the total probability $W(t)$ that the system makes this step after time t? 2. Equivalently, what is the "survival probability" $S(t)=1-W(t)$ that the system still remains in the state $N=n-1$ after time t? To obtain $S(t)$, we look at the relation between $S(t)$ and $S(t+dt)$:
+\begin{align}
+    S(t+d t)&=S(t) \cdot[1-\nu d t]\\
+    \frac{d S}{d t}&=-v \cdot S \\
+    \intertext{by using $S(t=0) = 1$ we get:}
+    S(t)&=e^{-\nu t}
+\end{align}
+\dfn{Survival Probability}{
+    $$S(t)=e^{-\nu t}$$
+}
+We can then get the average time it takes for the process to make this single step $\ev{t_1}$ by using $W(t)$ and the probability density $w(t)$:
+\begin{align}
+    \intertext{First define the probability density $w(t)$ of making the step:}
+    w(t)=\frac{d W(t)}{d t}=-\frac{\partial S}{\partial t}=\nu e^{-\nu t}\\
+    \intertext{Then the average time it takes to go forward this single step would be:}
+    \left\langle t_1\right\rangle=\int t \cdot w(t) d t=\frac{1}{\nu}\\
+    \intertext{and with a similar method, we can also get:}
+    \sigma^2_t = \left\langle t_1^2\right\rangle-\left\langle t_1\right\rangle^2=\frac{1}{\nu^2}
+\end{align}
+
+\qs{Simulation excercise}{
+    We are constantly flipping a biased coin and the stochastic process is the total number of heads obtained. The constant step time $\Delta t$ is the time it takes for each flip and the biased probability of flipping a head from the coin is $p_+$, we can express it in terms of the usual Poisson process rates:
+    \begin{align}
+        p_{+}=\nu{\Delta t} \quad \text { and } \quad p_0=1-\nu \Delta t
+    \end{align}
+    What's the probability $P(k,N)$ of having exactly k heads after these N steps (or after time $T=N\Delta t$)? (k is just like our position in a Poisson process, and $N = T/\Delta t$ is effectively a type of expression for total time T.)
+}
+We can see trivially that this is a binomial process without the need for simulation where:
+\begin{align}
+    p(k, N)=\frac{N !}{k !(N-b) !} \cdot p_{+}^k \cdot\left(1-p_{+}\right)^{N-k}
+\end{align}
+The interesting thing is that if you run a simulation with large enough N (small enough time step), p(k,N) reduces to:
+\begin{align}
+    p(k, \lambda)=\frac{\lambda^k}{k !} e^{-\lambda} 
+\end{align}
+Where $\lambda = Np_+ = \nu T$ is the expectation value of heads in the overall session. This is exactly the Poisson distribution! 
+\dfn{Poisson distribution}{
+    Poisson distribution is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time if these events occur with a known constant mean rate and independently of the time since the last event.
+    \begin{align}
+        p(k, \lambda)=\frac{\lambda^k}{k !} e^{-\lambda} \label{eq:Poisson_dist}
+    \end{align}
+    Where $\lambda = \nu T$ is the expected number of events in the given time interval.
+}
+\section{The Poisson distribution}
+But how did we reach this result? Let's try to derive it using a standard Poisson process with external parameters position and time (n,t) and the rate $\nu$. First, let's start with the probability of being at position n at time t+dt:
+\begin{align}
+    P(n, t+d t)=P(n, t) \cdot[1-\nu d t]+P(n-1, t) \cdot \nu d t
+\end{align}
+The first term on the RHS represents the process where it was already at position n and carry on staying at the same spot after this small time interval, and the second term corresponds to it being at position n-1 and hopping forward into our desired state n in the small time interval. Using this relation, we can find: 
+\begin{align}
+    \frac{d P(n, t)}{d t} &= \left[P(n,t+dt)-P(n,t)\right]/dt\\
+    &= \nu \cdot[P(n-1, t)-P(n, t)] \label{eq:master_equation_poisson}
+\end{align}
+In the square brackets of the second line, the first term and second terms can be considered as the "flux in" and "flux out" of the position n. This is often called the "Master Equation". Recall from the previous chapter the characteristic function $\phi_x(k)=\left\langle e^{i k x}\right\rangle$, we can define a "generating function" $g(k,t)$ using a similar logic:
+\begin{align}
+    g(k, t)&=\sum_{n=0}^{\infty} p(n, t) k^n \label{eq:g_definition} \\
+    \intertext{If we differentiate it in respect of t:}
+    \frac{\partial g(k, t)}{\partial t}&=\sum_{n=0}^{\infty} k^n \cdot v[p(n-1, t)-p(n, t)]\\
+    \intertext{and reindex n into m-1 and regroup the terms}
+    &=\sum_{m=0}^{\infty} v\left(k^{m+1}-k^m\right) P(m, t)\\
+    &=v(k-1) \sum_{n=0}^{\infty} k^n P(n, t)\\
+    \intertext{we can see the sum is the same as $g(k,t)$! So we have:}
+    \frac{\partial g}{\partial t}&=v(k-1) \cdot g\\
+    \intertext{By using the following initial conditions, we obtain the exponential form of g:}
+    P(n, t=0)=\delta_{n, 0} &\Rightarrow g(t=0)=1\\
+    g(k, t)&=e^{(k-1) v t}\\
+    \intertext{Now expand the exponential and compare it with the definition of g (Eq.\refeq{eq:g_definition}):}
+    g(k, t)&=e^{-\nu t} \sum_{n=0}^{\infty} \frac{1}{n !}(\nu t)^n \cdot k^n\\
+    &=\sum_{n=0}^{\infty} p(n, t) k^n
+    \intertext{We reach our conclusion:}
+    P(n, t)&=\frac{1}{n !}(\nu t)^n e^{-\nu t}
+\end{align}
+Which is the same as Eq. \refeq{eq:Poisson_dist}.
+We can then ask some simple questions about the expected values or probability of the process:
+\ex{}{What is the expectation value of the occurring time of the 10th event?}
+\sol
+Considering each step is independent, the answer is simply:
+\begin{align}
+    \left\langle t_{10}\right\rangle=10\left\langle t_1\right\rangle=10/ v
+\end{align}
+\ex{}{What is the probability that the 10th event occurs after time t?}
+\sol\\
+There are two ways of doing this: 
+1. Consider the probability $P\left(t_{10}>t\right)$:
+Which we want to integrate the probability that the 10th event happens at exactly $t=t'$ over $t' = t \sim \infty$:
+\begin{align}
+    P\left(t_{10}>t\right)&=\int_t^{\infty} P(t_{10}=t')dt'\\
+    \intertext{And we write this probability as a product of having exactly 9 events and having another one during the time interval dt':}
+    &=\int_t^{\infty} \frac{\left(\nu t^{\prime}\right)^q}{q !} e^{-v t^{\prime}} \cdot v d t^{\prime}
+\end{align}
+2. The second way is much simpler, we just consider $P(n(t)<10)$, which is:
+\begin{align}
+    P(n(t)<10) = \sum_{j=0}^9 \frac{(\nu t)^j}{j !} e^{-\nu t}
+\end{align}
+\section{Evolution of the Master Equation}
+Using the evolution relation (Eq. \refeq{eq:evolution_relation}), we can write out the evolution relation for any stationary Markov process distribution (not just Poisson): 
+\begin{align}
+    \intertext{(The integral has been replaced by a sum since m is discrete)}
+    P(n, t+\Delta t)&=\sum_m G(n, t+\Delta t \mid m, t) \cdot P(m, t)\\
+    \intertext{And if we subtract $P(n,t)$ from both sides:}
+    \frac{\partial P(n, t)}{\partial t}&=\frac{1}{\Delta t}\left[\sum_m G(n, t+\Delta t m, t) P(m, t)
+    -P(n, t) \cdot \sum_m G(m, t+ \Delta t \mid n, t)\right]\\
+    \intertext{where:}
+    \sum_m G(m, t+ \Delta t \mid n, t) = 1\\
+    \intertext{we get:}
+    &=\sum_m \frac{G\left(n, t+\Delta t \mid m, t\right)}{d t} P(m, t)-\sum_m \frac{G(m, t+\Delta t \mid u, t)}{d t} P(u, t)\\
+    &=\sum_m\left[w_{n m} P(m, t)-w_{m n} P(n, t)\right]
+\end{align}
+Where $w_fi$ is the transition probabilities between initial state $\bmi$ to final state $\bmf$.
+\begin{align}
+    w_{fi}=\operatorname{limit~}_{d t \rightarrow 0} \frac{1}{d t} G(j, t+d t \mid i, t)
+\end{align}
+If we are considering the Poisson process, we need to imply the restrictions of $n > m$ and $n < m$ respectively on the two sums, but what we derived here is more general and did not include this restriction.
+\end{document}
