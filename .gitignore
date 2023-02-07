@@ -1,3 +1,6 @@
-example.tex
-example.pdf
-example.synctex.gz
+example.*
+NOTES.*
+
+!NOTES.pdf
+!NOTES.synctex.gz
+!NOTES.tex
