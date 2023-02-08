@@ -105,7 +105,7 @@ As the title suggests, this lecture covers the basic of probability theory so th
         Variance:& \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
     \end{align}
 }
-\noindent We then introduce the concept of characteristic function $\phi_x(k)$ that most of you probably have not seen before, which is the expectation value of $e^{ikx}$:
+\noindent We then introduce the concept of characteristic functions $\phi_x(k)$ that most of you probably have not seen before, which is the expectation value of $e^{ikx}$:
 \dfn{Characteristic function}{
     \begin{align}
         \phi_x(k) = \langle e^{ikx}\rangle_{P(x)} = \int e^{ikx} P(x) dx
@@ -407,49 +407,18 @@ Where $w_fi$ is the transition probabilities between initial state $\bmi$ to fin
 If we are considering the Poisson process, we need to imply the restrictions of $n > m$ and $n < m$ respectively on the two sums, but what we derived here is more general and did not include this restriction.
 
 \chapter{Lecture 4: The Wiener process}
-As the title suggests, we will be looking at the other stationary Markov process that we mentioned at the beginning of the last chapter, the Winer process. 
+As the title suggests, we will be looking at the other stationary Markov process that we mentioned at the beginning of the last chapter, the Wiener process.
 
 \section{The Wiener process}
 So what is the Wiener process? Let's start with the definition of a random walk (Section \ref{section:random_walk}), where you have a random variable $\bmx$ (a single step) with probability density $P(\bmx)$ and a linked sequence $\bmy_N$, which can be converted into a time-dependent function $\bmy(t)$ with a stepping rate. We call this the Wiener process when the probability distribution of independent step $P(\bmx)$ is the Gaussian probability. And we usually use the expression $W(t)$ to represent a Wiener process (rather than $y(t)$).
 
-\dfn{Wiener process}{A random walk $W(t)$ where the increment $\Delta W$ has the Gaussian probability.
+\dfn{Wiener process}{A random walk $W(t)$ where the increment $\Delta W$ has the Gaussian probability of variance $\sigma^2 = \Delta t$
 \begin{align}
     \Delta W&=W(t+\Delta t)-W(t)\\
-    P(\Delta w)&=\frac{1}{\sqrt{2 \pi \Delta t}} \exp\left({-\frac{\Delta w^2}{2 \Delta t}}\right)
+    P(\Delta w)&=\frac{1}{\sqrt{2 \pi \Delta t}} \exp\left({-\frac{\Delta w^2}{2 \Delta t}}\right) \label{eq:wiener_step_prob}
 \end{align}
 }
 \noindent And then there are a few important properties of the Wiener process:
-\subsection{Probability distribution}
-From the probability distribution $P(\Delta w)$ above, it has a variance $\sigma_{\Delta w}$ of $1/\Delta t$. And by using Eq. \eqref{eq:random_walk_variance}, it's not hard to be convinced that after time t ($N = t/\Delta t$ steps), the probability distribution of W(t) - $P(w,t)$ will still a Gaussian distribution if we start from $w(t=0) = w_0$:
-\thm{Probabilty distribution of W(t)}{
-    \begin{align}
-        P(w,t) = w_0 + \frac{1}{\sqrt{2 \pi t}} e^{-x^2 /(2 t)} \label{eq:Wiener_prob}
-    \end{align}
-    with $\sigma_w = 1/t$.
-}
-\begin{myproof}
-    Using the propagator $G = P(\Delta w)$ from the definition of a Wiener process:
-    \begin{align}
-        &P(w+\Delta w, t+\Delta t)=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w, t) d w\\
-        \intertext{And using the relation $\Delta w=w(t+\Delta t)-w(t)$, we can change the variables and change the integral $ d w=-d \Delta w $ (think $w(t+\Delta t)$ as a constant)}
-        &=-\int_{\infty}^{-\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
-        \intertext{flipping the interval of integration back}
-        &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
-        \intertext{taking out the $-\Delta w$ term since it's $<< w(t)$}
-        &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t), t) d w w\\
-        &-\int G(\Delta w, \Delta t) \Delta w \frac{\partial P}{\partial w} d \Delta w\\
-        &+\frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 \frac{\partial^2 P}{\partial w} d \Delta w
-    \end{align}
-    \begin{align}
-        \intertext{The integral in the first line over G is 1 (P doesn't depend on $\Delta w$), due to normalisation over all possible $\Delta w$. The second line is 0 since it's a product of an even function G and odd function $\Delta w$:}
-        P(w+\Delta w, t+\Delta t) - P(w(t+\Delta t), t) &= \frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 d \Delta w \frac{\partial^2 p}{\partial w}\\
-        \intertext{by using $\Delta w=w(t+\Delta t)-w(t)$ and the definition of variance:}
-        \frac{\partial P(w, t)}{\partial t}&=\frac{1}{2} \frac{\sigma_{\Delta w}}{\Delta t} \cdot \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\\
-        \intertext{wrapping the terms up with D, we reach the diffusion equation:}
-        \frac{\partial P\left(w, t\right)}{\partial t}&=D \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\label{eq:wiener_diffusion}\\
-    \end{align}
-    then we can check that our probability Eq. \eqref{eq:Wiener_prob} is a solution of this differential equation that converges to a delta function $P(w) = \delta(w-w_0)$ at t=0. (Plug it in yourself!)
-\end{myproof}
 \subsection{Characteristic function}
 It is easy to check (Fourier Transform) that the characteristic function $\phi$ of $\Delta W$ is:
 \thm{Wiener Characteristic Function}{
@@ -465,7 +434,7 @@ If we speed up (or slow down) the rate of the process by a scaling factor $c$, t
     \begin{align}
         V(t)=\frac{1}{\sqrt{c}} W(c t)
     \end{align}
-    is a Wiener process. The scaling factor $1/\sqrt{c}$ came renormalisation of Eq. \eqref{eq:Wiener_prob}.
+    is a Wiener process. The scaling factor $1/\sqrt{c}$ came from the exponent in Eq. \eqref{eq:wiener_step_prob} since we need to keep the variance of $\Delta v$ as $\Delta t$. (If time flows faster and we're taking more steps per time, the steps must be smaller to keep the overall variance the same.)
 }
 \subsection{Time inversion}
 This is a bit of a weird one to be interpreted physically.
@@ -483,16 +452,46 @@ If we reverse the time and relabel $W(t=A)$ to be the new origin, this is still 
     \end{align}
     is a Wiener process.
 }
-\subsection{Diffusion Equation}
-From the proof of the probability distribution, we derived the diffusion equation \eqref{eq:wiener_diffusion}, which governs how $P(w,t)$ evolves over time. There is no universal solution to this equation since it depends on the initial boundary condition. The Gaussian probability \eqref{eq:Wiener_prob} was a special case where we set the boundary condition $P(w,t=0)$ to be $\delta(w=w_0)$, starting from a fixed point $w_0$. The equation for the global functions (such as the diffusion equation for the global probability distribution $P(w,t)$) are called "kinetic" or Macroscopic. And on a microscopic scale of $W(t)$, they're governed by "Stochastic differential equations", SDE.
+\subsection{Probability distribution} \label{section:wiener_probability}
+Using the propagator $G = P(\Delta w)$ from the definition of a Wiener process:
+\begin{align}
+    &P(w+\Delta w, t+\Delta t)=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w, t) d w\\
+    \intertext{And using the relation $\Delta w=w(t+\Delta t)-w(t)$, we can change the variables and change the integral $ d w=-d \Delta w $ (think $w(t+\Delta t)$ as a constant)}
+    &=-\int_{\infty}^{-\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
+    \intertext{flipping the interval of integration back}
+    &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
+    \intertext{taking out the $-\Delta w$ term since it's $<< w(t)$}
+    &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t), t) d w w\\
+    &-\int G(\Delta w, \Delta t) \Delta w \frac{\partial P}{\partial w} d \Delta w\\
+    &+\frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 \frac{\partial^2 P}{\partial w} d \Delta w
+\end{align}
+\begin{align}
+    \intertext{The integral in the first line over G is 1 (P doesn't depend on $\Delta w$), due to normalisation over all possible $\Delta w$. The second line is 0 since it's a product of an even function G and odd function $\Delta w$:}
+    P(w+\Delta w, t+\Delta t) - P(w(t+\Delta t), t) &= \frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 d \Delta w \frac{\partial^2 p}{\partial w}\\
+    \intertext{by using $\Delta w=w(t+\Delta t)-w(t)$ and the definition of variance:}
+    \frac{\partial P(w, t)}{\partial t}&=\frac{1}{2} \frac{\sigma_{\Delta w}^2}{\Delta t} \cdot \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\\
+    \intertext{wrapping the terms up with D, we reach the diffusion equation:}
+    \frac{\partial P\left(w, t\right)}{\partial t}&=D \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\label{eq:wiener_diffusion}
+\end{align}
+From the derivation above, we conclude that the diffusion equation \eqref{eq:wiener_diffusion} is how $P(w,t)$ evolves over time. There is no universal solution to this equation since it depends on the initial boundary condition $P(w,t=0)$.
+Although there is a special case where we start from a single point $w_0$, setting the boundary condition $P(w,t=0)$ to be $\delta(w=w_0)$. We get a Gaussian probability distribution:
+\thm{Probabilty distribution of W(t)}{
+    \begin{align}
+        P(w,t) = w_0 + \frac{1}{\sqrt{2 \pi t}} e^{-x^2 /(2 t)} \label{eq:Wiener_prob}
+    \end{align}
+    with variance $\sigma_w^2 = t$.
+}
+It's easy to check that Eq. \eqref{eq:Wiener_prob} is a solution of the diffusion differential equation and converges to a delta function $P(w) = \delta(w-w_0)$ at t=0. (Plug it in yourself!) Also, by using the variance $\sigma_{\Delta w}^2$ of $\Delta t$ and Eq. \eqref{eq:random_walk_variance}, it's not hard to be convinced after time t ($N = t/\Delta t$ steps), the probability distribution of W(t) : $P(w,t)$ will still a Gaussian distribution if we start from a single point.
+
+The equation for the global functions (such as the diffusion equation for the global probability distribution $P(w,t)$) are called "kinetic" or Macroscopic. And on a microscopic scale of $W(t)$, they're governed by "Stochastic differential equations", SDE.
 \section{Stochastic differential equations}
 Here's a fun little fact. With so many "Physics-inspired" algorithms/models nowadays, the solution of Brownian motion was actually "trading-inspired". In 1900, Louis Bachelier presented the method of stochastic analysis of stock and option markets in his PhD thesis "The theory of speculation". Then in 1905 Albert Einstein and Marian Smoluchowski brought the solution of Brownian motion to the attention of physicists and presented it as a way to indirectly confirm the existence of atoms and molecules. Later in 1911, Langevin proposed a more general approach to formulating and analysing SDEs. 
 
 Let's start with something that we're all familiar with, the stochastic differential equation for Brownian Motion:
 \begin{align}
-    m \frac{d u}{d t}=-\gamma v+\xi(t)
+    m \frac{d u}{d t}=-\gamma u+\xi(t)
 \end{align}
-where $\xi$ is a stochastic force. More generally, an SDE looks like this:
+where $u$ is the velocity of the particle and $\xi$ is a stochastic force. More generally, any SDE can be written like this:
 \begin{align}
     \frac{d x}{d t}=\underbrace{F(x)}_{\text{drift term}}+\underbrace{\sigma(x) \Delta W(t)}_{\text{diffusion term}}
 \end{align}
