@@ -101,8 +101,8 @@ Model C describes a field $\phi$ that is coupled to a conserved auxiliary field 
 As the title suggests, this lecture covers the basic of probability theory so there is a common language that we can use to describe stochastic systems. Let's start with the definition of "Random variables" or "Stochastic variables". A random variable $x$ with a microscopic probability $P(x)$ has the definitions:
 \dfn{EV and Variance}{
     \begin{align}
-        Expectation value:& \ \langle x \rangle=\int x \cdot P(x) dx\\
-        Variance:& \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
+        \text{Expectation value:}& \ \langle x \rangle=\int x \cdot P(x) dx\\
+        \text{Variance:}& \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
     \end{align}
 }
 \noindent We then introduce the concept of characteristic functions $\phi_x(k)$ that most of you probably have not seen before, which is the expectation value of $e^{ikx}$:
@@ -135,8 +135,8 @@ As the title suggests, this lecture covers the basic of probability theory so th
 }
 \ex{$C_1$}{
     \begin{align}
-        C_1&=\frac{d}{d\left(ik\right)} \ln \left(\sum_{n=0}^{\infty} \frac{(i k)^n}{n !}\left\langle x^a\right\rangle\right)_{k=0}\\
-        &=\left[\frac{1}{i} \frac{i \sum_m \frac{1}{(m-1)}(i k)^{m-1}\left\langle x^m\right\rangle}{\sum_n(i k)^n / m !\left\langle x^n\right\rangle}\right]_{k=0}\\
+        C_1&=\frac{d}{d\left(ik\right)} \ln \left(\sum_{n=0}^{\infty} \frac{(i k)^n}{n !}\left\langle x^n\right\rangle\right)_{k=0}\\
+        &=\left[\frac{1}{i} \frac{i \sum_m \frac{1}{(m-1)!}(i k)^{m-1}\left\langle x^m\right\rangle}{\sum_n(i k)^n / m !\left\langle x^n\right\rangle}\right]_{k=0}\\
         &= \langle x \rangle
     \end{align}
 }
@@ -547,7 +547,7 @@ In this section, it's all mathematician BS, so we used some big words to blend i
     \end{align}
     and a fucntion $f(x)$ that depends on x. The SDE for f is:
     \begin{align}
-        d f&=\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \sigma \frac{\partial f}{\partial x} \cdot d w_t
+        d f&=\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \sigma \frac{\partial f}{\partial x} \cdot d w_t \label{lemma:Itoh}
     \end{align}
 }
 Now applying the same analysis to Geometric Brownian Motion Eq.\eqref{eq:GBM} and consider the function $f(S) = \ln S_t$:
@@ -576,5 +576,89 @@ S&=S_0 \exp \left(\left(u-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
 \end{enumerate}
 
 \noindent Try using the code on the \href{https://en.wikipedia.org/wiki/Geometric_Brownian_motion}{GBM Wikipedia page} to produce GBM graphs in Python!
+
+\chapter{Lecture 5}
+In this lecture, we will be using the two things we introduced in the last lecture, Etoh's lemma and Geometric Brownian Motion, to study the Black-Scholes equation, which won the Nobel prize for economics in 1997. So what is the Black-Scholes equation and how is it useful? It is a mathematical analysis of dynamics and prediction of option prices in volatile markets that are stochastic. The term "option" might not be familiar to some readers, in simple terms, the B-S equation gives investment managers a tool to allocate their risk and cash. For example, buying more stocks is allocating more risk and less cash. 
+
+Interestingly, there are theories that suggest that the 1987 financial crisis was caused by a group of traders that conspired to punish the early adopters of the B-S analysis. Even more interestingly, one of the main causes of the 2008 financial crisis is actually too much trust in the B-S analysis and incorrect use of it (Since they didn't pick the ASM option in Lent like you obviously lol). 
+
+\section{Black-Scholes Equation}
+So first we use a stochastic variable $S(t)$ to present the value of a given stock, which is governed by the SDE of Geometric Brownian Motion (GBM):
+\begin{align}
+    d S=\mu S d t+\sigma S d w \label{eq:StockSDE}
+\end{align}
+since in stocks we usually describe the growth in percentage growth and not linear growth. An "Option" is a contract when you (the seller) agree to sell me (the buyer) a certain stock $\mathcal{S}$, at a future time t, at the current price if the future price satisfies certain conditions (For example reach a trigger price $E$). So you see the seller hopes the stock to depreciate and then the opposite for the buyer. You might think, why would the seller agree to a such weird contract? They already have the stock in hand and can sell them at any time that they want! The only reason that a seller will be interested in such a contract is if the buyer (me) pays a small extra fee for this. We denote this fee as another stochastic variable $V(s, t)$, which depends on the value of the stock $S$ and time $t$. A "Portfolio" $\Pi$ is a combination of assets (cash, stocks, options etc.) that I currently have:
+\begin{align}
+    \Pi=-V\left(s_t\right)+\alpha S
+\end{align}
+where the $-V$ came from the amount that you have already paid for the options contract, and $\alpha S$ from selling a portion $\alpha$ of that same stock at the same time to "hedge" aka decrease risk exposure (Just like the hedge in "Hedge fund"). In continuous trading, we have small increments of time, therefore:
+\begin{align}
+    \Delta \Pi=-\Delta V(s)+\alpha \Delta S
+\end{align}
+Now, we can use the Itoh Lemma \refeq{lemma:Itoh}:
+\begin{align}
+    d V(s)&=\left(\frac{\partial V}{\partial t}+\frac{\partial V}{\partial s} d s+\frac{1}{2} \frac{\partial^2 V}{\partial s^2} d s^2\right)
+    \intertext{And subbing in:}
+    d s&=\mu s d t+\sigma s d w
+    \intertext{We get:}
+    d V(s)&=\left(\frac{\partial v}{\partial t}+\mu s \frac{\partial v}{\partial s}+\frac{1}{2} 6^2 s^2 \frac{\partial^2 v}{\partial s^2}\right) d t +\sigma s \frac{\partial V}{\partial s} d W
+    \intertext{Then substitute $dV$ and $dS$ into $d\Pi$:}
+    d \Pi=-\frac{\partial v}{\partial t} d t-\mu s \frac{\partial v}{\partial s} d t&-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2} d t +\alpha \mu s d t-\underbrace{\sigma s \frac{\partial v}{\partial s} d W+\alpha \sigma s d W}_{\text{stochastic part}}
+\end{align}
+With our stochastic description of $d\Pi$, the key step of reaching the BS equation is to choose the factor $\alpha$ to be $\partial V / \partial S$ so the volatility terms above cancel out and we have no volatility in $d\Pi$. Then, we make a decision on what we want to achieve for $d\Pi$ (The goal of our investments), a steady geometric growth:
+\begin{align}
+    d \Pi=r \cdot \Pi d t
+\end{align}
+Getting us the relation with rate $r$:
+\begin{align}
+    r \cdot \overbrace{(\alpha S-V)}^{\Pi} d t &=\left(-\frac{\partial V}{\partial t}-\cancel{\mu s \frac{\partial V}{\partial s}}-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial S^2}+\ \cancel{\alpha \mu s}\right) d t\\
+    \intertext{Finally we have:}
+    \frac{\partial V(s, t)}{\partial t}&+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial s^2}=r\left(V-s \frac{\partial V}{\partial s}\right)
+\end{align}
+This is the B-S equation! It allows us to solve for $V(s,t)$ for any given $r$ and $\sigma$. The lack of dependence on $\mu$ makes it even more powerful since if we look back to our SDE Eq.\refeq{eq:StockSDE} for $S(t)$, it is $\mu$ that makes the growth of each stock different and the $dW$ term is just geometric stochastic term that represents the market volatility and does not relate to the growth.
+
+What about r? What are the restrictions on this risk-free geometric growth? The "desired legislation" should have this rate of risk-free growth fixed (limited). We will not go into too much detail about the impact of $r$ in the overall economy since we're physicists not econ students. In reality, we use the rate of US Treasury Bonds $r_0$ (effectively the interest rate you get by lending money to the US government) since they are such a global superpower and the capitalists believe lending money to them is risk-free lol.
+\section{A simple case}
+Let's consider the case where $r=0$ and see how the Black-Scholes equation is useful if we were a hedge fund manager back in the 1980s skrskr:
+\begin{align}
+    \frac{\partial V}{\partial t}+\frac{\sigma^2}{2} S^2 \frac{\partial^2 V}{\partial S^2}=0
+\end{align}
+Later in the course, you will see that this is actually the "super diffusion" equation (Another great naming from the physicists ofc) since the diffusion constant $D = \frac{\sigma^2}{2} S^2$ grows as $S^2$, the effective position (non-linear diffusion).
+
+Using this equation, we can solve for the fair value of the contract $V$ at the current time and buy all options that are underpriced and sell all the overpriced ones.
+
+(Note: There's another interesting question to ask: Do we really know the value of volatility $\sigma$? To this day, the measurement or modelling of $\sigma$ is still a very competitive field between hedge funds and a lot of different analyses are still being proposed.)
+
+With all that waffling above, how do we actually solve for $V(s,t)$ using this equation?
+Using the current price($t=0$) of a stock $S$ and the trigger price$E$ of the stock at the end of the contract $(t=T)$, we define:
+\begin{align}
+    x&=\ln S / E\\
+    S&=E e^x\\
+    \tau &= T - t
+    \intertext{re-express $V$ into:}
+    V&\left(E e^x, T-\tau\right)=Z(x, \tau)
+    \intertext{we get:}
+    \frac{\partial z}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 z}{\partial x^2}&+\left(\frac{\sigma^2}{2}-r\right) \frac{\partial z}{\partial x}+r =0
+\end{align}
+Which is a homogeneous differential equation! In order to solve this, there's a beautiful solution by introducing a new variable $u$:
+\begin{align}
+    u(x, \tau)&=z(x, \tau) \cdot e^{\alpha x+\beta \tau}
+    \intertext{plugging it into the PDE above:}
+    \frac{\partial u}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2}&+A(\alpha, \beta) \cdot \frac{\partial u}{\partial x}+\underbrace{B(\alpha, \beta)} \cdot u=0
+    \intertext{choose an $\alpha$ and $\beta$ that yields $A=B=0$: (try it yourself!)}
+    \alpha&=r / 6^2-1 / 2 \\
+    \beta&=r / 2+6^2 / 8+r^2 / 26^2
+    \intertext{and all we have left is:}
+    \frac{\partial u}{\partial \tau}-&\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2} = 0
+\end{align}
+Amazing right? The last step is to simply solve this by using Green's function and its initial condition:
+\begin{align}
+    u(x, \tau)=\int \underbrace{\frac{1}{\sqrt{2 \pi \sigma^2 \tau}} \exp\left({-\frac{(x-w)^2}{2 \sigma^2 \tau}}\right)}_{\text{Green's function}} \cdot \underbrace{u(w, 0)}_{\text{initial condition}} d w
+\end{align}
+and hence we can backroll and find $Z$, and $V(s,t)$.
+
+
+
+
 
 \end{document}
