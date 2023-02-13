@@ -601,7 +601,7 @@ Now, we can use the Itoh Lemma \refeq{lemma:Itoh}:
     \intertext{And subbing in:}
     d s&=\mu s d t+\sigma s d w
     \intertext{We get:}
-    d V(s)&=\left(\frac{\partial v}{\partial t}+\mu s \frac{\partial v}{\partial s}+\frac{1}{2} 6^2 s^2 \frac{\partial^2 v}{\partial s^2}\right) d t +\sigma s \frac{\partial V}{\partial s} d W
+    d V(s)&=\left(\frac{\partial v}{\partial t}+\mu s \frac{\partial v}{\partial s}+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2}\right) d t +\sigma s \frac{\partial V}{\partial s} d W
     \intertext{Then substitute $dV$ and $dS$ into $d\Pi$:}
     d \Pi=-\frac{\partial v}{\partial t} d t-\mu s \frac{\partial v}{\partial s} d t&-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2} d t +\alpha \mu s d t-\underbrace{\sigma s \frac{\partial v}{\partial s} d W+\alpha \sigma s d W}_{\text{stochastic part}}
 \end{align}
@@ -612,10 +612,14 @@ With our stochastic description of $d\Pi$, the key step of reaching the BS equat
 Getting us the relation with rate $r$:
 \begin{align}
     r \cdot \overbrace{(\alpha S-V)}^{\Pi} d t &=\left(-\frac{\partial V}{\partial t}-\cancel{\mu s \frac{\partial V}{\partial s}}-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial S^2}+\ \cancel{\alpha \mu s}\right) d t\\
-    \intertext{Finally we have:}
-    \frac{\partial V(s, t)}{\partial t}&+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial s^2}=r\left(V-s \frac{\partial V}{\partial s}\right)
 \end{align}
-This is the B-S equation! It allows us to solve for $V(s,t)$ for any given $r$ and $\sigma$. The lack of dependence on $\mu$ makes it even more powerful since if we look back to our SDE Eq.\refeq{eq:StockSDE} for $S(t)$, it is $\mu$ that makes the growth of each stock different and the $dW$ term is just geometric stochastic term that represents the market volatility and does not relate to the growth.
+Finally we have the B-S equation:
+\dfn{Black-Scholes Equation}{
+    \begin{align}
+        \frac{\partial V(s, t)}{\partial t}&+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial s^2}=r\left(V-s \frac{\partial V}{\partial s}\right)
+    \end{align}
+}
+It allows us to solve for $V(s,t)$ for any given $r$ and $\sigma$. The lack of dependence on $\mu$ makes it even more powerful since if we look back to our SDE Eq.\refeq{eq:StockSDE} for $S(t)$, it is $\mu$ that makes the growth of each stock different and the $dW$ term is just geometric stochastic term that represents the market volatility and does not relate to the growth.
 
 What about r? What are the restrictions on this risk-free geometric growth? The "desired legislation" should have this rate of risk-free growth fixed (limited). We will not go into too much detail about the impact of $r$ in the overall economy since we're physicists not econ students. In reality, we use the rate of US Treasury Bonds $r_0$ (effectively the interest rate you get by lending money to the US government) since they are such a global superpower and the capitalists believe lending money to them is risk-free lol.
 \section{A simple case}
@@ -646,8 +650,8 @@ Which is a homogeneous differential equation! In order to solve this, there's a 
     \intertext{plugging it into the PDE above:}
     \frac{\partial u}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2}&+A(\alpha, \beta) \cdot \frac{\partial u}{\partial x}+\underbrace{B(\alpha, \beta)} \cdot u=0
     \intertext{choose an $\alpha$ and $\beta$ that yields $A=B=0$: (try it yourself!)}
-    \alpha&=r / 6^2-1 / 2 \\
-    \beta&=r / 2+6^2 / 8+r^2 / 26^2
+    \alpha&=r / \sigma^2-1 / 2 \\
+    \beta&=r / 2+\sigma^2 / 8+r^2 / 2\sigma^2
     \intertext{and all we have left is:}
     \frac{\partial u}{\partial \tau}-&\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2} = 0
 \end{align}
@@ -657,6 +661,247 @@ Amazing right? The last step is to simply solve this by using Green's function a
 \end{align}
 and hence we can backroll and find $Z$, and $V(s,t)$.
 
+\chapter{Lecture 6: Ornstein-Uhlenbeck process}
+After all that discussion about financial maths, in this lecture let's go back to physical systems and talk about the Ornstein-Uhlenbeck process. 
+\section{Ornstein-Uhlenbeck process}
+Once again, let's start with the most general form of an SDE:
+\begin{align}
+    d x_t=\mu(x, t) d t+\sigma(x, t) d w
+\end{align}
+The O-U process is when $\mu$ and $\sigma$ are chosen to be:
+\dfn{Ornstein-Uhlenbeck process SDE}{
+    \begin{align}
+        d x_t=\Theta\cdot\left(x_0-x\right) d t+\sigma d w \label{eq:OU_SDE}
+    \end{align}
+}
+where $\Theta, x_0, \sigma$ are constants. This might seem like something completely new but actually, we have seen this before! Let's look at this equation:
+\begin{align}
+    m \dot{v}&=-\gamma v+\sqrt{2 k_B T \cdot \gamma} \xi(t) \label{eq:free_diffusion}
+    \intertext{this is the Brownian motion equation in the Part II TSP course, also known as the free diffusion equation. If we divide both sides by m and times by $dt$:}
+    d v&=-\frac{\gamma}{m} v \cdot d t+\sqrt{\frac{2 k_B T \cdot \gamma}{m}} d W \label{eq:brownian_OU_SDE}
+\end{align}
+In comparison to Eq \refeq{eq:OU_SDE}, this is the same equation with $x =v$, $\Theta = \gamma / m$, $x_0 = 0$, $\sigma = \sqrt{\frac{2 k_B T \cdot \gamma}{m}}$, and $dW = \xi(t)$. 
+
+Or similarly, the diffusion equation in a spring potential:
+\begin{align}
+    \gamma \dot{x}&=-k\left(x-x_0\right)+\sqrt{2 k_b T \cdot \gamma} \xi(t)
+    \intertext{rearrange:}
+    d x&=-\frac{k}{\gamma}\left(x-x_0\right) d t+\sqrt{\frac{2 k_B T}{\gamma}} d w
+\end{align}
+where we can see this is just another Ornstein-Uhlenbeck SDE with a different choice of constants. So why is the O-U important? Seems like just another SDE with a niche form. The reason lies in the linear term $\Theta\cdot\left(x_0-x\right)$. Most physical processes near equilibrium can be approximated with a linear restoring force, or a parabolic potential (think about Taylor expansion). So the O-U process is what describes the dynamic of a stochastic system near equilibrium.
+
+Before going into more details about O-U, let's revise some basic mechanics:
+\begin{align}
+    \intertext{relation between position and velocity:}
+    x(t)&=\int_0^t v(s) d s\\
+    \intertext{using the product of this and taking the ensemble average:}
+    \left\langle x^2(t)\right\rangle&=\int_0^t d s_1 \int_0^t d s_2\left\langle v\left(s_1\right) v\left(s_2\right)\right\rangle
+    \intertext{taking the time derivative, we should have 2 identical integrals since $s1,s2$ is symmetrical under exchange:}
+    \frac{d}{d t}\left\langle x^2(t)\right\rangle&=2 \int_0^t d s\langle v(t) v(s)\rangle
+    \intertext{Using the relation we got above and comparing it to the diffusion equation $\left\langle x^2\right\rangle=2 D t$, we see that:}
+    D&=\int_0^t\langle v(t) v(s)\rangle \quad \text{(1D case)}\\
+    \text{or} \quad D&=\frac{1}{N}\int_0^t\langle v(t) v(s)\rangle \quad \text{(ND case)}
+    \intertext{in the end we shift the time by $\tilde{s}=t-s$ so it looks neater:}
+    D&=\int_0^t d \tilde{s}\langle v(\tilde{s}) v(0)\rangle \label{eq:neat_D}
+\end{align}
+Let's go back to the free diffusion equation \refeq{eq:free_diffusion}. If we times both sides by $v(0)$ and take the average over the whole ensemble:
+\begin{align}
+    m \frac{d}{d t}\langle v(t) \cdot v(0)\rangle&=-\gamma\langle v(t) v(0)\rangle + C \cancelto{0}{\langle \xi(t) \cdot v(0)\rangle}\\
+    &=-\gamma\langle v(t) v(0)\rangle
+    \intertext{The last term cancels out due to the stochastic nature of $\xi$, so: }
+    \langle v(t) v(0)\rangle&=\langle v(0)^2\rangle e^{-\frac{\gamma}{m} t} \label{eq:v_self_correlation}
+    \intertext{then subbing it back into Eq \refeq{eq:neat_D}:}
+    D=\left\langle v_0^2\right\rangle \int_0^t d s \space\space e^{-\frac{\gamma}{m} s} &=\left\langle\nu_0^2\right\rangle \frac{m}{\gamma}\left(1-e^{-\frac{\gamma}{m} t}\right)
+\end{align}
+We have obtained a time-dependent value of $D$ instead of the usual constant form. How do we physically interpret this exponential decay in time? The exponential term in the self-correlation of $\nu$ in Eq. \refeq{eq:v_self_correlation} can be interpreted as a "memory" with relaxation time scale $m/\gamma$. If our time $t$ is much greater than this "time of velocity relaxation", which gives the system enough time to forget its initial conditions and reach its equilibrium, we can obtain a constant form of D:
+\begin{align}
+   D \approx \frac{m}{\gamma}\left\langle v_0^2\right\rangle=\frac{k \pi}{\gamma} \quad \text{(we used the 2D case where }m\left\langle v_0^2\right\rangle = k_B T) 
+\end{align}
+
+\dfn{Green-Kubo formula}{
+    For a time that's much longer than the relaxation time, we define the usual diffusion constant that we use to be:
+    \begin{align}
+         D=\int_0^{\infty}\langle v(t) v(0)\rangle d t
+    \end{align}
+}
+\section{O-U process with multiple variablese}
+By choosing the equilibrium point $x_0 = 0$ we have the usual single variable O-U SDE:
+\begin{align}
+    d x&=-\theta x d t+\sigma d w
+    \intertext{Now if we want to make it multi-variable:}
+    d x_i&=-\theta_{i k} x_k d t+\sigma_{i k} d w_k\\ \label{eq:OU_mv_SDE}
+    \text{or} \quad \frac{d}{d t} x_i&=-\theta_{i k} x_k+C_{i k} \xi_k
+\end{align}
+The reason for the matrices $\theta_{i k},\sigma_{i k}$ is so variables can be correlated to each other so we don't just boringly have one independent ODE for each variable. To solve this, we convolve the initial condition with Green's function:
+\begin{align}
+    x_i(t)=\int_0^t \underbrace{e^{e^{-\theta_{i k}(t-s)}}}_{G(t-s)} \cdot \sigma_{k e} \xi_l^{(s)} d s \label{eq:OU_mv_solution}
+\end{align}
+If you are not quite convinced by this, you can check it by differentiation and it gives you the same as Eq.\refeq{eq:OU_mv_SDE}.
+
+Now we construct a matrix $M_{ik}$ to represent the correlation functions:
+\begin{align}
+    M_{i k}&=\left\langle x_i(t) x_k(t)\right\rangle
+    \intertext{subbing in Eq. \refeq{eq:OU_mv_solution}:}
+    M_{i k}=\int_0^t d s_1 \int_0^t d s_2 \ \  &e^{-\theta_{i m}\left(t-s_1\right)} e^{-\theta_{k p}\left(t-s_2\right)}\cdot \sigma_{m l}\sigma_{p q}\cdot\langle \xi_l\left(s_1\right) \xi_q\left(s_2\right)\rangle
+    \intertext{since Wiener processes are not related to one another, the average term can be written into:}
+    \left\langle\xi_e\left(s_1\right) \xi_q\left(s_2\right)\right\rangle &= \delta_{q e} \delta\left(s_1-s_2\right)
+\end{align}
+therefore:
+\begin{align}
+    M_{ik} &= \int_0^t d s e^{-\theta_{i m}(t-s)} \sigma_{m l} \cdot \sigma_{p l} e^{-\theta_{k p}(t-s)}\\
+    \doubleunderline{M}&=\int_0^t d s e^{-\doubleunderline{\theta}(t-s)} \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot e^{\left(-\doubleunderline{\theta}^\top t-s\right)}
+    \intertext{taking t to infinity (to be in the equilibrium state) and shifting time $(t-s) \rightarrow \tilde{t}$ to make it look nicer:}
+    \doubleunderline{M}&=\int_0^\infty d s \exp \left(-\doubleunderline{\theta}\tilde{t}\right) \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot \exp \left(-\doubleunderline{\theta}^\top \tilde{t}\right)
+\end{align}
+\begin{example}{Single variable case}
+    for the 1 variable case, the equation above becomes:
+    \begin{align}
+        M=\left\langle x^2\right\rangle=\int_0^{\infty} d t e^{-2 \theta t} \cdot \sigma^2=\frac{\sigma^2}{2 \theta}
+    \end{align}
+    which gives the value of $\left\langle x^2\right\rangle$ in equilibrium state. 
+    If we use it on the Eq.\refeq{eq:brownian_OU_SDE}, we get:
+    \begin{align}
+        \left\langle v^2\right\rangle=\frac{2 k_B T \gamma}{2 \gamma m} = \frac{k T}{m}
+    \end{align}
+\end{example}
+
+Let's now construct another matrix that's related to the fluctuation-dissipation relationship(we love matrices rip):
+\begin{align}
+    \doubleunderline{\theta} \cdot \doubleunderline{M}+\underline{\underline{M}} \cdot \doubleunderline{\theta}^{\top}
+\end{align}
+remember, neither $\theta$ nor $\sigma$ need to be symmetric (I hate these double underlines):
+\begin{align}
+    \doubleunderline{\theta} \underline{\underline{M}}+\doubleunderline{M} \doubleunderline{\theta^{\top}}&=\int_0^{\infty} d t\left[\doubleunderline{\theta} \cdot e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}+e^{\doubleunderline{\theta} t} \doubleunderline{\sigma \sigma^\top} \cdot e^{-\doubleunderline{\theta}^{\top} t} \cdot \doubleunderline{\theta}^{\top}\right]
+    \intertext{noticing that the square bracket can be written into a time derivative:}
+    &=-\int_0^{\infty} d t \frac{d}{dt}\left[ e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}\right]
+    \intertext{and the square bracket goes to 0 for t towards $\infty$ so the integral becomes:}
+    &= \doubleunderline{\sigma}\doubleunderline{\sigma^\top}
+\end{align}
+In the end, this gives us:
+\begin{align}
+    \theta_{i k}\left\langle x_k x_l\right\rangle+\left\langle x_i x_k\right\rangle \theta_{e_k}=\sigma_{i k} \sigma_{l k}
+\end{align}
+So why do we care about this weirdly-looking matrix? It gives us a direct way of solving for all correlators in equilibrium between variables $\ev{x_i x_j}$ using the constant matrices $\sigma$ and $\theta$.\chapter{Lecture 6: Ornstein-Uhlenbeck process}
+After all that discussion about financial maths, in this lecture let's go back to physical systems and talk about the Ornstein-Uhlenbeck process. 
+\section{Ornstein-Uhlenbeck process}
+Once again, let's start wit the most general form of an SDE:
+\begin{align}
+    d x_t=\mu(x, t) d t+\sigma(x, t) d w
+\end{align}
+The O-U process is when $\mu$ and $\sigma$ are chosen to be:
+\dfn{Ornstein-Uhlenbeck process SDE}{
+    \begin{align}
+        d x_t=\Theta\cdot\left(x_0-x\right) d t+\sigma d w \label{eq:OU_SDE}
+    \end{align}
+}
+where $\Theta, x_0, \sigma$ are constants. This might seems like something completely new but actually, we have seen this before! Let's look at this equation:
+\begin{align}
+    m \dot{v}&=-\gamma v+\sqrt{2 k_B T \cdot \gamma} \xi(t) \label{eq:free_diffusion}
+    \intertext{this is the brownian motion equation in the Part II TSP course, also known as the free diffusion equation. If we divide both sides by m and times by $dt$:}
+    d v&=-\frac{\gamma}{m} v \cdot d t+\sqrt{\frac{2 k_B T \cdot \gamma}{m}} d W \label{eq:brownian_OU_SDE}
+\end{align}
+In comparison to Eq \refeq{eq:OU_SDE}, this is the same equation with $x =v$, $\Theta = \gamma / m$, $x_0 = 0$, $\sigma = \sqrt{\frac{2 k_B T \cdot \gamma}{m}}$, and $dW = \xi(t)$. 
+
+Or similarly, the diffusion equation in a spring potential:
+\begin{align}
+    \gamma \dot{x}&=-k\left(x-x_0\right)+\sqrt{2 k_b T \cdot \gamma} \xi(t)
+    \intertext{rearrange:}
+    d x&=-\frac{k}{\gamma}\left(x-x_0\right) d t+\sqrt{\frac{2 k_B T}{\gamma}} d w
+\end{align}
+where we can see this is just another Ornstein-Uhlenbeck SDE with a different choice of the constants. So why is the O-U important? Seems like just another SDE with a niche form? The reason lies in the linear term $\Theta\cdot\left(x_0-x\right)$. Most physical processes near equilibrium can be approximated with a linear restoring force, or a parabolic potential (think about Taylor-expansion). So the O-U process is what describes the dynamic of a stochastic system near equilibrium.
+
+Before going into more details about O-U, let's revise some basic mechanics:
+\begin{align}
+    \intertext{relation between position and velocity:}
+    x(t)&=\int_0^t v(s) d s\\
+    \intertext{using the product of this and taking the ensemble average:}
+    \left\langle x^2(t)\right\rangle&=\int_0^t d s_1 \int_0^t d s_2\left\langle v\left(s_1\right) v\left(s_2\right)\right\rangle
+    \intertext{taking the time derivative, we should have 2 identical integrals since $s1,s2$ is symmetrical under exchange:}
+    \frac{d}{d t}\left\langle x^2(t)\right\rangle&=2 \int_0^t d s\langle v(t) v(s)\rangle
+    \intertext{Using the relation we got above and comparing it to the diffusion equation $\left\langle x^2\right\rangle=2 D t$, we see that:}
+    D&=\int_0^t\langle v(t) v(s)\rangle \quad \text{(1D case)}\\
+    \text{or} \quad D&=\frac{1}{N}\int_0^t\langle v(t) v(s)\rangle \quad \text{(ND case)}
+    \intertext{in the end we shift the time by $\tilde{s}=t-s$ so it looks neater:}
+    D&=\int_0^t d \tilde{s}\langle v(\tilde{s}) v(0)\rangle \label{eq:neat_D}
+\end{align}
+Let's go back to the free diffusion equation \refeq{eq:free_diffusion}. If we times both sides by $v(0)$ and take the average over the whole ensemble:
+\begin{align}
+    m \frac{d}{d t}\langle v(t) \cdot v(0)\rangle&=-\gamma\langle v(t) v(0)\rangle + C \cancelto{0}{\langle \xi(t) \cdot v(0)\rangle}\\
+    &=-\gamma\langle v(t) v(0)\rangle
+    \intertext{The last term canecls out due to the stochastic nature of $\xi$, so: }
+    \langle v(t) v(0)\rangle&=\langle v(0)^2\rangle e^{-\frac{\gamma}{m} t} \label{eq:v_self_correlation}
+    \intertext{then subbing it back into Eq \refeq{eq:neat_D}:}
+    D=\left\langle v_0^2\right\rangle \int_0^t d s \space\space e^{-\frac{\gamma}{m} s} &=\left\langle\nu_0^2\right\rangle \frac{m}{\gamma}\left(1-e^{-\frac{\gamma}{m} t}\right)
+\end{align}
+We have obtained a time dependent value of $D$ instead of the usual constant form. How do we physically interpret this exponential decay in time? The exponential term in the self correlation of $\nu$ in Eq. \refeq{eq:v_self_correlation} can be interpreted as a "memory" with relaxation time scale $m/\gamma$. If our time $t$ is much greater than this "time of velocity relaxation", which the give the system enough time to forget its initial conditions and reach its equilibrium, we can obtain a contant form of D:
+\begin{align}
+   D \approx \frac{m}{\gamma}\left\langle v_0^2\right\rangle=\frac{k \pi}{\gamma} \quad \text{(we used the 2D case where }m\left\langle v_0^2\right\rangle = k_B T) 
+\end{align}
+
+\dfn{Green-Kubo formula}{
+    For a time that's much longer than the relaxation time, we define the usual diffusion constant that we use to be:
+    \begin{align}
+         D=\int_0^{\infty}\langle v(t) v(0)\rangle d t
+    \end{align}
+}
+\section{O-U process with multiple variablese}
+By choosing the equilibrium point $x_0 = 0$ we have the usual single variable O-U SDE:
+\begin{align}
+    d x&=-\theta x d t+\sigma d w
+    \intertext{Now if we want to make it multi-variable:}
+    d x_i&=-\theta_{i k} x_k d t+\sigma_{i k} d w_k\\ \label{eq:OU_mv_SDE}
+    \text{or} \quad \frac{d}{d t} x_i&=-\theta_{i k} x_k+C_{i k} \xi_k
+\end{align}
+The reason of the matrices $\theta_{i k},\sigma_{i k}$ is so variables can be correlated to each other so we don't just boringly have one independent ODEs for each variables. To solve this, we convolve the initial condition with the Green's function:
+\begin{align}
+    x_i(t)=\int_0^t \underbrace{e^{e^{-\theta_{i k}(t-s)}}}_{G(t-s)} \cdot \sigma_{k e} \xi_l^{(s)} d s \label{eq:OU_mv_solution}
+\end{align}
+If you are not quite convinced by this, you can check it by differentiation and it gives you the same as Eq.\refeq{eq:OU_mv_SDE}.
+
+Now we construct a matrix $M_{ik}$ to represent the correlation functions:
+\begin{align}
+    M_{i k}&=\left\langle x_i(t) x_k(t)\right\rangle
+    \intertext{subbing in Eq. \refeq{eq:OU_mv_solution}:}
+    M_{i k}=\int_0^t d s_1 \int_0^t d s_2 \ \  &e^{-\theta_{i m}\left(t-s_1\right)} e^{-\theta_{k p}\left(t-s_2\right)}\cdot \sigma_{m l}\sigma_{p q}\cdot\langle \xi_l\left(s_1\right) \xi_q\left(s_2\right)\rangle
+    \intertext{since Wiener processes are not related to one another, the average term can be written into:}
+    \left\langle\xi_e\left(s_1\right) \xi_q\left(s_2\right)\right\rangle &= \delta_{q e} \delta\left(s_1-s_2\right)
+\end{align}
+therefore:
+\begin{align}
+    M_{ik} &= \int_0^t d s e^{-\theta_{i m}(t-s)} \sigma_{m l} \cdot \sigma_{p l} e^{-\theta_{k p}(t-s)}\\
+    \doubleunderline{M}&=\int_0^t d s e^{-\doubleunderline{\theta}(t-s)} \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot e^{\left(-\doubleunderline{\theta}^\top t-s\right)}
+    \intertext{taking t to infinity (to be in the equilibrium state) and shifting time $(t-s) \rightarrow \tilde{t}$ to make it look nicer:}
+    \doubleunderline{M}&=\int_0^\infty d s \exp \left(-\doubleunderline{\theta}\tilde{t}\right) \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot \exp \left(-\doubleunderline{\theta}^\top \tilde{t}\right)
+\end{align}
+\begin{example}{Single variable case}
+    for the 1 variable case, the equation above becomes:
+    \begin{align}
+        M=\left\langle x^2\right\rangle=\int_0^{\infty} d t e^{-2 \theta t} \cdot \sigma^2=\frac{\sigma^2}{2 \theta}
+    \end{align}
+    which gives the value of $\left\langle x^2\right\rangle$ in equilibrium state. 
+    If we use it on the Eq.\refeq{eq:brownian_OU_SDE}, we get:
+    \begin{align}
+        \left\langle v^2\right\rangle=\frac{2 k_B T \gamma}{2 \gamma m} = \frac{k T}{m}
+    \end{align}
+\end{example}
+
+Let's now construct another matrix that's related to the fluctuation-dissapation relationship(we love matrices rip):
+\begin{align}
+    \doubleunderline{\theta} \cdot \doubleunderline{M}+\underline{\underline{M}} \cdot \doubleunderline{\theta}^{\top}
+\end{align}
+remember, neither $\theta$ nor $\sigma$ need to be symmetric (I hate these double underlines):
+\begin{align}
+    \doubleunderline{\theta} \underline{\underline{M}}+\doubleunderline{M} \doubleunderline{\theta^{\top}}&=\int_0^{\infty} d t\left[\doubleunderline{\theta} \cdot e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}+e^{\doubleunderline{\theta} t} \doubleunderline{\sigma \sigma^\top} \cdot e^{-\doubleunderline{\theta}^{\top} t} \cdot \doubleunderline{\theta}^{\top}\right]
+    \intertext{noticing that the square bracket can be written into a time derivative:}
+    &=-\int_0^{\infty} d t \frac{d}{dt}\left[ e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}\right]
+    \intertext{and the square bracket goes to 0 for t towards $\infty$ so the integral becomes:}
+    &= \doubleunderline{\sigma}\doubleunderline{\sigma^\top}
+\end{align}
+In the end, this gives us:
+\begin{align}
+    \theta_{i k}\left\langle x_k x_l\right\rangle+\left\langle x_i x_k\right\rangle \theta_{e_k}=\sigma_{i k} \sigma_{l k}
+\end{align}
+So why do we care about this weirdly looking matrix? It gives us a direct way of solving for all correlator in equilibrium between variables $\ev{x_i x_j}$ using the constant matrices $\sigma$ and $\theta$.
 
 
 
