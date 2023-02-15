@@ -255,7 +255,7 @@ If we consider the setting mentioned in the propagator section, we can actually 
 \subsection{Kolmogorov-Chapman relation}
 The last relation we're gonna talk about in this section is the Kolmogorov-Chapman relation. Now imagine we start with state 0 $(y_0,t_0)$, go through a transition state 1 $(y_1,t_1)$ at a given time $t=t_1$ and end up in state 2 $(y_2,t_2)$. The propagator between state 0 and state 2 can be expressed by:
 \begin{align}
-    G\left(y_2, y_0 \mid t_2, t_0\right)=\int G\left(y_2, y_1\mid t_2, t_1\right) G\left(y_1, y_0 \mid t_1, t_0\right) dy_1
+    G\left(y_2, y_0 \mid t_2, t_0\right)=\int G\left(y_2, y_1\mid t_2, t_1\right) G\left(y_1, y_0 \mid t_1, t_0\right) dy_1\label{eq:kolmogorov_relation}
 \end{align}
 
 %
@@ -577,7 +577,7 @@ S&=S_0 \exp \left(\left(u-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
 
 \noindent Try using the code on the \href{https://en.wikipedia.org/wiki/Geometric_Brownian_motion}{GBM Wikipedia page} to produce GBM graphs in Python!
 
-\chapter{Lecture 5}
+\chapter{Lecture 5: Black-Scholes equation}
 In this lecture, we will be using the two things we introduced in the last lecture, Etoh's lemma and Geometric Brownian Motion, to study the Black-Scholes equation, which won the Nobel prize for economics in 1997. So what is the Black-Scholes equation and how is it useful? It is a mathematical analysis of dynamics and prediction of option prices in volatile markets that are stochastic. The term "option" might not be familiar to some readers, in simple terms, the B-S equation gives investment managers a tool to allocate their risk and cash. For example, buying more stocks is allocating more risk and less cash. 
 
 Interestingly, there are theories that suggest that the 1987 financial crisis was caused by a group of traders that conspired to punish the early adopters of the B-S analysis. Even more interestingly, one of the main causes of the 2008 financial crisis is actually too much trust in the B-S analysis and incorrect use of it (Since they didn't pick the ASM option in Lent like you obviously lol). 
@@ -724,13 +724,13 @@ We have obtained a time dependent value of $D$ instead of the usual constant for
          D=\int_0^{\infty}\langle v(t) v(0)\rangle d t
     \end{align}
 }
-\section{O-U process with multiple variablese}
+\section{O-U process with multiple variables}
 By choosing the equilibrium point $x_0 = 0$ we have the usual single variable O-U SDE:
 \begin{align}
     d x&=-\theta x d t+\sigma d w
     \intertext{Now if we want to make it multi-variable:}
     d x_i&=-\theta_{i k} x_k d t+\sigma_{i k} d w_k\\ \label{eq:OU_mv_SDE}
-    \text{or} \quad \frac{d}{d t} x_i&=-\theta_{i k} x_k+C_{i k} \xi_k
+    \text{or} \quad \frac{d}{d t} x_i&=-\theta_{i k} x_k+\sigma_{i k} \xi_k
 \end{align}
 The reason of the matrices $\theta_{i k},\sigma_{i k}$ is so variables can be correlated to each other so we don't just boringly have one independent ODEs for each variables. To solve this, we convolve the initial condition with the Green's function:
 \begin{align}
@@ -783,6 +783,142 @@ In the end, this gives us:
 \end{align}
 So why do we care about this weirdly looking matrix? It gives us a direct way of solving for all correlator in equilibrium between variables $\ev{x_i x_j}$ using the constant matrices $\sigma$ and $\theta$.
 
+\chapter*{Lecture 7: More on Ornstein-Uhlenbeck}
+Last lecture we talked about the O-U process and its multivariable form. In reality, SDEs are very hard to solve, instead, it would be better if we can find its probability distribution $P(x,t)$. To achieve that, we transform the SDE to something called the "kinetic equation" for $P$, which is an equation that can be differentiable properly just like $P$.
+
+\section{Kinetic equation of the O-U process}
+Let's start with the evolution equation \refeq{eq:evolution_relation} (rewriting it a little):
+\begin{align}
+    P(x, t+\Delta t)=\int G(x, t+\Delta t \mid y, t) P(y, t) dy \label{eq:kinetic_equation_OU}
+\end{align}
+Normally when we think of a propagator $G(x\mid y)$, we have a fixed $y$ (starting point) and propagate to a variable target $x$ but in this equation, $x$ is the fixed target and $y$ is the variable starting point. Let's introduce another variable $\Delta x = x-y\Delta x=x-y \quad, \quad y=x-\Delta x, \quad d y=-\Delta x$, and rewrite the equation above:
+\begin{align}
+    P(x, t+\Delta t)=\int G(x-\Delta x+\Delta x, t+\Delta t \mid x-\Delta x, t) P(x-\Delta x, t) d[-\Delta x]
+    \intertext{Taylor expanding in $(-\Delta x)$:} 
+    P(x, t+\Delta t)=\int d(\Delta x) \sum_{n=0}^{\infty} \frac{(-\Delta x)^n}{n !} \frac{\partial^n}{\partial x^n} \left[G(x+\Delta x, t+\Delta t \mid x, t)P(x,t) \right]
+\end{align}
+Let's define the Moments to be:
+\dfn{nth-Moments of G}{
+    \begin{align}
+        \left\langle\Delta x^n\right\rangle=\int d(\Delta x)(\Delta x)^n G(x+\Delta x \mid x)
+    \end{align}
+}
+For the O-U process, the moments are: (from now on we only keep terms linear in $\Delta t$ for the same reasoning in Itoh analysis)
+\begin{align}
+    \left\langle\Delta x^0\right\rangle &= 1 \quad \text{(Normalisation of G)}\\
+    \left\langle\Delta x^1\right\rangle &= -\theta x \Delta t + \cdots\\
+    \left\langle\Delta x^0\right\rangle &= \sigma^2 \Delta t+ \cdots\\
+\end{align}
+Therefore the Taylor expansion above becomes:
+\begin{align}
+    P(x, t+\Delta t)&=P(x, t)-\frac{\partial}{\partial x}\left(\ev{\Delta x} P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\left\langle\Delta x^2\right\rangle P(x, t)\right) \cdots\\
+    &= P(x, t)-\frac{\partial}{\partial x}\left(-\theta x \Delta t P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\sigma^2 \Delta t P(x, t)\right)
+\end{align}
+and we reach our kinetic equation:
+\dfn{Kinetic equation of the O-U process}{
+    \begin{align}
+        \frac{\partial P(x, t)}{\partial t}= \frac{\partial}{\partial x}\left(\theta x P(x, t)\right) + \frac{\sigma^2}{2}\frac{\partial^2}{\partial x^2}\left( P(x, t)\right)
+    \end{align}
+    where you can see it has an external force term and a diffusion coefficient term
+}
+
+\thm{Digression: Kramers-Moyal expansion}{
+    Now let's go on a little digression. We got the kinetic equation above from the key properties of the Wiener process (keeping only the $\Delta t$ terms) but what if don't even have a Wiener process in the first place? Let's try to approach it generally, which is called the Kramers-Moyal expansion. Let's once again start with the Evolution equation \refeq{eq:evolution_relation}:
+    \begin{align}
+        P(x, t+\Delta t)=\int G(x, t+a t \mid y, t) P(y, t) d y
+    \end{align}
+    (We could also use the Kolmogorov-Chapman equation \refeq{eq:kolmogorov_relation} if we have the initial conditions at $x_0,t_0$ but it doesn't matter because the analysis is the same)
+    Substituting variables $\Delta x=x-y \quad, \quad y=x-\Delta x, \quad d y=-\Delta x$:
+    \begin{align}
+        P(x, t+\Delta t)=\int G(x-\Delta x+\Delta x, t+\Delta t \mid x-\Delta x, t) P(x-\Delta x, t) d[-\Delta x]
+        \intertext{Taylor expanding in $(-\Delta x)$:} 
+        P(x, t+\Delta t)=\int d(\Delta x) \sum_{n=0}^{\infty} \frac{(-\Delta x)^n}{n !} \frac{\partial^n}{\partial x^n} \left[G(x+\Delta x, t+\Delta t \mid x, t)P(x,t) \right]
+    \end{align}
+    (so far it's all the same as what we did above)
+    Then we define the Kramers-Moyal coefficients:
+    \dfn{Kramers-Moyal coefficients}{
+        \begin{align}
+            D^{(n)}(x)=\lim _{\Delta t \rightarrow 0} \frac{1}{\Delta t} \int \frac{(\Delta x)^n}{n !} G(x+\Delta x, t+\Delta t \mid x, t) d(\Delta x)
+        \end{align}
+    }
+    This is very similar to the "Moments" that we have just seen but it's not quite the same for various reasons: There's an n factorial term and a division of $\Delta t$ in the limit.
+    If we now substitute these coefficients into the equation above and rearrange them a little:
+    \begin{align}
+        \frac{\partial P(x, f)}{\partial t}&=\sum_{n=1}^{\infty}(-1)^n \frac{\partial^n}{\partial x^n}\left[D^{(n)}_{(x)} P(x, t)\right]
+        \intertext{we define this as the K-M operator:}
+        &\equiv \hat{L}_{k M} P(x, t)
+    \end{align}
+    \dfn{K-M operator}{
+        \begin{align}
+            \hat{L}_{k M} \equiv \sum_{n=1}^{\infty}(-1)^n \frac{\partial^n}{\partial x^n}D^{(n)}_{(x)}
+        \end{align}
+    }
+    As this analysis doesn't specify which stochastic process it is, the coefficients $D^{(n)}_{(x)}$ carry all the information we need to form the kinetic equation. For the Wiener process case, there are only two coefficients $D^{(1)}$ and $ D^{(2)}$.
+}
+
+\ex{Brownian Motion}{
+    Let's look at one example of kinetic analysis. Recall the Brownian motion equation:
+    \begin{gather}
+        \dot{v}=-\underbrace{\frac{\gamma}{m}}_{\theta} v+\underbrace{\frac{\sqrt{2 k_B T}}{m}}_{\sigma} \xi(t)
+        \intertext{And if we apply our analysis above, we obtain its kinetic equation:}
+        \frac{\partial P(v, t)}{\partial t}=\frac{\partial}{\partial v}\left(\frac{\gamma}{m} v P\right) +\frac{2k_B T \gamma}{2m^2} \cdot \frac{\partial^2 P}{\partial v^2}
+        \intertext{To solve for the steady state:}
+        0=\frac{\partial}{\partial v}\left[\frac{\gamma}{m} v P+\frac{k_b T \gamma}{m^2} \frac{\partial P}{\partial v}\right]\\
+        \Rightarrow \frac{d P}{P}=-\frac{m}{k_B T} v dv
+        \intertext{(the lecturer just assumed the integration constant to be 0 idk why)}
+        P_{\text{eq}}(v)=\exp{-\frac{m v^2}{2 k_B T}}
+    \end{gather}
+    Which is the thermostat we're very familiar with! The next question is how long does it take for an arbitrary initial setup to reach this equilibrium state? Recall from the last lecture, we expect some sort of exponential decay with the time scale $\tau=m / \gamma$. 
+}
+
+\ex{Quadratic potential}{
+Let's look at another example. Recall again the stochastic overdamped equation of motion for a particle moving in a quadratic potential:
+\begin{gather}
+    \gamma \dot{x}=-a\left(x-x_0\right)+\sqrt{2 k_B T\gamma} \xi(t)
+    \intertext{which is just O-U with constants:}
+    \theta=a / \gamma, \quad \sigma=\sqrt{2 k \pi / \gamma}
+    \intertext{applying the kinetic equation analysis:}
+    \frac{\partial P(x, t)}{\partial t}=\frac{\partial}{\partial x}\left(\frac{a}{\gamma} (x-x_0)P\right)+\frac{k_B T}{\gamma} \cdot \frac{\partial^2 P}{\partial x^2}
+    \intertext{solve for steady state:}
+    \frac{d P}{P}=-\frac{a}{k_B T}\left(x-x_0\right) d x\\
+    P_{e q}=\exp{-\frac{a\left(x-x_0\right)^2}{2 k T}}
+\end{gather}
+Same as the reason above, we expect the system to reach equilibrium on the time scale of $\tau = \gamma / a$.
+}
+
+\ex{General Case of "Brownian Motion"}{
+    Now we go even one step further and look at the case where we are no longer in the overdamped limit and also allow the driving force to be a general force. We'll take $x=0$ as our equilibrium position (You can put it back in if you want but I'm lazy lol):
+    \begin{gather}
+        m \dot{v}=-\gamma v - a x+\sqrt{2 k_B T \cdot r} \xi(t)
+        \intertext{since we have two unknowns now we need another equation and it is simply:}
+        \dot{x} = v
+        \intertext{recall that they can be combined into Eq. \refeq{eq:OU_mv_solution}:}
+        \dot{x}_i=-\theta_{i k} x_k+\sigma_{i k} \xi_k
+        \intertext{with matrices:}
+        \underline{\underline{\theta}}=\left(\begin{array}{cc}\gamma / m & a / m \\-1 & 0\end{array}\right)
+        ,\quad and \quad
+        \doubleunderline{\sigma}=\left(\begin{array}{cc}\frac{\sqrt{2 k_B T \gamma}}{m} & 0 \\0 & 0\end{array}\right)
+    \end{gather}
+    Now let's try to check Fluctuation-Dissipation Relation. If given the 3 correlators: $\ev{v^2}$ $\ev{vx}$ $\ev{x^2}$. Can we write the full kinetic equation for $P(v,x,t)$? 
+    
+    Let's try to rewrite the kinetic equation of the O-U into a multi-variable form:
+    \begin{align}
+        \frac{\partial P}{\partial t}&=\frac{\partial}{\partial x_i}\left(\theta_{i k} x_k \cdot P\right)+\frac{1}{2}\left(\sigma \sigma^{\top}\right) \frac{\partial^2 P}{\partial x_{i k} \partial x_k}\\
+        \intertext{and subbing in the matrices $\sigma$ and $\theta$ above and expand:}
+        &=\frac{\partial}{\partial v}\left(\frac{\gamma}{m} v \cdot P\right)+\frac{\partial}{\partial v}\left(\frac{a}{m} x \cdot P\right) +\frac{\partial}{\partial x}(-1 \cdot v \cdot p)\\
+        &\quad +\frac{\partial}{\partial x}(0) +\frac{1}{2} \frac{2 k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial V^2}
+        \intertext{taking the $\frac{\partial}{\partial x}(-1 \cdot v \cdot p)$ to the left:}
+        \frac{\partial P}{\partial t}&+\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
+    \end{align}
+    We can see that the terms on the LHS are a convective derivative and the $\gamma v+a x$ term is a total force between the drag and linear restoring force. This is the general Fokker-Planck equation for $P(v,x,t)$
+    \dfn{Fokker-Planck equation}{
+        \begin{align}
+        \frac{\partial P}{\partial t}&+\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
+        \end{align}
+        (This is a very very hard equation to solve.)
+    }
+    It is interesting to point out that the time scale for $v$ to reach equilibrium is much smaller than it takes for $x$. Therefore, the velocity-wise Maxwell distribution develops wayyy before the position-wise Boltzmann distribution does. So this equation actually reduces to the diffusion equation for $P(x,t)$ at t much greater than the velocity relaxation time $t\gg m/\gamma$.
+}
 
 
 
