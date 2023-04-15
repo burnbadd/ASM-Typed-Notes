@@ -34,10 +34,10 @@ Now consider the scenario where, for a given E, we introduce a small positive ch
 \begin{align}
     \Omega(E)\ dE & = \intphase \quad (\text{for states with } E <  \ham < E + dE)                             \\
                   & =\intphase \Theta(E+dE-H)-\Theta(E-H) \quad (\Theta\text{ is the Heaviside step function}) \\
-                  & =d E \cdot \intphase \left[\frac{\partial\Theta(\E-H)}{\partial E}\right]                        \\
+                  & =d E \cdot \intphase \left[\frac{\partial\Theta(\E-H)}{\partial E}\right]                  \\
 \end{align}
 and we reach the conclusion:
-\dfn{Number of states with hamiltonian $\SH$ equal to given energy E.}{$$\Rightarrow \Omega(E) = \intphase \delta(E - \ham$$)}
+\dfn{Number of states with hamiltonian $\SH$ equal to given energy E.}{$$\Rightarrow \Omega(E) = \intphase \delta(E - \ham)$$}
 \noindent We then define the "entropy" S to be:
 \dfn{Entropy}{$$\bmS(E) = k_B \ln \Omega(E)$$}
 Now let's talk about probability $\rho(E)$. But how do we define it and how is it useful? Let's consider a quantity of the system $X(\bmp, \bmq)$ and we're trying to deduce its expectation value $\langle X \rangle$. We'll want to integrate over all states with the constraint $\SH = E$:
@@ -57,8 +57,8 @@ In comparison with the micro-canonical ensemble, a canonical ensemble is a stati
 \dfn{The partition function}{
     \begin{align}
         Z & = \sum_{All\ states} e^{-\beta E} = \intphase e^{\beta -\ham} \\
-          & = \sum_{Microstates(E)} \Omega(E) e^{-\beta E}               \\
-          & = \sum_{Microstates(E)} e^{-\beta (E-k_B T \ln \Omega(E))}   \\
+          & = \sum_{Microstates(E)} \Omega(E) e^{-\beta E}                \\
+          & = \sum_{Microstates(E)} e^{-\beta (E-k_B T \ln \Omega(E))}    \\
     \end{align}
 }
 \noindent Where we often call the value in the exponent the "Free energy" of a microstate.
@@ -67,7 +67,7 @@ In comparison with the micro-canonical ensemble, a canonical ensemble is a stati
 \dfn{Probabilty for the system to have energy E}{$$\rho(E) = \frac{1}{Z} e^{\beta(E-TS)}$$}
 \noindent From the relation above, we can see that the probability is maximised when the free energy F is minimised. And for a large system, this gives the equilibrium state due to the central limit theorem. (We will go further into this in the later lectures.)
 
-In conclusion, minimising the free energy allow us to find the balance between the two incompatible demands in statistical physics: 1. Minimising energy E 2. Maximising entropy S(E), and ignoring the fluctuation in the system about this preferred microstate. But in this course, we aim to look at two non-equilibrium questions: 1. How long does it take to reach such an equilibrium state from an initial state? 2. Are there barriers and metastabilities states?
+In conclusion, minimising the free energy allow us to find the balance between the two incompatible demands in statistical physics: 1. Minimising energy E 2. Maximising entropy S(E), and ignoring the fluctuation in the system about this preferred microstate. But in this course, we aim to look at two non-equilibrium questions: 1. How long does it take to reach such an equilibrium state from an initial state? 2. Are there barriers and metastable states?
 \section{Different types of systems (Hohenberg-Halperin 1977)}
 \subsection{Model A: No conservation laws}
 An order parameter $\phi$ is defined to be a variable that can be used to describe a system and gives a complete description of the hamiltonian. In other words, the Hamiltonian can be written in the form $\SH(\phi)$. And when there are no conservation laws in a system for this parameter $\phi$, we call it a Model A system. For example, the magnetisation of a magnetic system is an order parameter of Model A since it does not have to be conserved at all. For models like this we can make a classical mechanical analogy (Think of $\phi$ as the cartesian coordinates of a particle):
@@ -101,8 +101,8 @@ Model C describes a field $\phi$ that is coupled to a conserved auxiliary field 
 As the title suggests, this lecture covers the basic of probability theory so there is a common language that we can use to describe stochastic systems. Let's start with the definition of "Random variables" or "Stochastic variables". A random variable $x$ with a microscopic probability $P(x)$ has the definitions:
 \dfn{EV and Variance}{
     \begin{align}
-        \text{Expectation value:}& \ \langle x \rangle=\int x \cdot P(x) dx\\
-        \text{Variance:}& \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
+        \text{Expectation value:} & \ \langle x \rangle=\int x \cdot P(x) dx                 \\
+        \text{Variance:}          & \ \ \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2
     \end{align}
 }
 \noindent We then introduce the concept of characteristic functions $\phi_x(k)$ that most of you probably have not seen before, which is the expectation value of $e^{ikx}$:
@@ -113,11 +113,11 @@ As the title suggests, this lecture covers the basic of probability theory so th
 }
 \noindent where we can see is just simply the Fourier Transform of $P(x)$! But if we expand the exponential in terms of the Taylor series:
 \begin{align}
-    \phi_x(k) &= \int e^{ikx} P(x) dx\\
-    &= \int \sum_{n=0}^{\infty} \frac{1}{n!} (ikx)^n P(x) dx\\
-    &= \sum_{n=0}^{\infty} \frac{(ik)^n}{n!} \langle x^n \rangle\\
+    \phi_x(k) & = \int e^{ikx} P(x) dx                                      \\
+              & = \int \sum_{n=0}^{\infty} \frac{1}{n!} (ikx)^n P(x) dx     \\
+              & = \sum_{n=0}^{\infty} \frac{(ik)^n}{n!} \langle x^n \rangle \\
 \end{align}
-\noindent where we call $\langle x^n \rangle$ the $n^{th}$ moment of the probability $P(X)$. 
+\noindent where we call $\langle x^n \rangle$ the $n^{th}$ moment of the probability $P(X)$.
 \dfn{Moments of P(x)}{
     \begin{align}
         n^{th} \ moment: \langle x^n \rangle = \int x^n P(x) dx
@@ -135,9 +135,9 @@ As the title suggests, this lecture covers the basic of probability theory so th
 }
 \ex{$C_1$}{
     \begin{align}
-        C_1&=\frac{d}{d\left(ik\right)} \ln \left(\sum_{n=0}^{\infty} \frac{(i k)^n}{n !}\left\langle x^n\right\rangle\right)_{k=0}\\
-        &=\left[\frac{1}{i} \frac{i \sum_m \frac{1}{(m-1)!}(i k)^{m-1}\left\langle x^m\right\rangle}{\sum_n(i k)^n / m !\left\langle x^n\right\rangle}\right]_{k=0}\\
-        &= \langle x \rangle
+        C_1 & =\frac{d}{d\left(ik\right)} \ln \left(\sum_{n=0}^{\infty} \frac{(i k)^n}{n !}\left\langle x^n\right\rangle\right)_{k=0}                                    \\
+            & =\left[\frac{1}{i} \frac{i \sum_m \frac{1}{(m-1)!}(i k)^{m-1}\left\langle x^m\right\rangle}{\sum_n(i k)^n / m !\left\langle x^n\right\rangle}\right]_{k=0} \\
+            & = \langle x \rangle
     \end{align}
 }
 \qs{$C_2$}{Check that $C_2 = \sigma^2 = \langle x^2 \rangle - \langle x \rangle^2$}
@@ -149,44 +149,44 @@ As the title suggests, this lecture covers the basic of probability theory so th
 Let's now consider a linked sequence $y_N$ of random variables $x_i$ with identical probability distributions $P(x)$ (For example the length of a polymer chain with N identical links randomly folded), we call this a "random walk" or a "stochastic process":
 \dfn{Random walk}{
     \begin{align}
-        y_N = \sum_{i=1}^{N}x_i\\
-        \left\langle y_N\right\rangle=N\langle x\rangle\\
-        \sigma_y^2 = \left\langle y_N^2\right\rangle-\langle y_N\rangle^2 = N \sigma^2 \label{eq:random_walk_variance}\\
+        y_N = \sum_{i=1}^{N}x_i                                                                                        \\
+        \left\langle y_N\right\rangle=N\langle x\rangle                                                                \\
+        \sigma_y^2 = \left\langle y_N^2\right\rangle-\langle y_N\rangle^2 = N \sigma^2 \label{eq:random_walk_variance} \\
     \end{align}
 }
 where the variance relationship came from:
 \begin{align}
-\left\langle y^2\right\rangle-\langle y\rangle^2&=\sum_i \sum_j\left\langle x_i x_j\right\rangle-\sum_i\left\langle x_i\right\rangle \sum_j\left\langle x_j\right\rangle \\
-&=N\left\langle x^2\right\rangle+N(N-1)\langle x\rangle^2-N^2\langle x\rangle^2 \\
-&=N\left(\left\langle x^2\right\rangle-\langle x)^2\right)=N \sigma^2
+    \left\langle y^2\right\rangle-\langle y\rangle^2 & =\sum_i \sum_j\left\langle x_i x_j\right\rangle-\sum_i\left\langle x_i\right\rangle \sum_j\left\langle x_j\right\rangle \\
+                                                     & =N\left\langle x^2\right\rangle+N(N-1)\langle x\rangle^2-N^2\langle x\rangle^2                                          \\
+                                                     & =N\left(\left\langle x^2\right\rangle-\langle x)^2\right)=N \sigma^2
 \end{align}
 Now we introduce the normalised random walk $S_N = y_N/N$ where $\ev{S_N} = \ev{x_N}$ and $\sigma_S^2 = \sigma_x^2/N$, and the central limit theorem suggests that no matter what $P(x)$ is, $P(S_N)$ will always converge to a Gaussian:
 \thm{Central Limit theorem}{
     For a normalised random walk $S_N$ where:
     \begin{align}
-        S_N &= \frac{y_N}{N}\\
-        \ev{S_N} &= \ev{x}\\
-        \sigma_S^2 &= \frac{\sigma_x^2}{N}\\
+        S_N        & = \frac{y_N}{N}        \\
+        \ev{S_N}   & = \ev{x}               \\
+        \sigma_S^2 & = \frac{\sigma_x^2}{N} \\
     \end{align}
     The probability distribution for $S_N$: $P(S)$ converges to a Gaussian with the same EV and Variance for large N.
 }
 \begin{myproof} (This is a very rough proof)\\
     We start with the characteristic function $\phi_S(k)$:
     \begin{align}
-        \phi_s(k)&=\left\langle e^{i k s}\right\rangle=\left\langle exp\left(i \frac{k}{N} \sum_m x_m\right)\right\rangle \\
-        &=\left\langle e^{\frac{i k}{N} x}\right\rangle_{P(x)}^N = \left[\phi_x(\frac{k}{N})\right]^N
+        \phi_s(k) & =\left\langle e^{i k s}\right\rangle=\left\langle exp\left(i \frac{k}{N} \sum_m x_m\right)\right\rangle \\
+                  & =\left\langle e^{\frac{i k}{N} x}\right\rangle_{P(x)}^N = \left[\phi_x(\frac{k}{N})\right]^N
     \end{align}
     On the other hand, we can also express $\phi_S(k)$ and $\phi_x(k)$ as:
     \begin{align}
-        \phi_s(k) & =\exp \left[\sum_{m=0}^{\infty} \frac{\left({i k}\right)^m}{m !} C_m(s)\right] \\
-        & =\left[\phi_x(k / N)\right]^N \\
-        & =\left[\exp \left(\sum_{m=0}^N \frac{\left({i k}\right)^m}{m!N^m} C_m(x)\right)\right]^N \\
-        & =\exp \left(\sum_{m=0}^N \frac{(i k)^m}{m ! N^{m-1}} C_m(x)\right)
+        \phi_s(k) & =\exp \left[\sum_{m=0}^{\infty} \frac{\left({i k}\right)^m}{m !} C_m(s)\right]           \\
+                  & =\left[\phi_x(k / N)\right]^N                                                            \\
+                  & =\left[\exp \left(\sum_{m=0}^N \frac{\left({i k}\right)^m}{m!N^m} C_m(x)\right)\right]^N \\
+                  & =\exp \left(\sum_{m=0}^N \frac{(i k)^m}{m ! N^{m-1}} C_m(x)\right)
     \end{align}
     From here, it is not hard to convince yourself that as N increases the terms in the sum with $m>1$ will slowly disappear. So if we consider only the first two terms in the sum:
     \begin{align}
-        \phi_S(k) &\approx \exp \left(N+i k C_1(x)-\frac{k^2}{2 N} C_2(x)\right)\\
-        &= \exp \left(N+i k \ev{x} - \frac{k^2}{2 N} \sigma_x^2\right)
+        \phi_S(k) & \approx \exp \left(N+i k C_1(x)-\frac{k^2}{2 N} C_2(x)\right) \\
+                  & = \exp \left(N+i k \ev{x} - \frac{k^2}{2 N} \sigma_x^2\right)
     \end{align}
     This is just the Fourier Transform of a Gaussian with the mean and variance mentioned above! Therefore, FTing it back to $P(S)$ gives us our desired result.
 \end{myproof}
@@ -196,20 +196,20 @@ If we replace N in the random walk with time t, we reach a stochastic process $y
 We can then define a set of probabilities:
 \dfn{Probabilities for random walks in time}{
     \begin{align}
-        P_1(y,t)&: the\ probability\ of\ being\ at\ value\ y\ at\ time\ t\\
-        P_2(y_1, y_2| t_1, t_2)&: probability\ of\ being\ at\ (y_1,t_1)\ and\ then\ (y_2,t_2)\\
-        \vdots & \ \ and\ so\ on
+        P_1(y,t)                & : the\ probability\ of\ being\ at\ value\ y\ at\ time\ t      \\
+        P_2(y_1, y_2| t_1, t_2) & : probability\ of\ being\ at\ (y_1,t_1)\ and\ then\ (y_2,t_2) \\
+        \vdots                  & \ \ and\ so\ on
     \end{align}
 }
 \subsection{Normalisation}
 These probabilities are normalised by:
 \begin{align}
-    1&=\int d y_1 \ldots d y_N \ P_N\left(y_1, y_2 \ldots y_N \mid t_1, t_2 \ldots t_N\right)\\
+    1 & =\int d y_1 \ldots d y_N \ P_N\left(y_1, y_2 \ldots y_N \mid t_1, t_2 \ldots t_N\right) \\
 \end{align}
 which is saying if we consider all possible $y_i$ at the given times $t=t_i$, we should have a total probability of 1.
 \ex{}{
     \begin{align}
-        1&=\int d y P_1(y, t)
+        1 & =\int d y P_1(y, t)
     \end{align}
 }
 \subsection{Reduction}
@@ -228,9 +228,9 @@ which is saying if we consider all possible $y_i$ at the given times $t=t_i$, we
 Correlation functions are defined in the following ways:
 \dfn{Correlation functions}{
     \begin{align}
-        \ev{y(t)} &= \int y \cdot P(y,t) dy\\
-        \left\langle y_1\left(t_1\right) y_2\left(t_2\right)\right\rangle&=\int y_1 y_2 p_2\left(y_1 y_2 \mid t_1 t_2\right)dy_1dy_2\\
-        etc&\cdots
+        \ev{y(t)}                                                         & = \int y \cdot P(y,t) dy                                   \\
+        \left\langle y_1\left(t_1\right) y_2\left(t_2\right)\right\rangle & =\int y_1 y_2 p_2\left(y_1 y_2 \mid t_1 t_2\right)dy_1dy_2 \\
+        etc                                                               & \cdots
     \end{align}
 }
 \subsection{Stationary process}
@@ -264,20 +264,20 @@ The last relation we're gonna talk about in this section is the Kolmogorov-Chapm
 %=======================================
 %
 \chapter{Lecture 3:The Poisson Process}
-As we mentioned in the last chapter, a stationary Markov process is a process where 1. its higher probabilities $P_i$ can all be derived from the single probability $P_1$ and the propagator G 2. The probabilities are all invariant with respect to time shifts. Two stationary Markov processes are particularly important - the Poisson Process and the Wiener Process:
+As we mentioned in the last chapter, a stationary Markov process is a process where 1. its higher probabilities $P_i$ can all be derived from the single probability $P_1$ and the propagator G 2. The probabilities are all invariant with respect to time shifts. There are two stationary Markov processes are particularly important - the Poisson Process and the Wiener Process:
 \begin{enumerate}
     \item Poisson Process:
-    \begin{itemize}
-        \item Independent steps
-        \item Only forward steps
-        \item Either go forward or not move after each step.
-    \end{itemize}
+          \begin{itemize}
+              \item Independent steps
+              \item Only forward steps
+              \item Either go forward or not move after each step.
+          \end{itemize}
     \item Wiener Process:
-    \begin{itemize}
-        \item Independent steps
-        \item Can go both forward and backward
-        \item Must go either forward or backwards after each step, must move!
-    \end{itemize}
+          \begin{itemize}
+              \item Independent steps
+              \item Can go both forward and backward
+              \item Must go either forward or backwards after each step, must move!
+          \end{itemize}
 \end{enumerate}
 \section{Poisson Process}
 Let's give some examples so we can have a clearer understanding. Imagine shooting a target with a pistol, let's call every time a bullet is fired a "step". So the number of bullets that hit the target is a Poisson Process since after each step the number can only increase by one (go forward 1 step) or not change if we miss (not move).
@@ -294,20 +294,20 @@ Formulating the above example in maths, we have a status of the system $N(t)$ an
 
 If the system is in the state $N(t) = n-1$ and we look into this single step going from (n-1) to (n), we can ask two questions: 1. What is the total probability $W(t)$ that the system makes this step after time t? 2. Equivalently, what is the "survival probability" $S(t)=1-W(t)$ that the system still remains in the state $N=n-1$ after time t? To obtain $S(t)$, we look at the relation between $S(t)$ and $S(t+dt)$:
 \begin{align}
-    S(t+d t)&=S(t) \cdot[1-\nu d t]\\
-    \frac{d S}{d t}&=-v \cdot S \\
+    S(t+d t)        & =S(t) \cdot[1-\nu d t] \\
+    \frac{d S}{d t} & =-v \cdot S            \\
     \intertext{by using $S(t=0) = 1$ we get:}
-    S(t)&=e^{-\nu t}
+    S(t)            & =e^{-\nu t}
 \end{align}
 \dfn{Survival Probability}{
-    $$S(t)=e^{-\nu t}$$
+$$S(t)=e^{-\nu t}$$
 }
 We can then get the average time it takes for the process to make this single step $\ev{t_1}$ by using $W(t)$ and the probability density $w(t)$:
 \begin{align}
     \intertext{First define the probability density $w(t)$ of making the step:}
-    w(t)=\frac{d W(t)}{d t}=-\frac{\partial S}{\partial t}=\nu e^{-\nu t}\\
+    w(t)=\frac{d W(t)}{d t}=-\frac{\partial S}{\partial t}=\nu e^{-\nu t} \\
     \intertext{Then the average time it takes to go forward this single step would be:}
-    \left\langle t_1\right\rangle=\int t \cdot w(t) d t=\frac{1}{\nu}\\
+    \left\langle t_1\right\rangle=\int t \cdot w(t) d t=\frac{1}{\nu}     \\
     \intertext{and with a similar method, we can also get:}
     \sigma^2_t = \left\langle t_1^2\right\rangle-\left\langle t_1\right\rangle^2=\frac{1}{\nu^2}
 \end{align}
@@ -317,7 +317,7 @@ We can then get the average time it takes for the process to make this single st
     \begin{align}
         p_{+}=\nu{\Delta t} \quad \text { and } \quad p_0=1-\nu \Delta t
     \end{align}
-    What's the probability $P(k,N)$ of having exactly k heads after these N steps (or after time $T=N\Delta t$)? (k is just like our position in a Poisson process, and $N = T/\Delta t$ is effectively a type of expression for total time T.)
+    What's the probability $P(k,N)$ of having exactly k heads after exactly N flips (or after time $T=N\Delta t$)? (k is just like our position in a Poisson process, and $N = T/\Delta t$ is effectively a type of expression for total time T.)
 }
 We can see trivially that this is a binomial process without the need for simulation where:
 \begin{align}
@@ -325,9 +325,9 @@ We can see trivially that this is a binomial process without the need for simula
 \end{align}
 The interesting thing is that if you run a simulation with large enough N (small enough time step), p(k,N) reduces to:
 \begin{align}
-    p(k, \lambda)=\frac{\lambda^k}{k !} e^{-\lambda} 
+    p(k, \lambda)=\frac{\lambda^k}{k !} e^{-\lambda}
 \end{align}
-Where $\lambda = Np_+ = \nu T$ is the expectation value of heads in the overall session. This is exactly the Poisson distribution! 
+Where $\lambda = Np_+ = \nu T$ is the expectation value of heads in the overall session. This is exactly the Poisson distribution!
 \dfn{Poisson distribution}{
     Poisson distribution is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time if these events occur with a known constant mean rate and independently of the time since the last event.
     \begin{align}
@@ -340,29 +340,29 @@ But how did we reach this result? Let's try to derive it using a standard Poisso
 \begin{align}
     P(n, t+d t)=P(n, t) \cdot[1-\nu d t]+P(n-1, t) \cdot \nu d t
 \end{align}
-The first term on the RHS represents the process where it was already at position n and carry on staying at the same spot after this small time interval, and the second term corresponds to it being at position n-1 and hopping forward into our desired state n in the small time interval. Using this relation, we can find: 
+The first term on the RHS represents the process where it was already at position n and carry on staying at the same spot after this small time interval, and the second term corresponds to it being at position n-1 and hopping forward into our desired state n in the small time interval. Using this relation, we can find:
 \begin{align}
-    \frac{d P(n, t)}{d t} &= \left[P(n,t+dt)-P(n,t)\right]/dt\\
-    &= \nu \cdot[P(n-1, t)-P(n, t)] \label{eq:master_equation_poisson}
+    \frac{d P(n, t)}{d t} & = \left[P(n,t+dt)-P(n,t)\right]/dt                                \\
+                          & = \nu \cdot[P(n-1, t)-P(n, t)] \label{eq:master_equation_poisson}
 \end{align}
 In the square brackets of the second line, the first term and second terms can be considered as the "flux in" and "flux out" of the position n. This is often called the "Master Equation". Recall from the previous chapter the characteristic function $\phi_x(k)=\left\langle e^{i k x}\right\rangle$, we can define a "generating function" $g(k,t)$ using a similar logic:
 \begin{align}
-    g(k, t)&=\sum_{n=0}^{\infty} p(n, t) k^n \label{eq:g_definition} \\
+    g(k, t)                             & =\sum_{n=0}^{\infty} p(n, t) k^n \label{eq:g_definition}         \\
     \intertext{If we differentiate it in respect of t:}
-    \frac{\partial g(k, t)}{\partial t}&=\sum_{n=0}^{\infty} k^n \cdot v[p(n-1, t)-p(n, t)]\\
-    \intertext{and reindex n into m-1 and regroup the terms}
-    &=\sum_{m=0}^{\infty} v\left(k^{m+1}-k^m\right) P(m, t)\\
-    &=v(k-1) \sum_{n=0}^{\infty} k^n P(n, t)\\
+    \frac{\partial g(k, t)}{\partial t} & =\sum_{n=0}^{\infty} k^n \cdot v[p(n-1, t)-p(n, t)]              \\
+    \intertext{and reindex the n in the second p into m-1 and regroup the two sums}
+                                        & =\sum_{m=0}^{\infty} v\left(k^{m+1}-k^m\right) P(m, t)           \\
+                                        & =v(k-1) \sum_{n=0}^{\infty} k^n P(n, t)                          \\
     \intertext{we can see the sum is the same as $g(k,t)$! So we have:}
-    \frac{\partial g}{\partial t}&=v(k-1) \cdot g\\
+    \frac{\partial g}{\partial t}       & =v(k-1) \cdot g                                                  \\
     \intertext{By using the following initial conditions, we obtain the exponential form of g:}
-    P(n, t=0)=\delta_{n, 0} &\Rightarrow g(t=0)=1\\
-    g(k, t)&=e^{(k-1) v t}\\
+    P(n, t=0)=\delta_{n, 0}             & \Rightarrow g(t=0)=1                                             \\
+    g(k, t)                             & =e^{(k-1) v t}                                                   \\
     \intertext{Now expand the exponential and compare it with the definition of g (Eq.\refeq{eq:g_definition}):}
-    g(k, t)&=e^{-\nu t} \sum_{n=0}^{\infty} \frac{1}{n !}(\nu t)^n \cdot k^n\\
-    &=\sum_{n=0}^{\infty} p(n, t) k^n
+    g(k, t)                             & =e^{-\nu t} \sum_{n=0}^{\infty} \frac{1}{n !}(\nu t)^n \cdot k^n \\
+                                        & =\sum_{n=0}^{\infty} p(n, t) k^n
     \intertext{We reach our conclusion:}
-    P(n, t)&=\frac{1}{n !}(\nu t)^n e^{-\nu t}
+    P(n, t)                             & =\frac{1}{n !}(\nu t)^n e^{-\nu t}
 \end{align}
 Which is the same as Eq. \refeq{eq:Poisson_dist}.
 We can then ask some simple questions about the expected values or probability of the process:
@@ -374,33 +374,33 @@ Considering each step is independent, the answer is simply:
 \end{align}
 \ex{}{What is the probability that the 10th event occurs after time t?}
 \sol\\
-There are two ways of doing this: 
+There are two ways of doing this:
 1. Consider the probability $P\left(t_{10}>t\right)$:
 Which we want to integrate the probability that the 10th event happens at exactly $t=t'$ over $t' = t \sim \infty$:
 \begin{align}
-    P\left(t_{10}>t\right)&=\int_t^{\infty} P(t_{10}=t')dt'\\
+    P\left(t_{10}>t\right) & =\int_t^{\infty} P(t_{10}=t')dt'                                                                  \\
     \intertext{And we write this probability as a product of having exactly 9 events and having another one during the time interval dt':}
-    &=\int_t^{\infty} \frac{\left(\nu t^{\prime}\right)^q}{q !} e^{-v t^{\prime}} \cdot v d t^{\prime}
+                           & =\int_t^{\infty} \frac{\left(\nu t^{\prime}\right)^9}{9 !} e^{-v t^{\prime}} \cdot v d t^{\prime}
 \end{align}
 2. The second way is much simpler, we just consider $P(n(t)<10)$, which is:
 \begin{align}
     P(n(t)<10) = \sum_{j=0}^9 \frac{(\nu t)^j}{j !} e^{-\nu t}
 \end{align}
 \section{Evolution of the Master Equation}
-Using the evolution relation (Eq. \refeq{eq:evolution_relation}), we can write out the evolution relation for any stationary Markov process distribution (not just Poisson): 
+Using the evolution relation (Eq. \refeq{eq:evolution_relation}), we can write out the evolution relation for any stationary Markov process distribution (not just Poisson):
 \begin{align}
     \intertext{(The integral has been replaced by a sum since m is discrete)}
-    P(n, t+\Delta t)&=\sum_m G(n, t+\Delta t \mid m, t) \cdot P(m, t)\\
+    P(n, t+\Delta t)                    & =\sum_m G(n, t+\Delta t \mid m, t) \cdot P(m, t)                                                                        \\
     \intertext{And if we subtract $P(n,t)$ from both sides:}
-    \frac{\partial P(n, t)}{\partial t}&=\frac{1}{\Delta t}\left[\sum_m G(n, t+\Delta t m, t) P(m, t)
-    -P(n, t) \cdot \sum_m G(m, t+ \Delta t \mid n, t)\right]\\
+    \frac{\partial P(n, t)}{\partial t} & =\frac{1}{\Delta t}\left[\sum_m G(n, t+\Delta t m, t) P(m, t)
+    -P(n, t) \cdot \sum_m G(m, t+ \Delta t \mid n, t)\right]                                                                                                      \\
     \intertext{where:}
-    \sum_m G(m, t+ \Delta t \mid n, t) = 1\\
+    \sum_m G(m, t+ \Delta t \mid n, t) = 1                                                                                                                        \\
     \intertext{we get:}
-    &=\sum_m \frac{G\left(n, t+\Delta t \mid m, t\right)}{d t} P(m, t)-\sum_m \frac{G(m, t+\Delta t \mid u, t)}{d t} P(u, t)\\
-    &=\sum_m\left[w_{n m} P(m, t)-w_{m n} P(n, t)\right]
+                                        & =\sum_m \frac{G\left(n, t+\Delta t \mid m, t\right)}{d t} P(m, t)-\sum_m \frac{G(m, t+\Delta t \mid u, t)}{d t} P(u, t) \\
+                                        & =\sum_m\left[w_{n m} P(m, t)-w_{m n} P(n, t)\right]
 \end{align}
-Where $w_fi$ is the transition probabilities between initial state $\bmi$ to final state $\bmf$.
+Where $w_{fi}$ is the transition rate from initial state $\bmi$ to final state $\bmf$.
 \begin{align}
     w_{fi}=\operatorname{limit~}_{d t \rightarrow 0} \frac{1}{d t} G(j, t+d t \mid i, t)
 \end{align}
@@ -413,18 +413,18 @@ As the title suggests, we will be looking at the other stationary Markov process
 So what is the Wiener process? Let's start with the definition of a random walk (Section \ref{section:random_walk}), where you have a random variable $\bmx$ (a single step) with probability density $P(\bmx)$ and a linked sequence $\bmy_N$, which can be converted into a time-dependent function $\bmy(t)$ with a stepping rate. We call this the Wiener process when the probability distribution of independent step $P(\bmx)$ is the Gaussian probability. And we usually use the expression $W(t)$ to represent a Wiener process (rather than $y(t)$).
 
 \dfn{Wiener process}{A random walk $W(t)$ where the increment $\Delta W$ has the Gaussian probability of variance $\sigma^2 = \Delta t$
-\begin{align}
-    \Delta W&=W(t+\Delta t)-W(t)\\
-    P(\Delta w)&=\frac{1}{\sqrt{2 \pi \Delta t}} \exp\left({-\frac{\Delta w^2}{2 \Delta t}}\right) \label{eq:wiener_step_prob}
-\end{align}
+    \begin{align}
+        \Delta W    & =W(t+\Delta t)-W(t)                                                                                            \\
+        P(\Delta w) & =\frac{1}{\sqrt{2 \pi \Delta t}} \exp\left({-\frac{\Delta w^2}{2 \Delta t}}\right) \label{eq:wiener_step_prob}
+    \end{align}
 }
 \noindent And then there are a few important properties of the Wiener process:
 \subsection{Characteristic function}
 It is easy to check (Fourier Transform) that the characteristic function $\phi$ of $\Delta W$ is:
 \thm{Wiener Characteristic Function}{
     \begin{align}
-        \phi(k, t_0+\Delta t) & =\left\langle e^{i k (w_0+\Delta w)}\right\rangle_{P(\Delta w)} \\
-        & =\exp\left(i k w_0-\frac{1}{2} k^2\left(\Delta t-t_0\right)\right)
+        \phi(k, t_0+\Delta t) & =\left\langle e^{i k (w_0+\Delta w)}\right\rangle_{P(\Delta w)}    \\
+                              & =\exp\left(i k w_0-\frac{1}{2} k^2\left(\Delta t-t_0\right)\right)
     \end{align}
     where $w(t_0) = w_0$.
 }
@@ -455,23 +455,23 @@ If we reverse the time and relabel $W(t=A)$ to be the new origin, this is still 
 \subsection{Probability distribution} \label{section:wiener_probability}
 Using the propagator $G = P(\Delta w)$ from the definition of a Wiener process:
 \begin{align}
-    &P(w+\Delta w, t+\Delta t)=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w, t) d w\\
+     & P(w+\Delta w, t+\Delta t)=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w, t) d w           \\
     \intertext{And using the relation $\Delta w=w(t+\Delta t)-w(t)$, we can change the variables and change the integral $ d w=-d \Delta w $ (think $w(t+\Delta t)$ as a constant)}
-    &=-\int_{\infty}^{-\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
+     & =-\int_{\infty}^{-\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w       \\
     \intertext{flipping the interval of integration back}
-    &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w\\
+     & =\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t)-\Delta w, t) d \Delta w        \\
     \intertext{taking out the $-\Delta w$ term since it's $<< w(t)$}
-    &=\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t), t) d w w\\
-    &-\int G(\Delta w, \Delta t) \Delta w \frac{\partial P}{\partial w} d \Delta w\\
-    &+\frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 \frac{\partial^2 P}{\partial w} d \Delta w
+     & =\int_{-\infty}^{\infty} G(\Delta w, \Delta t) P(w(t+\Delta t), t) d \Delta w                 \\
+     & -\int G(\Delta w, \Delta t) \Delta w \frac{\partial P}{\partial w} d \Delta w                 \\
+     & +\frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 \frac{\partial^2 P}{\partial w} d \Delta w
 \end{align}
 \begin{align}
     \intertext{The integral in the first line over G is 1 (P doesn't depend on $\Delta w$), due to normalisation over all possible $\Delta w$. The second line is 0 since it's a product of an even function G and odd function $\Delta w$:}
-    P(w+\Delta w, t+\Delta t) - P(w(t+\Delta t), t) &= \frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 d \Delta w \frac{\partial^2 p}{\partial w}\\
+    P(w+\Delta w, t+\Delta t) - P(w(t+\Delta t), t) & = \frac{1}{2} \int G(\Delta w, \Delta t) \Delta w^2 d \Delta w \frac{\partial^2 p}{\partial w^2}           \\
     \intertext{by using $\Delta w=w(t+\Delta t)-w(t)$ and the definition of variance:}
-    \frac{\partial P(w, t)}{\partial t}&=\frac{1}{2} \frac{\sigma_{\Delta w}^2}{\Delta t} \cdot \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\\
+    \frac{\partial P(w, t)}{\partial t}             & =\frac{1}{2} \frac{\sigma_{\Delta w}^2}{\Delta t} \cdot \frac{\partial^2 P\left(w, t\right)}{\partial w^2} \\
     \intertext{wrapping the terms up with D, we reach the diffusion equation:}
-    \frac{\partial P\left(w, t\right)}{\partial t}&=D \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\label{eq:wiener_diffusion}
+    \frac{\partial P\left(w, t\right)}{\partial t}  & =D \frac{\partial^2 P\left(w, t\right)}{\partial w^2}\label{eq:wiener_diffusion}
 \end{align}
 From the derivation above, we conclude that the diffusion equation \eqref{eq:wiener_diffusion} is how $P(w,t)$ evolves over time. There is no universal solution to this equation since it depends on the initial boundary condition $P(w,t=0)$.
 Although there is a special case where we start from a single point $w_0$, setting the boundary condition $P(w,t=0)$ to be $\delta(w=w_0)$. We get a Gaussian probability distribution:
@@ -481,11 +481,11 @@ Although there is a special case where we start from a single point $w_0$, setti
     \end{align}
     with variance $\sigma_w^2 = t$.
 }
-It's easy to check that Eq. \eqref{eq:Wiener_prob} is a solution of the diffusion differential equation and converges to a delta function $P(w) = \delta(w-w_0)$ at t=0. (Plug it in yourself!) Also, by using the variance $\sigma_{\Delta w}^2$ of $\Delta t$ and Eq. \eqref{eq:random_walk_variance}, it's not hard to be convinced after time t ($N = t/\Delta t$ steps), the probability distribution of W(t) : $P(w,t)$ will still a Gaussian distribution if we start from a single point.
+It's easy to check that Eq. \eqref{eq:Wiener_prob} is a solution of the diffusion differential equation and converges to a delta function $P(w) = \delta(w-w_0)$ at t=0. (Plug it in yourself!) Also, by using the variance $\sigma_{\Delta w}^2$ of $\Delta t$ and Eq. \eqref{eq:random_walk_variance}, it's not hard to be convinced after time t ($N = t/\Delta t$ steps), the probability distribution of W(t) : $P(w,t)$ will still be a Gaussian distribution if we start from a single point.
 
 The equation for the global functions (such as the diffusion equation for the global probability distribution $P(w,t)$) are called "kinetic" or Macroscopic. And on a microscopic scale of $W(t)$, they're governed by "Stochastic differential equations", SDE.
 \section{Stochastic differential equations}
-Here's a fun little fact. With so many "Physics-inspired" algorithms/models nowadays, the solution of Brownian motion was actually "trading-inspired". In 1900, Louis Bachelier presented the method of stochastic analysis of stock and option markets in his PhD thesis "The theory of speculation". Then in 1905 Albert Einstein and Marian Smoluchowski brought the solution of Brownian motion to the attention of physicists and presented it as a way to indirectly confirm the existence of atoms and molecules. Later in 1911, Langevin proposed a more general approach to formulating and analysing SDEs. 
+Here's a fun little fact. With so many "Physics-inspired" algorithms/models nowadays, the solution of Brownian motion was actually "trading-inspired". In 1900, Louis Bachelier presented the method of stochastic analysis of stock and option markets in his PhD thesis "The theory of speculation". Then in 1905 Albert Einstein and Marian Smoluchowski brought the solution of Brownian motion to the attention of physicists and presented it as a way to indirectly confirm the existence of atoms and molecules. Later in 1911, Langevin proposed a more general approach to formulating and analysing SDEs.
 
 Let's start with something that we're all familiar with, the stochastic differential equation for Brownian Motion:
 \begin{align}
@@ -515,7 +515,7 @@ which is also known as the "percentage drift" or the "percentage volatility".
 
 To solve this we rearrange the equation above into:
 \begin{align}
-    \frac{d S_t}{S_t}=\mu \cdot d t+c \cdot d w_t
+    \frac{d S_t}{S_t}=\mu \cdot d t+\sigma \cdot d w_t
     \intertext{which you will very intuitively write into:}
     \cancelto{\text{Wrong!}}{d \ln S_t = d\left(\mu t+\sigma w_t\right)}
 \end{align}
@@ -531,14 +531,14 @@ In this section, it's all mathematician BS, so we used some big words to blend i
 }
 \noindent First we start with the definition of df:
 \begin{align}
-    d f&=f(x+d x)-f(x)\\
+    d f & =f(x+d x)-f(x)                                                                                                                                                                                                                         \\
     \intertext{which the terms may all have explicit time dependence. We Taylor expand them:}
-    &=\frac{\partial f}{\partial t} d t+\frac{\partial f}{\partial x} d x+\frac{1}{2} \frac{\partial^2 f}{\partial x^2} d x^2+\cdots \cdots
+        & =\frac{\partial f}{\partial t} d t+\frac{\partial f}{\partial x} d x+\frac{1}{2} \frac{\partial^2 f}{\partial x^2} d x^2+\cdots \cdots
     \intertext{then using $d x_t=\mu(x, t) d t+\omega(x, t) d w_t$ from Eq\eqref{eq:sde_math_notation} and only keeping terms linear in dt:}
     \intertext{(Note that $\left\langle d w_t^2\right\rangle=d t$ for fast steps with small time interval)}
-    &=\frac{\partial f}{\partial t} d t+\frac{\partial f}{\partial x}(\mu \delta t+\sigma d w)+\frac{1}{2} \frac{\partial^2 f}{\partial x^2}\left(\mu^2 \cancelto{0}{dt^2} +2 \mu \sigma \cancelto{0}{d t d w_t} + \sigma^2 d w_t^2 \right)
+        & =\frac{\partial f}{\partial t} d t+\frac{\partial f}{\partial x}(\mu \delta t+\sigma d w)+\frac{1}{2} \frac{\partial^2 f}{\partial x^2}\left(\mu^2 \cancelto{0}{dt^2} +2 \mu \sigma \cancelto{0}{d t d w_t} + \sigma^2 d w_t^2 \right)
     \intertext{Now:}
-    d f&=\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \underbrace{\sigma \frac{\partial f}{\partial x} \cdot d w_t}_{\text{diffusion term}}
+    d f & =\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \underbrace{\sigma \frac{\partial f}{\partial x} \cdot d w_t}_{\text{diffusion term}}
 \end{align}
 \mlenma{Itoh Lemma}{
     If we have a stochastic process $x(t)$ with SDE:
@@ -547,47 +547,48 @@ In this section, it's all mathematician BS, so we used some big words to blend i
     \end{align}
     and a fucntion $f(x)$ that depends on x. The SDE for f is:
     \begin{align}
-        d f&=\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \sigma \frac{\partial f}{\partial x} \cdot d w_t \label{lemma:Itoh}
+        d f & =\left(\frac{\partial f}{\partial t}+\mu \frac{\partial f}{\partial x}+\frac{1}{2} \sigma^2 \frac{\partial^2 f}{\partial x^2}\right) \cdot d t + \sigma \frac{\partial f}{\partial x} \cdot d w_t \label{lemma:Itoh}
     \end{align}
 }
 Now applying the same analysis to Geometric Brownian Motion Eq.\eqref{eq:GBM} and consider the function $f(S) = \ln S_t$:
 \begin{align}
-d(\ln S) & =\frac{\partial f}{\partial S} d S+\frac{1}{2} \frac{\partial^2 f}{\partial S^2} d S^2 \\
-& =\frac{d S}{S}-\frac{1}{2 S^2} d S^2 \\
-& =\frac{d S}{S}-\frac{1}{2 S^2}\left(\mu^2 S^2 \cancelto{0}{d t^2}+2 \mu \sigma S^2 \cancelto{0}{d t d w} +\sigma^2 S^2 d w^2\right) \\
-& =\frac{d S}{S}-\frac{\sigma^2}{2} d t
-\intertext{which gives:}
-S&=S_0 \exp \left(\left(u-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
+    d(\ln S) & =\frac{\partial f}{\partial S} d S+\frac{1}{2} \frac{\partial^2 f}{\partial S^2} d S^2                                              \\
+             & =\frac{d S}{S}-\frac{1}{2 S^2} d S^2                                                                                                \\
+             & =\frac{d S}{S}-\frac{1}{2 S^2}\left(\mu^2 S^2 \cancelto{0}{d t^2}+2 \mu \sigma S^2 \cancelto{0}{d t d w} +\sigma^2 S^2 d w^2\right) \\
+             & =\frac{d S}{S}-\frac{\sigma^2}{2} d t                                                                                               \\
+             & = \mu \cdot d t+\sigma \cdot d w_t-\frac{\sigma^2}{2} d t                                                                           \\
+    \intertext{which gives:}
+    S        & =S_0 \exp \left(\left(\mu-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
 \end{align}
 \dfn{Solution of Geometric Brownian Motion}{
     \begin{align}
-    S(t)=S_0 \exp \left(\left(u-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
+        S(t)=S_0 \exp \left(\left(\mu-\frac{\sigma^2}{2}\right)t + \sigma w_t \right)
     \end{align}
 }
 \noindent From this we can see two interesting things:
 \begin{enumerate}
     \item Since $d w_t$ is a small step Wiener process, we have a diffusive growth $e^{\sigma w_t}$
     \item If we solved the differential equation without the diffusion term we would've reached the solution:
-    \begin{align}
-        d S=\mu s d t \rightarrow S=S_0 e^{\mu t}
-        \intertext{But instead we have a shift in the deterministic drift term, giving us a lower growth rate:}
-        S \propto \exp \left(\mu-\frac{\sigma^2}{2}\right) t
-    \end{align}
+          \begin{align}
+              d S=\mu s d t \rightarrow S=S_0 e^{\mu t}
+              \intertext{But instead we have a shift in the deterministic drift term, giving us a lower growth rate:}
+              S \propto \exp \left(\mu-\frac{\sigma^2}{2}\right) t
+          \end{align}
 \end{enumerate}
 
 \noindent Try using the code on the \href{https://en.wikipedia.org/wiki/Geometric_Brownian_motion}{GBM Wikipedia page} to produce GBM graphs in Python!
 
 \chapter{Lecture 5: Black-Scholes equation}
-In this lecture, we will be using the two things we introduced in the last lecture, Etoh's lemma and Geometric Brownian Motion, to study the Black-Scholes equation, which won the Nobel prize for economics in 1997. So what is the Black-Scholes equation and how is it useful? It is a mathematical analysis of dynamics and prediction of option prices in volatile markets that are stochastic. The term "option" might not be familiar to some readers, in simple terms, the B-S equation gives investment managers a tool to allocate their risk and cash. For example, buying more stocks is allocating more risk and less cash. 
+In this lecture, we will be using the two things we introduced in the last lecture, Etoh's lemma and Geometric Brownian Motion, to study the Black-Scholes equation, which won the Nobel prize for economics in 1997. So what is the Black-Scholes equation and how is it useful? It is a mathematical analysis of dynamics and prediction of option prices in volatile markets that are stochastic. The term "option" might not be familiar to some readers, in simple terms, the B-S equation gives investment managers a tool to allocate their risk and cash. For example, buying more stocks is allocating more risk and less cash.
 
-Interestingly, there are theories that suggest that the 1987 financial crisis was caused by a group of traders that conspired to punish the early adopters of the B-S analysis. Even more interestingly, one of the main causes of the 2008 financial crisis is actually too much trust in the B-S analysis and incorrect use of it (Since they didn't pick the ASM option in Lent like you obviously lol). 
+Interestingly, there are theories that suggest that the 1987 financial crisis was caused by a group of traders that conspired to punish the early adopters of the B-S analysis. Even more interestingly, one of the main causes of the 2008 financial crisis is actually too much trust in the B-S analysis and incorrect use of it (Since they didn't pick the ASM option in Lent like you obviously lol).
 
 \section{Black-Scholes Equation}
 So first we use a stochastic variable $S(t)$ to present the value of a given stock, which is governed by the SDE of Geometric Brownian Motion (GBM):
 \begin{align}
     d S=\mu S d t+\sigma S d w \label{eq:StockSDE}
 \end{align}
-since in stocks we usually describe the growth in percentage growth and not linear growth. An "Option" is a contract when you (the seller) agree to sell me (the buyer) a certain stock $\mathcal{S}$, at a future time t, at the current price if the future price satisfies certain conditions (For example reach a trigger price $E$). So you see the seller hopes the stock to depreciate and then the opposite for the buyer. You might think, why would the seller agree to a such weird contract? They already have the stock in hand and can sell them at any time that they want! The only reason that a seller will be interested in such a contract is if the buyer (me) pays a small extra fee for this. We denote this fee as another stochastic variable $V(s, t)$, which depends on the value of the stock $S$ and time $t$. A "Portfolio" $\Pi$ is a combination of assets (cash, stocks, options etc.) that I currently have:
+since in stocks we usually describe the growth in percentage growth and not linear growth. An "Option" is a contract when you (the seller) agree to sell me (the buyer) a certain stock $\mathcal{S}$, at a future time t, at a "strike price" $E$. So you see the seller hopes the stock to depreciate and then the opposite for the buyer. You might think, why would the seller agree to a such weird contract? They already have the stock in hand and can sell them at any time that they want! The only reason that a seller will be interested in such a contract is if the buyer (me) pays a small extra fee for this. We denote this fee as another stochastic variable $V(s, t)$, which depends on the value of the stock $S$ and time $t$. A "Portfolio" $\Pi$ is a combination of assets (cash, stocks, options etc.) that I currently have:
 \begin{align}
     \Pi=-V\left(s_t\right)+\alpha S
 \end{align}
@@ -597,13 +598,13 @@ where the $-V$ came from the amount that you have already paid for the options c
 \end{align}
 Now, we can use the Itoh Lemma \refeq{lemma:Itoh}:
 \begin{align}
-    d V(s)&=\left(\frac{\partial V}{\partial t}+\frac{\partial V}{\partial s} d s+\frac{1}{2} \frac{\partial^2 V}{\partial s^2} d s^2\right)
+    d V(s)                                                                           & =\left(\frac{\partial V}{\partial t}+\frac{\partial V}{\partial s} d s+\frac{1}{2} \frac{\partial^2 V}{\partial s^2} d s^2\right)
     \intertext{And subbing in:}
-    d s&=\mu s d t+\sigma s d w
+    d s                                                                              & =\mu s d t+\sigma s d w
     \intertext{We get:}
-    d V(s)&=\left(\frac{\partial v}{\partial t}+\mu s \frac{\partial v}{\partial s}+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2}\right) d t +\sigma s \frac{\partial V}{\partial s} d W
+    d V(s)                                                                           & =\left(\frac{\partial v}{\partial t}+\mu s \frac{\partial v}{\partial s}+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2}\right) d t +\sigma s \frac{\partial V}{\partial s} d W
     \intertext{Then substitute $dV$ and $dS$ into $d\Pi$:}
-    d \Pi=-\frac{\partial v}{\partial t} d t-\mu s \frac{\partial v}{\partial s} d t&-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2} d t +\alpha \mu s d t-\underbrace{\sigma s \frac{\partial v}{\partial s} d W+\alpha \sigma s d W}_{\text{stochastic part}}
+    d \Pi=-\frac{\partial v}{\partial t} d t-\mu s \frac{\partial v}{\partial s} d t & -\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 v}{\partial s^2} d t +\alpha \mu s d t-\underbrace{\sigma s \frac{\partial v}{\partial s} d W+\alpha \sigma s d W}_{\text{stochastic part}}
 \end{align}
 With our stochastic description of $d\Pi$, the key step of reaching the BS equation is to choose the factor $\alpha$ to be $\partial V / \partial S$ so the volatility terms above cancel out and we have no volatility in $d\Pi$. Then, we make a decision on what we want to achieve for $d\Pi$ (The goal of our investments), a steady geometric growth:
 \begin{align}
@@ -611,12 +612,12 @@ With our stochastic description of $d\Pi$, the key step of reaching the BS equat
 \end{align}
 Getting us the relation with rate $r$:
 \begin{align}
-    r \cdot \overbrace{(\alpha S-V)}^{\Pi} d t &=\left(-\frac{\partial V}{\partial t}-\cancel{\mu s \frac{\partial V}{\partial s}}-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial S^2}+\ \cancel{\alpha \mu s}\right) d t\\
+    r \cdot \overbrace{(\alpha S-V)}^{\Pi} d t & =\left(-\frac{\partial V}{\partial t}-\cancel{\mu s \frac{\partial V}{\partial s}}-\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial S^2}+\ \cancel{\alpha \mu s}\right) d t \\
 \end{align}
 Finally we have the B-S equation:
 \dfn{Black-Scholes Equation}{
     \begin{align}
-        \frac{\partial V(s, t)}{\partial t}&+\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial s^2}=r\left(V-s \frac{\partial V}{\partial s}\right)
+        \frac{\partial V(s, t)}{\partial t} & +\frac{1}{2} \sigma^2 s^2 \frac{\partial^2 V}{\partial s^2}=r\left(V-s \frac{\partial V}{\partial s}\right)
     \end{align}
 }
 It allows us to solve for $V(s,t)$ for any given $r$ and $\sigma$. The lack of dependence on $\mu$ makes it even more powerful since if we look back to our SDE Eq.\refeq{eq:StockSDE} for $S(t)$, it is $\mu$ that makes the growth of each stock different and the $dW$ term is just geometric stochastic term that represents the market volatility and does not relate to the growth.
@@ -634,26 +635,26 @@ Using this equation, we can solve for the fair value of the contract $V$ at the 
 (Note: There's another interesting question to ask: Do we really know the value of volatility $\sigma$? To this day, the measurement or modelling of $\sigma$ is still a very competitive field between hedge funds and a lot of different analyses are still being proposed.)
 
 With all that waffling above, how do we actually solve for $V(s,t)$ using this equation?
-Using the current price($t=0$) of a stock $S$ and the trigger price$E$ of the stock at the end of the contract $(t=T)$, we define:
+Using the current price($t=0$) of a stock $S$ and the strike price $E$ of the stock at the end of the contract $(t=T)$, we define:
 \begin{align}
-    x&=\ln S / E\\
-    S&=E e^x\\
-    \tau &= T - t
+    x                                                                                     & =\ln S / E                                                            \\
+    S                                                                                     & =E e^x                                                                \\
+    \tau                                                                                  & = T - t
     \intertext{re-express $V$ into:}
-    V&\left(E e^x, T-\tau\right)=Z(x, \tau)
+    V                                                                                     & \left(E e^x, T-\tau\right)=Z(x, \tau)
     \intertext{we get:}
-    \frac{\partial z}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 z}{\partial x^2}&+\left(\frac{\sigma^2}{2}-r\right) \frac{\partial z}{\partial x}+r =0
+    \frac{\partial z}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 z}{\partial x^2} & +\left(\frac{\sigma^2}{2}-r\right) \frac{\partial z}{\partial x}+r =0
 \end{align}
 Which is a homogeneous differential equation! In order to solve this, there's a beautiful solution by introducing a new variable $u$:
 \begin{align}
-    u(x, \tau)&=z(x, \tau) \cdot e^{\alpha x+\beta \tau}
+    u(x, \tau)                                                                            & =z(x, \tau) \cdot e^{\alpha x+\beta \tau}
     \intertext{plugging it into the PDE above:}
-    \frac{\partial u}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2}&+A(\alpha, \beta) \cdot \frac{\partial u}{\partial x}+\underbrace{B(\alpha, \beta)} \cdot u=0
+    \frac{\partial u}{\partial \tau}-\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2} & +A(\alpha, \beta) \cdot \frac{\partial u}{\partial x}+\underbrace{B(\alpha, \beta)} \cdot u=0
     \intertext{choose an $\alpha$ and $\beta$ that yields $A=B=0$: (try it yourself!)}
-    \alpha&=r / \sigma^2-1 / 2 \\
-    \beta&=r / 2+\sigma^2 / 8+r^2 / 2\sigma^2
+    \alpha                                                                                & =r / \sigma^2-1 / 2                                                                           \\
+    \beta                                                                                 & =r / 2+\sigma^2 / 8+r^2 / 2\sigma^2
     \intertext{and all we have left is:}
-    \frac{\partial u}{\partial \tau}-&\frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2} = 0
+    \frac{\partial u}{\partial \tau}-                                                     & \frac{\sigma^2}{2} \frac{\partial^2 u}{\partial x^2} = 0
 \end{align}
 Amazing right? The last step is to simply solve this by using Green's function and its initial condition:
 \begin{align}
@@ -662,9 +663,9 @@ Amazing right? The last step is to simply solve this by using Green's function a
 and hence we can backroll and find $Z$, and $V(s,t)$.
 
 \chapter{Lecture 6: Ornstein-Uhlenbeck process}
-After all that discussion about financial maths, in this lecture let's go back to physical systems and talk about the Ornstein-Uhlenbeck process. 
+After all that discussion about financial maths, in this lecture let's go back to physical systems and talk about the Ornstein-Uhlenbeck process.
 \section{Ornstein-Uhlenbeck process}
-Once again, let's start wit the most general form of an SDE:
+Once again, let's start with the most general form of an SDE:
 \begin{align}
     d x_t=\mu(x, t) d t+\sigma(x, t) d w
 \end{align}
@@ -676,61 +677,61 @@ The O-U process is when $\mu$ and $\sigma$ are chosen to be:
 }
 where $\Theta, x_0, \sigma$ are constants. This might seems like something completely new but actually, we have seen this before! Let's look at this equation:
 \begin{align}
-    m \dot{v}&=-\gamma v+\sqrt{2 k_B T \cdot \gamma} \xi(t) \label{eq:free_diffusion}
+    m \dot{v} & =-\gamma v+\sqrt{2 k_B T \cdot \gamma} \xi(t) \label{eq:free_diffusion}
     \intertext{this is the brownian motion equation in the Part II TSP course, also known as the free diffusion equation. If we divide both sides by m and times by $dt$:}
-    d v&=-\frac{\gamma}{m} v \cdot d t+\sqrt{\frac{2 k_B T \cdot \gamma}{m}} d W \label{eq:brownian_OU_SDE}
+    d v       & =-\frac{\gamma}{m} v \cdot d t+\sqrt{\frac{2 k_B T \cdot \gamma}{m}} d W \label{eq:brownian_OU_SDE}
 \end{align}
-In comparison to Eq \refeq{eq:OU_SDE}, this is the same equation with $x =v$, $\Theta = \gamma / m$, $x_0 = 0$, $\sigma = \sqrt{\frac{2 k_B T \cdot \gamma}{m}}$, and $dW = \xi(t)$. 
+In comparison to Eq \refeq{eq:OU_SDE}, this is the same equation with $x =v$, $\Theta = \gamma / m$, $x_0 = 0$, $\sigma = \sqrt{\frac{2 k_B T \cdot \gamma}{m}}$, and $dW = \xi(t)$.
 
 Or similarly, the diffusion equation in a spring potential:
 \begin{align}
-    \gamma \dot{x}&=-k\left(x-x_0\right)+\sqrt{2 k_b T \cdot \gamma} \xi(t)
+    \gamma \dot{x} & =-k\left(x-x_0\right)+\sqrt{2 k_b T \cdot \gamma} \xi(t)
     \intertext{rearrange:}
-    d x&=-\frac{k}{\gamma}\left(x-x_0\right) d t+\sqrt{\frac{2 k_B T}{\gamma}} d w
+    d x            & =-\frac{k}{\gamma}\left(x-x_0\right) d t+\sqrt{\frac{2 k_B T}{\gamma}} d w
 \end{align}
 where we can see this is just another Ornstein-Uhlenbeck SDE with a different choice of the constants. So why is the O-U important? Seems like just another SDE with a niche form? The reason lies in the linear term $\Theta\cdot\left(x_0-x\right)$. Most physical processes near equilibrium can be approximated with a linear restoring force, or a parabolic potential (think about Taylor-expansion). So the O-U process is what describes the dynamic of a stochastic system near equilibrium.
 
 Before going into more details about O-U, let's revise some basic mechanics:
 \begin{align}
     \intertext{relation between position and velocity:}
-    x(t)&=\int_0^t v(s) d s\\
-    \intertext{using the product of this and taking the ensemble average:}
-    \left\langle x^2(t)\right\rangle&=\int_0^t d s_1 \int_0^t d s_2\left\langle v\left(s_1\right) v\left(s_2\right)\right\rangle
+    x(t)                                          & =\int_0^t v(s) d s                                                                          \\
+    \intertext{using the product of this and taking the ensemble average(just think of it as the expected value):}
+    \left\langle x^2(t)\right\rangle              & =\int_0^t d s_1 \int_0^t d s_2\left\langle v\left(s_1\right) v\left(s_2\right)\right\rangle
     \intertext{taking the time derivative, we should have 2 identical integrals since $s1,s2$ is symmetrical under exchange:}
-    \frac{d}{d t}\left\langle x^2(t)\right\rangle&=2 \int_0^t d s\langle v(t) v(s)\rangle
+    \frac{d}{d t}\left\langle x^2(t)\right\rangle & =2 \int_0^t d s\langle v(t) v(s)\rangle
     \intertext{Using the relation we got above and comparing it to the diffusion equation $\left\langle x^2\right\rangle=2 D t$, we see that:}
-    D&=\int_0^t\langle v(t) v(s)\rangle \quad \text{(1D case)}\\
-    \text{or} \quad D&=\frac{1}{N}\int_0^t\langle v(t) v(s)\rangle \quad \text{(ND case)}
+    D                                             & =\int_0^t ds \langle v(t) v(s)\rangle \quad \text{(1D case)}                                \\
+    \text{or} \quad D                             & =\frac{1}{N}\int_0^t ds \langle v(t) v(s)\rangle \quad \text{(ND case)}
     \intertext{in the end we shift the time by $\tilde{s}=t-s$ so it looks neater:}
-    D&=\int_0^t d \tilde{s}\langle v(\tilde{s}) v(0)\rangle \label{eq:neat_D}
+    D                                             & =\int_0^t d \tilde{s}\langle v(\tilde{s}) v(0)\rangle \label{eq:neat_D}
 \end{align}
 Let's go back to the free diffusion equation \refeq{eq:free_diffusion}. If we times both sides by $v(0)$ and take the average over the whole ensemble:
 \begin{align}
-    m \frac{d}{d t}\langle v(t) \cdot v(0)\rangle&=-\gamma\langle v(t) v(0)\rangle + C \cancelto{0}{\langle \xi(t) \cdot v(0)\rangle}\\
-    &=-\gamma\langle v(t) v(0)\rangle
+    m \frac{d}{d t}\langle v(t) \cdot v(0)\rangle                                       & =-\gamma\langle v(t) v(0)\rangle + C \cancelto{0}{\langle \xi(t) \cdot v(0)\rangle}      \\
+                                                                                        & =-\gamma\langle v(t) v(0)\rangle
     \intertext{The last term canecls out due to the stochastic nature of $\xi$, so: }
-    \langle v(t) v(0)\rangle&=\langle v(0)^2\rangle e^{-\frac{\gamma}{m} t} \label{eq:v_self_correlation}
+    \langle v(t) v(0)\rangle                                                            & =\langle v(0)^2\rangle e^{-\frac{\gamma}{m} t} \label{eq:v_self_correlation}
     \intertext{then subbing it back into Eq \refeq{eq:neat_D}:}
-    D=\left\langle v_0^2\right\rangle \int_0^t d s \space\space e^{-\frac{\gamma}{m} s} &=\left\langle\nu_0^2\right\rangle \frac{m}{\gamma}\left(1-e^{-\frac{\gamma}{m} t}\right)
+    D=\left\langle v_0^2\right\rangle \int_0^t d s \space\space e^{-\frac{\gamma}{m} s} & =\left\langle\nu_0^2\right\rangle \frac{m}{\gamma}\left(1-e^{-\frac{\gamma}{m} t}\right)
 \end{align}
 We have obtained a time dependent value of $D$ instead of the usual constant form. How do we physically interpret this exponential decay in time? The exponential term in the self correlation of $\nu$ in Eq. \refeq{eq:v_self_correlation} can be interpreted as a "memory" with relaxation time scale $m/\gamma$. If our time $t$ is much greater than this "time of velocity relaxation", which the give the system enough time to forget its initial conditions and reach its equilibrium, we can obtain a contant form of D:
 \begin{align}
-   D \approx \frac{m}{\gamma}\left\langle v_0^2\right\rangle=\frac{k \pi}{\gamma} \quad \text{(we used the 2D case where }m\left\langle v_0^2\right\rangle = k_B T) 
+    D \approx \frac{m}{\gamma}\left\langle v_0^2\right\rangle=\frac{k_B T}{\gamma} \quad \text{(we used the 2D case where }m\left\langle v_0^2\right\rangle = k_B T)
 \end{align}
 
 \dfn{Green-Kubo formula}{
     For a time that's much longer than the relaxation time, we define the usual diffusion constant that we use to be:
     \begin{align}
-         D=\int_0^{\infty}\langle v(t) v(0)\rangle d t
+        D=\int_0^{\infty}\langle v(t) v(0)\rangle d t
     \end{align}
 }
 \section{O-U process with multiple variables}
 By choosing the equilibrium point $x_0 = 0$ we have the usual single variable O-U SDE:
 \begin{align}
-    d x&=-\theta x d t+\sigma d w
+    d x                               & =-\theta x d t+\sigma d w
     \intertext{Now if we want to make it multi-variable:}
-    d x_i&=-\theta_{i k} x_k d t+\sigma_{i k} d w_k\\ \label{eq:OU_mv_SDE}
-    \text{or} \quad \frac{d}{d t} x_i&=-\theta_{i k} x_k+\sigma_{i k} \xi_k
+    d x_i                             & =-\theta_{i k} x_k d t+\sigma_{i k} d w_k \\ \label{eq:OU_mv_SDE}
+    \text{or} \quad \frac{d}{d t} x_i & =-\theta_{i k} x_k+\sigma_{i k} \xi_k
 \end{align}
 The reason of the matrices $\theta_{i k},\sigma_{i k}$ is so variables can be correlated to each other so we don't just boringly have one independent ODEs for each variables. To solve this, we convolve the initial condition with the Green's function:
 \begin{align}
@@ -740,25 +741,25 @@ If you are not quite convinced by this, you can check it by differentiation and 
 
 Now we construct a matrix $M_{ik}$ to represent the correlation functions:
 \begin{align}
-    M_{i k}&=\left\langle x_i(t) x_k(t)\right\rangle
+    M_{i k}                                                              & =\left\langle x_i(t) x_k(t)\right\rangle
     \intertext{subbing in Eq. \refeq{eq:OU_mv_solution}:}
-    M_{i k}=\int_0^t d s_1 \int_0^t d s_2 \ \  &e^{-\theta_{i m}\left(t-s_1\right)} e^{-\theta_{k p}\left(t-s_2\right)}\cdot \sigma_{m l}\sigma_{p q}\cdot\langle \xi_l\left(s_1\right) \xi_q\left(s_2\right)\rangle
+    M_{i k}=\int_0^t d s_1 \int_0^t d s_2 \ \                            & e^{-\theta_{i m}\left(t-s_1\right)} e^{-\theta_{k p}\left(t-s_2\right)}\cdot \sigma_{m l}\sigma_{p q}\cdot\langle \xi_l\left(s_1\right) \xi_q\left(s_2\right)\rangle
     \intertext{since Wiener processes are not related to one another, the average term can be written into:}
-    \left\langle\xi_e\left(s_1\right) \xi_q\left(s_2\right)\right\rangle &= \delta_{q e} \delta\left(s_1-s_2\right)
+    \left\langle\xi_e\left(s_1\right) \xi_q\left(s_2\right)\right\rangle & = \delta_{q e} \delta\left(s_1-s_2\right)
 \end{align}
 therefore:
 \begin{align}
-    M_{ik} &= \int_0^t d s e^{-\theta_{i m}(t-s)} \sigma_{m l} \cdot \sigma_{p l} e^{-\theta_{k p}(t-s)}\\
-    \doubleunderline{M}&=\int_0^t d s e^{-\doubleunderline{\theta}(t-s)} \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot e^{\left(-\doubleunderline{\theta}^\top t-s\right)}
+    M_{ik}              & = \int_0^t d s e^{-\theta_{i m}(t-s)} \sigma_{m l} \cdot \sigma_{p l} e^{-\theta_{k p}(t-s)}                                                                                                          \\
+    \doubleunderline{M} & =\int_0^t d s e^{-\doubleunderline{\theta}(t-s)} \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot e^{\left(-\doubleunderline{\theta}^\top t-s\right)}
     \intertext{taking t to infinity (to be in the equilibrium state) and shifting time $(t-s) \rightarrow \tilde{t}$ to make it look nicer:}
-    \doubleunderline{M}&=\int_0^\infty d s \exp \left(-\doubleunderline{\theta}\tilde{t}\right) \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot \exp \left(-\doubleunderline{\theta}^\top \tilde{t}\right)
+    \doubleunderline{M} & =\int_0^\infty d s \exp \left(-\doubleunderline{\theta}\tilde{t}\right) \doubleunderline{\sigma} \cdot \doubleunderline{\sigma}^\top \cdot \exp \left(-\doubleunderline{\theta}^\top \tilde{t}\right)
 \end{align}
 \begin{example}{Single variable case}
-    for the 1 variable case, the equation above becomes:
+    For the 1 variable case, the equation above becomes:
     \begin{align}
         M=\left\langle x^2\right\rangle=\int_0^{\infty} d t e^{-2 \theta t} \cdot \sigma^2=\frac{\sigma^2}{2 \theta}
     \end{align}
-    which gives the value of $\left\langle x^2\right\rangle$ in equilibrium state. 
+    which gives the value of $\left\langle x^2\right\rangle$ in equilibrium state.
     If we use it on the Eq.\refeq{eq:brownian_OU_SDE}, we get:
     \begin{align}
         \left\langle v^2\right\rangle=\frac{2 k_B T \gamma}{2 \gamma m} = \frac{k T}{m}
@@ -771,11 +772,11 @@ Let's now construct another matrix that's related to the fluctuation-dissapation
 \end{align}
 remember, neither $\theta$ nor $\sigma$ need to be symmetric (I hate these double underlines):
 \begin{align}
-    \doubleunderline{\theta} \underline{\underline{M}}+\doubleunderline{M} \doubleunderline{\theta^{\top}}&=\int_0^{\infty} d t\left[\doubleunderline{\theta} \cdot e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}+e^{\doubleunderline{\theta} t} \doubleunderline{\sigma \sigma^\top} \cdot e^{-\doubleunderline{\theta}^{\top} t} \cdot \doubleunderline{\theta}^{\top}\right]
+    \doubleunderline{\theta} \underline{\underline{M}}+\doubleunderline{M} \doubleunderline{\theta^{\top}} & =\int_0^{\infty} d t\left[\doubleunderline{\theta} \cdot e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}+e^{\doubleunderline{\theta} t} \doubleunderline{\sigma \sigma^\top} \cdot e^{-\doubleunderline{\theta}^{\top} t} \cdot \doubleunderline{\theta}^{\top}\right]
     \intertext{noticing that the square bracket can be written into a time derivative:}
-    &=-\int_0^{\infty} d t \frac{d}{dt}\left[ e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}\right]
+                                                                                                           & =-\int_0^{\infty} d t \frac{d}{dt}\left[ e^{-\doubleunderline{\theta} t} \doubleunderline{\sigma} \doubleunderline{\sigma^{\top}} e^{-\doubleunderline{\theta}^{\top} t}\right]
     \intertext{and the square bracket goes to 0 for t towards $\infty$ so the integral becomes:}
-    &= \doubleunderline{\sigma}\doubleunderline{\sigma^\top}
+                                                                                                           & = \doubleunderline{\sigma}\doubleunderline{\sigma^\top}
 \end{align}
 In the end, this gives us:
 \begin{align}
@@ -791,10 +792,10 @@ Let's start with the evolution equation \refeq{eq:evolution_relation} (rewriting
 \begin{align}
     P(x, t+\Delta t)=\int G(x, t+\Delta t \mid y, t) P(y, t) dy \label{eq:kinetic_equation_OU}
 \end{align}
-Normally when we think of a propagator $G(x\mid y)$, we have a fixed $y$ (starting point) and propagate to a variable target $x$ but in this equation, $x$ is the fixed target and $y$ is the variable starting point. Let's introduce another variable $\Delta x = x-y\Delta x=x-y \quad, \quad y=x-\Delta x, \quad d y=-\Delta x$, and rewrite the equation above:
+Normally when we think of a propagator $G(x\mid y)$, we have a fixed $y$ (starting point) and propagate to a variable target $x$ but in this equation, $x$ is the fixed target and $y$ is the variable starting point. Let's introduce another variable $\Delta x = x-y \text{ so } y=x-\Delta x, \ d y=-\Delta x$, and rewrite the equation above:
 \begin{align}
     P(x, t+\Delta t)=\int G(x-\Delta x+\Delta x, t+\Delta t \mid x-\Delta x, t) P(x-\Delta x, t) d[-\Delta x]
-    \intertext{Taylor expanding in $(-\Delta x)$:} 
+    \intertext{Taylor expanding in $(-\Delta x)$:}
     P(x, t+\Delta t)=\int d(\Delta x) \sum_{n=0}^{\infty} \frac{(-\Delta x)^n}{n !} \frac{\partial^n}{\partial x^n} \left[G(x+\Delta x, t+\Delta t \mid x, t)P(x,t) \right]
 \end{align}
 Let's define the Moments to be:
@@ -805,14 +806,14 @@ Let's define the Moments to be:
 }
 For the O-U process, the moments are: (from now on we only keep terms linear in $\Delta t$ for the same reasoning in Itoh analysis)
 \begin{align}
-    \left\langle\Delta x^0\right\rangle &= 1 \quad \text{(Normalisation of G)}\\
-    \left\langle\Delta x^1\right\rangle &= -\theta x \Delta t + \cdots\\
-    \left\langle\Delta x^0\right\rangle &= \sigma^2 \Delta t+ \cdots\\
+    \left\langle\Delta x^0\right\rangle & = 1 \quad \text{(Normalisation of G)} \\
+    \left\langle\Delta x^1\right\rangle & = -\theta x \Delta t + \cdots         \\
+    \left\langle\Delta x^0\right\rangle & = \sigma^2 \Delta t+ \cdots           \\
 \end{align}
 Therefore the Taylor expansion above becomes:
 \begin{align}
-    P(x, t+\Delta t)&=P(x, t)-\frac{\partial}{\partial x}\left(\ev{\Delta x} P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\left\langle\Delta x^2\right\rangle P(x, t)\right) \cdots\\
-    &= P(x, t)-\frac{\partial}{\partial x}\left(-\theta x \Delta t P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\sigma^2 \Delta t P(x, t)\right)
+    P(x, t+\Delta t) & =P(x, t)-\frac{\partial}{\partial x}\left(\ev{\Delta x} P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\left\langle\Delta x^2\right\rangle P(x, t)\right) \cdots \\
+                     & = P(x, t)-\frac{\partial}{\partial x}\left(-\theta x \Delta t P(x, t)\right) + \frac{1}{2}\frac{\partial^2}{\partial x^2}\left(\sigma^2 \Delta t P(x, t)\right)
 \end{align}
 and we reach our kinetic equation:
 \dfn{Kinetic equation of the O-U process}{
@@ -831,7 +832,7 @@ and we reach our kinetic equation:
     Substituting variables $\Delta x=x-y \quad, \quad y=x-\Delta x, \quad d y=-\Delta x$:
     \begin{align}
         P(x, t+\Delta t)=\int G(x-\Delta x+\Delta x, t+\Delta t \mid x-\Delta x, t) P(x-\Delta x, t) d[-\Delta x]
-        \intertext{Taylor expanding in $(-\Delta x)$:} 
+        \intertext{Taylor expanding in $(-\Delta x)$:}
         P(x, t+\Delta t)=\int d(\Delta x) \sum_{n=0}^{\infty} \frac{(-\Delta x)^n}{n !} \frac{\partial^n}{\partial x^n} \left[G(x+\Delta x, t+\Delta t \mid x, t)P(x,t) \right]
     \end{align}
     (so far it's all the same as what we did above)
@@ -844,9 +845,9 @@ and we reach our kinetic equation:
     This is very similar to the "Moments" that we have just seen but it's not quite the same for various reasons: There's an n factorial term and a division of $\Delta t$ in the limit.
     If we now substitute these coefficients into the equation above and rearrange them a little:
     \begin{align}
-        \frac{\partial P(x, f)}{\partial t}&=\sum_{n=1}^{\infty}(-1)^n \frac{\partial^n}{\partial x^n}\left[D^{(n)}_{(x)} P(x, t)\right]
+        \frac{\partial P(x, f)}{\partial t} & =\sum_{n=1}^{\infty}(-1)^n \frac{\partial^n}{\partial x^n}\left[D^{(n)}_{(x)} P(x, t)\right]
         \intertext{we define this as the K-M operator:}
-        &\equiv \hat{L}_{k M} P(x, t)
+                                            & \equiv \hat{L}_{k M} P(x, t)
     \end{align}
     \dfn{K-M operator}{
         \begin{align}
@@ -864,33 +865,32 @@ and we reach our kinetic equation:
         \frac{\partial P(v, t)}{\partial t}=\frac{\partial}{\partial v}\left(\frac{\gamma}{m} v P\right) +\frac{2k_B T \gamma}{2m^2} \cdot \frac{\partial^2 P}{\partial v^2}
         \intertext{To solve for the steady state:}
         0=\frac{\partial}{\partial v}\left[\frac{\gamma}{m} v P+\frac{k_b T \gamma}{m^2} \frac{\partial P}{\partial v}\right]\\
-        \Rightarrow \frac{d P}{P}=-\frac{m}{k_B T} v dv
-        \intertext{(the lecturer just assumed the integration constant to be 0 idk why)}
-        P_{\text{eq}}(v)=\exp{-\frac{m v^2}{2 k_B T}}
+        \Rightarrow \frac{d P}{P}=-\frac{m}{k_B T} v dv\\
+        P_{\text{eq}}(v)\propto\exp\left(-\frac{m v^2}{2 k_B T}\right)
     \end{gather}
-    Which is the thermostat we're very familiar with! The next question is how long does it take for an arbitrary initial setup to reach this equilibrium state? Recall from the last lecture, we expect some sort of exponential decay with the time scale $\tau=m / \gamma$. 
+    Which is the thermostat we're very familiar with! The next question is how long does it take for an arbitrary initial setup to reach this equilibrium state? Recall from the last lecture, we expect some sort of exponential decay with the time scale $\tau=m / \gamma$.
 }
 
 \ex{Quadratic potential}{
-Let's look at another example. Recall again the stochastic overdamped equation of motion for a particle moving in a quadratic potential:
-\begin{gather}
-    \gamma \dot{x}=-a\left(x-x_0\right)+\sqrt{2 k_B T\gamma} \xi(t)
-    \intertext{which is just O-U with constants:}
-    \theta=a / \gamma, \quad \sigma=\sqrt{2 k \pi / \gamma}
-    \intertext{applying the kinetic equation analysis:}
-    \frac{\partial P(x, t)}{\partial t}=\frac{\partial}{\partial x}\left(\frac{a}{\gamma} (x-x_0)P\right)+\frac{k_B T}{\gamma} \cdot \frac{\partial^2 P}{\partial x^2}
-    \intertext{solve for steady state:}
-    \frac{d P}{P}=-\frac{a}{k_B T}\left(x-x_0\right) d x\\
-    P_{e q}=\exp{-\frac{a\left(x-x_0\right)^2}{2 k T}}
-\end{gather}
-Same as the reason above, we expect the system to reach equilibrium on the time scale of $\tau = \gamma / a$.
+    Let's look at another example. Recall again the stochastic overdamped equation of motion for a particle moving in a quadratic potential:
+    \begin{gather}
+        \gamma \dot{x}=-a\left(x-x_0\right)+\sqrt{2 k_B T\gamma} \xi(t)
+        \intertext{which is just O-U with constants:}
+        \theta=a / \gamma, \quad \sigma=\sqrt{2 k \pi / \gamma}
+        \intertext{applying the kinetic equation analysis:}
+        \frac{\partial P(x, t)}{\partial t}=\frac{\partial}{\partial x}\left(\frac{a}{\gamma} (x-x_0)P\right)+\frac{k_B T}{\gamma} \cdot \frac{\partial^2 P}{\partial x^2}
+        \intertext{solve for steady state:}
+        \frac{d P}{P}=-\frac{a}{k_B T}\left(x-x_0\right) d x\\
+        P_{e q}=\exp\left(-\frac{a\left(x-x_0\right)^2}{2 k T}\right)
+    \end{gather}
+    Same as the reason above, we expect the system to reach equilibrium on the time scale of $\tau = \gamma / a$.
 }
 
 \ex{General Case of "Brownian Motion"}{
     Now we go even one step further and look at the case where we are no longer in the overdamped limit and also allow the driving force to be a general force. We'll take $x=0$ as our equilibrium position (You can put it back in if you want but I'm lazy lol):
     \begin{gather}
         m \dot{v}=-\gamma v - a x+\sqrt{2 k_B T \cdot r} \xi(t)
-        \intertext{since we have two unknowns now we need another equation and it is simply:}
+        \intertext{since we have two unknowns, we need another equation and it is simply:}
         \dot{x} = v
         \intertext{recall that they can be combined into Eq. \refeq{eq:OU_mv_solution}:}
         \dot{x}_i=-\theta_{i k} x_k+\sigma_{i k} \xi_k
@@ -899,26 +899,323 @@ Same as the reason above, we expect the system to reach equilibrium on the time 
         ,\quad and \quad
         \doubleunderline{\sigma}=\left(\begin{array}{cc}\frac{\sqrt{2 k_B T \gamma}}{m} & 0 \\0 & 0\end{array}\right)
     \end{gather}
-    Now let's try to check Fluctuation-Dissipation Relation. If given the 3 correlators: $\ev{v^2}$ $\ev{vx}$ $\ev{x^2}$. Can we write the full kinetic equation for $P(v,x,t)$? 
-    
+    Now let's try to check Fluctuation-Dissipation Relation. If given the 3 correlators: $\ev{v^2}$ $\ev{vx}$ $\ev{x^2}$. Can we write the full kinetic equation for $P(v,x,t)$?
+
     Let's try to rewrite the kinetic equation of the O-U into a multi-variable form:
     \begin{align}
-        \frac{\partial P}{\partial t}&=\frac{\partial}{\partial x_i}\left(\theta_{i k} x_k \cdot P\right)+\frac{1}{2}\left(\sigma \sigma^{\top}\right) \frac{\partial^2 P}{\partial x_{i k} \partial x_k}\\
+        \frac{\partial P}{\partial t} & =\frac{\partial}{\partial x_i}\left(\theta_{i k} x_k \cdot P\right)+\frac{1}{2}\left(\sigma \sigma^{\top}\right) \frac{\partial^2 P}{\partial x_{i k} \partial x_k}                \\
         \intertext{and subbing in the matrices $\sigma$ and $\theta$ above and expand:}
-        &=\frac{\partial}{\partial v}\left(\frac{\gamma}{m} v \cdot P\right)+\frac{\partial}{\partial v}\left(\frac{a}{m} x \cdot P\right) +\frac{\partial}{\partial x}(-1 \cdot v \cdot p)\\
-        &\quad +\frac{\partial}{\partial x}(0) +\frac{1}{2} \frac{2 k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial V^2}
+                                      & =\frac{\partial}{\partial v}\left(\frac{\gamma}{m} v \cdot P\right)+\frac{\partial}{\partial v}\left(\frac{a}{m} x \cdot P\right) +\frac{\partial}{\partial x}(-1 \cdot v \cdot p) \\
+                                      & \quad +\frac{\partial}{\partial x}(0) +\frac{1}{2} \frac{2 k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial V^2}
         \intertext{taking the $\frac{\partial}{\partial x}(-1 \cdot v \cdot p)$ to the left:}
-        \frac{\partial P}{\partial t}&+\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
+        \frac{\partial P}{\partial t} & +\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
     \end{align}
     We can see that the terms on the LHS are a convective derivative and the $\gamma v+a x$ term is a total force between the drag and linear restoring force. This is the general Fokker-Planck equation for $P(v,x,t)$
     \dfn{Fokker-Planck equation}{
         \begin{align}
-        \frac{\partial P}{\partial t}&+\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
+            \frac{\partial P}{\partial t} & +\frac{\partial}{\partial x}(vP)=\frac{\partial}{\partial v}\left(\frac{\gamma v+a x}{m} \cdot P\right)+\frac{k_B T \gamma}{m^2} \frac{\partial^2 P}{\partial v^2}
         \end{align}
         (This is a very very hard equation to solve.)
     }
     It is interesting to point out that the time scale for $v$ to reach equilibrium is much smaller than it takes for $x$. Therefore, the velocity-wise Maxwell distribution develops wayyy before the position-wise Boltzmann distribution does. So this equation actually reduces to the diffusion equation for $P(x,t)$ at t much greater than the velocity relaxation time $t\gg m/\gamma$.
 }
+
+\chapter{O-U process continued}
+\section{Discussion before continuing}
+In the last chapter, we talked about the O-U process where the forces are linear. What happens if the force field is arbitrary: $f(x)=-\frac{\partial}{\partial x} V(x)$?
+\begin{align}
+    \intertext{In the overdamped limit we have the SDE:}
+    \gamma \dot{x}                      & =f(x)+\sqrt{2 k_B T \cdot \gamma} \cdot \xi(t)
+    \intertext{and via the Kramers-Moyal expansion in $D^1$ and $D^2$ we get:}
+    \frac{\partial P(x, t)}{\partial t} & =-\frac{\partial}{\partial x}\left(\frac{f(x) P}{\gamma}\right)+\frac{1}{2} \frac{2 k T}{\gamma} \frac{\partial^2 P}{\partial x^2} \label{eq:KM_expansion_chp8}
+    \intertext{which can be written in terms of the current/flux of P:}
+                                        & =-\frac{\partial}{\partial x}(J(x, t))
+    \intertext{with a continuity eqution:}
+    \dot{P}                             & =-\operatorname{div} J
+\end{align}
+\begin{align}
+    \intertext{By expanding J, here we have:}
+    J & =\frac{f(x)}{\gamma} \cdot P(x, t)-\frac{k_B T}{\gamma} \frac{\partial P(x, t)}{\partial x}
+    \intertext{There's also another definition of J:}
+    J & =-D e^{-\beta V(x)} \frac{\partial}{\partial x}\left[e^{\beta V(x)} \cdot \rho(x,+)\right]
+\end{align}
+which is the same if you expand it with the product rule and treating $D=\frac{k_B T}{\gamma}$
+
+After adding in the force, let's make it even more general. What if we make the diffusion term $\xi$ x-dependent?
+\begin{align}
+    \intertext{We'll have an SDE where $\sigma$ is x-dependent:}
+    d x=\mu(x, t) d t+G(x, t) d w
+\end{align}
+If we take an educated guess of the solution, we will probably want to write something like Eq\refeq{eq:KM_expansion_chp8}:
+\begin{align}
+    \frac{\partial P(x, t)}{\partial t}=-\frac{\partial}{\partial x}(\mu(x, t) P(x, t)) +\frac{1}{2} \frac{\partial^2}{\partial x^2}[\sigma(x, t) \cdot P(x, t)]
+\end{align}
+But a couple of questions arises regarding the last term:
+\begin{align}
+    \intertext{Why can't $\sigma$ be completely outside of the derivatives?:}
+    \frac{1}{2} \sigma^2(x, t) \frac{\partial^2}{\partial x^2} P
+    \intertext{How about partially inside?}
+    \frac{1}{2} \sigma \frac{\partial}{\partial x}\left(\sigma \frac{\partial p}{\partial x}\right)
+\end{align}
+which is called the "multiplicative noise" but we're not dealing with it today.
+\section{O-U process key examples}
+\subsection{Particle in linear potential}
+The most common case is gravity, where the particle experience a constant force $f=mg$.
+\begin{align}
+    \intertext{Let's start with a linear potential:}
+    V(x)    & = fx
+    \intertext{where we can get the kinetic equation for our proability P:}
+    \dot{P} & =\frac{f}{\gamma} P^{\prime}+\frac{k \pi}{\gamma} P^{\prime \prime}
+\end{align}
+Which can be solved to get: (remember $D = \frac{kT}{\gamma}$)
+\begin{align}
+    P(x, t) & =\frac{1}{\sqrt{4 \pi D\left(t-t_0\right)}} \cdot \operatorname{lxp}\left[-\frac{\left(x-x_0+\frac{f_0}{y}\left(t-t_0\right)\right)^2}{4 D\left(t-t_0\right)}\right]
+\end{align}
+\subsection{Particle in a quadratic potential}
+Similar to the linear potential case, we start with the kinetic equation by using the potential $V = \frac{1}{2}\alpha x^2$ and $f = \alpha x$ :
+\begin{align}
+    \dot{p}           & =\frac{\alpha}{\gamma}(x \cdot P)^{\prime}+\frac{k_s T}{\gamma} P^{\prime \prime}
+    \intertext{where we can solve to get:}
+    P\left(x,t\right) & =\frac{1}{\sqrt{2 \pi k_B T S(t) / \alpha}} \cdot \exp \left[-\frac{\alpha\left(x-x_0 \exp\left(-\frac{\alpha}{\gamma}\left(t-t_0\right)\right)\right)}{2 k_B T S(t)}\right]
+    \intertext{where:}
+    S(t)              & =1-e^{-\frac{2 \alpha}{\gamma}\left(t-t_0\right)}
+\end{align}
+\textbf{Note: } In both examples, we solve for the solutions for the initial condition $P(x, t)=\left.\delta\left(x-x_0\right)\right|_{t=t_0}$. And in the $t \rightarrow \infty$ limit, P follows the Boltzmann distribution.
+\section{Convection diffusion}
+ (Sometimes it's called advection diffusion.) If we have a arbitrary background flow $u(x)$ of a fluid on top of the thermo Browninan motion of the particle:
+\begin{align}
+    \intertext{The original flux equation:}
+    \frac{\partial P(x, t)}{\partial t}                                           & =-\frac{\partial}{\partial x} J(x, t)                                                               \\
+    J                                                                             & =-D e^{-\beta v(x)} \frac{\gamma}{\partial x}\left[e^{\beta v(x)} P(x, t)\right]
+    \intertext{after adding on the extra convection:}
+    J                                                                             & =u \cdot P\left(x,t\right)                                                                          \\
+    \frac{\partial P(x, t)}{\partial t}                                           & =\nabla\left[D e^{-\beta v} \nabla\left(e^{\beta v} \cdot P\right)\right]-\nabla(u \cdot P)
+    \intertext{rearranging:}
+    \frac{\partial P(x, t)}{\partial t}+\frac{\partial}{\partial x}(u(x) \cdot P) & =\nabla\left[D e^{-\beta v} \nabla\left(e^{\beta v} \cdot P\right)\right]                           \\
+                                                                                  & =-\frac{\partial}{\partial x}\left(\frac{f(x)}{\gamma} p\right)+D \frac{\partial^2 p}{\partial x^2}
+\end{align}
+\begin{align}
+    \intertext{Now if $\nabla \dot u = 0$, the term above becomes a proper convective derivative:}
+    \frac{\partial}{\partial x}(u \cdot P) = (u \cdot \nabla) P\left(x, t\right)
+\end{align}
+\begin{align}
+    \intertext{And since u adds extra forces onto the force field, it's like adding extra structures to the potential V:}
+    \frac{\partial f(x, t)}{\partial t}=-\nabla\left[\left(\frac{f(x)}{\gamma}+u(x)\right) P\right]+P \frac{\partial^2 P}{\partial x^2}
+\end{align}
+where the term in the bracket is the new effective potential $V_{\text{eff}}$.
+Now let's try to solve for problems with the most simple constant convection diffusion.
+\begin{align}
+    \intertext{We have constant flow to the right:}
+    u                                                                   & = \text{constant}                                        \\
+    \frac{\partial P}{\partial t}+u \cdot \frac{\partial P}{\partial x} & =D \frac{\partial^2 P}{\partial x^2}
+    \intertext{If the initial concentration of the particles are (concentration is interchangeable with probability in this case):}
+    C                                                                   & =C_0 \delta(x)
+    \intertext{We have the trivial solution of a guassian diffusion drifting with velocity u:}
+    C(x, t)                                                             & =\frac{1}{\sqrt{4 \pi D t}} e^{-\frac{(x-u t)^2}{4 D t}}
+\end{align}
+Now let's consider the case where the initial condition is no longer a delta function but a constant source of concentration $c=c_0$ at $x=0$ at all times. In the large t limit, it's not hard to be convinced that the solution will look like a shock wave propagating to the right with a near vertical shock front. The analytical solution looks like:
+\begin{align}
+    C(x, t)=\frac{1}{2} C_0\left[\operatorname{Erfc}\left(\frac{x-u t}{\sqrt{4 D t}}\right)+e^{\frac{ux}{D}} \operatorname{Erfc}\left(\frac{x-u t}{\sqrt{4 D t}}\right)\right]
+\end{align}
+The exponential term $\exp\left(ux/D\right)$ is called the dispersivity.(There's a very long questions regarding this in the example sheet but the lecturer said that there will never be questions that long and that annoying in the actual exam.)
+
+
+
+
+
+
+
+\chapter{Mean first passage time (MFPT)}
+The idea is simple, imagine having a particle travelling at a high speed, bouncing around in a small spherical container. There is a small opening on the container with which the particle can escape. What is probability of the particle escaping in time t? And what is its mean time of escape? This questions can be asked in all kind of setting for all types of stochastic processes.
+\begin{align}
+    \intertext{Let's bring back the concept of survival probability $S(t)$, which is the proability that the particle have not escape at time t. If the probability of the position of the particle is $P(x,t)$, then S would be:}
+    S(t)                  & =\int_{\text {vol. inside}} P(x, t) d x
+    \intertext{Let's try to derive S. Consider $S(t)-S(t+d t)$ to be the rate of escape:}
+    S(t)-S(t+d t)=f(t) d t
+    \intertext{Which we can see that f is the probability density of escaping in time t:}
+    f(t)                  & =-\frac{\gamma S(t)}{\gamma t}
+    \langle\vec{t}\rangle & =\int_0^{\infty} t f(t) d t
+    \intertext{and if intergrate by parts:}
+    \langle t\rangle      & =\int S(t) d t
+\end{align}
+\section{Examples: 1D simple diffusion}
+Consider the simple 1D diffusion where the particle starts from $x=0$ and diffuses through brownian motion:
+\begin{align}
+    P(x, t)=\frac{1}{\sqrt{4 \pi D t}} e^{-\frac{x^2}{4 D t}}
+\end{align}
+And imagining adding a little door at $x=L$ where as soon as the particle touches it, it escapes and no longer exist in the system. We call this the absorbing boundary.
+\begin{align}
+    P(x=L, t)=0
+\end{align}
+To achieve this, we try using the method of images (just like in electric fields!) by introducing another identical but negative diffusing probability distribution at $x=2L$. Overall, we'll have:
+\begin{align}
+    P(x, t)        & =\frac{1}{\sqrt{4 \pi D t}}\left(e^{-\frac{x^2}{4 D t}}-e^{-\frac{(x-2 L)^2}{4 D t}}\right)
+    \intertext{Now S becomes:}
+    S(t)           & =\int_{-\infty}^L P\left(x_c t\right) d x = \operatorname{Erf}\left[\frac{L}{\sqrt{4 D t}}\right]
+    \intertext{And we can find $f(t)$:}
+    f(t)           & =-\frac{\partial S}{\partial t}=\frac{L}{\sqrt{4 \pi D t^3}} e^{-\frac{L^2}{4 D t}}
+    \intertext{However... This gives us a diverging MFPT!}
+    \text { MFPT } & =\int_0^{\infty} t f(t) d t = \int \frac{d t}{\sqrt{t}} \rightarrow \infty
+\end{align}
+The problem is that we're modelling this with two 1D diffusions where particles can freely move to the left and right freely without actually being "absorbed". The probability of $P(x=L) = 0$ is just a dellusion!
+To fix this, we add a reflective wall at $x=-a$. Now we have two relfections: the reflective wall creates symmetric images, and the absorption boundary creates antisymmetric images. And since images of images will also be created by these reflections, we now have an infinite set of images! Of course that we can just express them as infinite series but the simpler way is just to solve the diffusion equation with the boundary conditions:
+\begin{align}
+    P^{\prime} & =0 \mid x=-a                                                        \\
+    P          & =0\mid x=L
+    P          & =\delta(x) \text { at } f=0
+    \intertext{where the solution will be the infinite series of the form (? is a constant):}
+    P          & = \sum_n^\theta \sin \left(\frac{n \pi x-?}{a+L}\right) e^{-(n Dt)}
+\end{align}
+Once we have obtained $P(x, t)$ we can quickly obtain S:
+\begin{align}
+    S(t)           & =\int_{-a}^L P(x, t) d x
+    \intertext{And the MFPT will be:}
+    \text { MFPT } & =\frac{L(L+2 a)}{2 D}
+\end{align}
+So in this case where the diffusion starts from x=0, if $a \rightarrow 0$ (only diffusion to the right is allowed at the origin) we can easily obtain MFPT $= L^2/2D$. But if we start at some $x=x_0$ which is not the origin, MFPT will depend on $x_0$ as well!(Imagine if we start very very close to x=L, we will expect a much shorter MFTP.)
+
+\section{MFTP of the Wiener Process}
+For a motion in an arbitrary potential $V(x)$, we have the Fokker-Planck equation:
+\begin{align}
+    \frac{\partial P(x f)}{\gamma t} & =-\frac{\partial}{\partial x}\left(\frac{f(x)}{\gamma} P(x, t)\right)+D \frac{\partial^2 P}{\partial x^2} \\
+                                     & =-\frac{\partial}{\partial x}(\mu(x) \cdot p)+\frac{1}{2} \sigma^2 \frac{\partial^2 p}{\partial x^2}
+    \intertext{We define a F-P opterator to simplify things:}
+    \hat{L}_x                        & =D \frac{\partial}{\partial x} e^{-\beta V(x)}\left(\frac{\partial}{\partial x} e^{\beta V(x)}\right)     \\
+    \frac{\partial P}{\partial t}    & =-\hat{L}_x P                                                                                             \\
+    \intertext{and the solution can be written in the form:}
+    P(x, t)                          & =e^{-\hat{L}_x \cdot t} P(x, 0)
+\end{align}
+\begin{align}
+    \intertext{If we now want to calculate MFPT:}
+    M F P T & =\int_0^{\infty} S(t) d t                                               \\
+            & =\int_0^{\infty} d t \int_{v 01 .} d x P\left(x, t \mid x_0, t=0\right)
+    \intertext{we can see that this value will only depend on $x_0$}
+            & = \tau(x_0)
+\end{align}
+From this, could we find and equation that would determine $\tau$? For this, we need operators that act on $x_0$ (initial condition), which is an "adjoint F-P operator". We need the Kolmogorov-Chapman relationship:
+\begin{align}
+    P\left(x, t \mid x_0, t_0\right)=\int G\left(x, t \mid y, t^{\prime}\right) P\left(y, t^{\prime} \mid x_0 t_0\right) d y
+\end{align}
+The rest will be in the next lecture.
+
+
+
+
+
+\chapter{MFPT continued}
+From the end of the last chapter, we mentioned the Kolmogorov-Chapman equation:
+\begin{align}
+    P\left(x, t \mid x_0, t_0\right) & =\int G\left(x, t \mid y, t^{\prime}\right) P\left(y, t^{\prime} \mid x_0 t_0\right) d y
+    \intertext{And since:}
+    \frac{\partial \rho}{\partial t}=-\hat{L}_x p
+    \intertext{We can get this relation since the only entry of t and x is in G:}
+    \frac{\partial G}{\partial t}    & =-\hat{L}_x G
+\end{align}
+But what if we differentiate w.r.t. $t^\prime$?
+We get:
+\begin{align}
+    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0,0}\right)       & =0                                                                                                                                                                                                                                                 \\
+                                                                               & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,+^{\prime}\right) d y+\int G\left(x,t\mid y,t^{\prime}\right) \frac{\partial}{\partial t^\prime} P\left(y, t^{\prime} \mid x_0, 0\right) d y
+    \intertext{where with the K-C equation, the time derivative of P in the second integral can be written in:}
+    \frac{\partial}{\partial t^\prime} P\left(y, t^{\prime} \mid x_0, 0\right) & = -\hat{L}_y P\left(y, t^{\prime}\left(x_0 0\right)\right.
+\end{align}
+
+Let's now define what an adjoint operator is:
+\begin{align}
+    \intertext{if:}
+    \dot{P}                                                & =-\hat{L}_x P                                                                  \\
+    \hat{L}_x                                              & =\frac{\partial}{\partial x} \mu(x)-D_{\partial x^2}
+    \intertext{then the adjoint operator $L^\dagger$ is defined to satisfy:}
+    \int d x g(x) \hat{L}_x f(x)                           & =\int d x f(x) L^\dagger_x+g(x)                                                \\
+    \langle g \hat{L} f\rangle                             & =\left\langle f \hat{L}^{\dagger } g\right\rangle                              \\
+    \intertext{And we can find it by plugging in the defintion of $L_x$ and intergrate it by parts:}
+    \int d x g(x) \frac{\partial}{\partial x}(\mu(x) f(x)) & =\cancelto{0}{[g \mu f]}-\int d x f(x) \mu(x) \frac{\partial g(x)}{\partial x}
+\end{align}
+\begin{align}
+    \intertext{So if:}
+    \dot{p}       & =-\hat{L}_x p
+    \intertext{The adjoint operator to be:}
+    \hat{L}_x^{+} & =D e^{\beta V(x)} \frac{\partial}{\partial x}\left(e^{-\beta V(x)} \frac{\partial}{\partial x}\right)
+\end{align}
+Now if we go back to:
+\begin{align}
+    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0,0}\right)                          & =0                                                                                                                                                                                     \\
+                                                                                                  & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,+^{\prime}\right) d y                                                            \\
+                                                                                                  & -\int G\left(x,t\mid y,t^{\prime}\right) \hat{L}_y P\left(y, t^{\prime} \mid x_0, 0\right) d y                                                                                         \\
+    \intertext{using the definition of the adjoint operator:}
+    \int G\left(x,t\mid y,t^{\prime}\right) \hat{L}_y P\left(y, t^{\prime} \mid x_0, 0\right) d y & = \int P\left(y, t^{\prime} \mid x_0, 0\right) \hat{L}_y^{+} G\left(x, t \mid y, t^{\prime}\right) d y
+    \intertext{we can write it like:}
+    0                                                                                             & =\int\left[\frac{\partial}{\partial t+} G\left(x, t \mid y_y+t^{\prime}\right)-\hat{L}_y^{+} G\left(x, t \mid y_y, t^{\prime}\right)\right] P\left(y, t^{\prime} \mid x_0, 0\right) dy
+    \intertext{and simplify it into:}
+    \frac{\partial}{\partial t^\prime} G                                                          & =L_y^{\dagger} G
+    \intertext{And since we can obtain P by apply this propagator onto the initial conditions, P will obey the same equation:}
+    \frac{\partial}{\partial t_0} P\left(x, t \mid x_0, t_0\right)                                & =\hat{L}_{x_0} P\left(x, t \mid x_0, t_0\right)
+\end{align}
+So with the adjoint operator, we can go back to the definition of $\tau(x_0)$:
+\begin{align}
+    \hat{L}^{\dag}_{x_0}\left(\tau\left(x_0\right)=\int d t \int_{\text{vol.}} P\left(x,t \mid x_0, t_0\right) d x\right) \\
+\end{align}
+\begin{align}
+    \hat{L}^{\dag}_{x_0} \tau\left(x_0\right) & =\int d t \int d x\left(\hat{L}_{x_0}^{+} p\right)                                                              \\
+                                              & =\int d t \int d x \frac{\partial}{\partial t_0} P\left(x_1 t \mid x_0 t_0\right)
+    \intertext{using the fact that we konw P is a function of $\tilde{t}=t-t_0$, we rewrite it:}
+                                              & =\int d \tilde{t} \int d x\left[-\frac{\partial}{\partial \tilde{t}} P\left(x, \tilde{t} \mid x_0\right)\right]
+                                              & =\int d \tilde{t} f(\tilde{t})=1
+\end{align}
+\begin{align}
+    \intertext{we have simplified everything into:}
+    \hat{L}_{x_0} \tau\left(x_0\right)                                                                           & =1
+    \intertext{or(Lecturer made a mistake so it should be -1 instead of 1):}
+    D e^{\beta v(x)} \frac{\partial}{\partial x}\left(e^{-\beta v(x)} \frac{\partial \tau(x)}{\partial x}\right) & =-1
+\end{align}
+With this, we can solve for $\tau$:
+\begin{align}
+    e^{-\beta V(x)} \frac{\partial \tau(x)}{\partial x}=-\frac{1}{D} \int^x e^{-\beta V(y)} d y
+\end{align}
+\textbf{Note:} the lower limit is to be determined. Either we have a relflective boundary and use that as the lower limit, or use $-\infty$ if $V(y)$ is well behaved.
+And then perform a second integration:
+\begin{align}
+    \tau\left(x_0\right)=-\int_D^{x_0} \frac{1}{D} e^{\beta V(x)} d x \int^x e^{-\beta V(y)} d y
+\end{align}
+\textbf{Note:} Same with the previous case, this lower limit is to be determined as well. We can see that this lower bound should be the absorbing boundary.
+\begin{align}
+    \intertext{In the end we achieve our final expression of the MFPS:}
+    \tau\left(x_0\right)=\frac{1}{D} \int_{x_0}^L e^{\beta V(x)} d x \int_{-a}^x e^{-\beta V(y)} d y
+\end{align}
+where L is the location of the absorbing boundary and $-a$ is the location of the reflecting boundary or $-\infty$.
+\section{Examples}
+\subsection{1D diffusion}
+Let's go look at our original example where the initial condition is a delta function at $x=0$ and an aborbing and reflective boundary at $x=L$ and $x=-a$.
+\begin{align}
+    \tau\left(x_0\right) & =\frac{1}{D} \int_0^L d x \int_{\substack{-a}}^x d y=\frac{1}{D} \int_0^L d x(x+a)
+    =\frac{1}{D}\left(\frac{1}{2} L+a L\right)=\frac{1}{2 D} L(L+2 a)
+\end{align}
+\subsection{Kramers problem:}
+A potential $V= \frac{1}{2} \omega^2 x^2$ with abosrobing boundary at $x=L$. Please look at the lecture notes for the detailed shape of the potential $V$.
+\begin{align}
+    MFPT & = \frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-\infty}^x e^{-\beta V(y)} d y                                            \\
+         & \approx \frac{1}{D} \cdot e^{\beta V_{\max }} \sqrt{\frac{2 \pi k T}{\omega_B^2}} \sqrt{\frac{2 \pi \cdot L \pi}{\omega_0^2}}
+    MFPT & \approx \frac{2 \pi \gamma}{\omega_0 \omega_\beta} e^{\beta V_{\text {max }}}
+    \intertext{And the escape rate will be a half of the reciprical (a half chance of being absorbed after reaching L, the other half steps to the left)}
+    \text{rate} = \frac{\omega_0 \omega_\beta}{4 \pi \gamma} e^{-\beta V_{\text {max }}}
+\end{align}
+\subsection{Diffusion in arbitrary periodic potential}
+A potential $V(x)$ that's periodic over space with the period of L. We want to find the MFPT of a particle going from 0 to L (travelling across a whole period). Without losing generality, let's set the local minimum to be at x and L (and 2L and so on).
+\begin{align}
+    \intertext{start with the standard eq:}
+    \tau=\frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-a}^x e^{-\beta V(y)} d y
+\end{align}
+$x_0$ is obviously 0 and $-a=0$ as well (I'm not sure why but the lecturer said so). In the case of over a long time and a long distance travelled, the total deviation from the original position can be written into an effective diffusion:
+\begin{align}
+    L^2=2 D_{\text {ef }} \cdot \tau
+    \intertext{so:}
+    D_{e f f}=\frac{L^2 D}{2} \frac{1}{\int_0^L e^{\beta v(x)} d x \int_0^x e^{-\beta V(y)} d y}
+    \intertext{and since the denominator is always a quite a large value, we know that the effective diffusion will be:}
+    D_{e ff} \ll D
+\end{align}
+
+
+
 
 
 
