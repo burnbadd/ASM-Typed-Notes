@@ -1193,11 +1193,11 @@ Let's go look at our original example where the initial condition is a delta fun
 \subsection{Kramers problem:}
 A potential $V= \frac{1}{2} \omega^2 x^2$ with abosrobing boundary at $x=L$. Please look at the lecture notes for the detailed shape of the potential $V$.
 \begin{align}
-    MFPT & = \frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-\infty}^x e^{-\beta V(y)} d y                                            \\
-         & \approx \frac{1}{D} \cdot e^{\beta V_{\max }} \sqrt{\frac{2 \pi k T}{\omega_B^2}} \sqrt{\frac{2 \pi \cdot L \pi}{\omega_0^2}}
-    MFPT & \approx \frac{2 \pi \gamma}{\omega_0 \omega_\beta} e^{\beta V_{\text {max }}}
+    MFPT        & = \frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-\infty}^x e^{-\beta V(y)} d y                                            \\
+                & \approx \frac{1}{D} \cdot e^{\beta V_{\max }} \sqrt{\frac{2 \pi k T}{\omega_B^2}} \sqrt{\frac{2 \pi \cdot L \pi}{\omega_0^2}}
+    MFPT        & \approx \frac{2 \pi \gamma}{\omega_0 \omega_\beta} e^{\beta V_{\text {max }}}
     \intertext{And the escape rate will be a half of the reciprical (a half chance of being absorbed after reaching L, the other half steps to the left)}
-    \text{rate} = \frac{\omega_0 \omega_\beta}{4 \pi \gamma} e^{-\beta V_{\text {max }}}
+    \text{rate} & = \frac{\omega_0 \omega_\beta}{4 \pi \gamma} e^{-\beta V_{\text {max }}}
 \end{align}
 \subsection{Diffusion in arbitrary periodic potential}
 A potential $V(x)$ that's periodic over space with the period of L. We want to find the MFPT of a particle going from 0 to L (travelling across a whole period). Without losing generality, let's set the local minimum to be at x and L (and 2L and so on).
@@ -1211,8 +1211,96 @@ $x_0$ is obviously 0 and $-a=0$ as well (I'm not sure why but the lecturer said 
     \intertext{so:}
     D_{e f f}=\frac{L^2 D}{2} \frac{1}{\int_0^L e^{\beta v(x)} d x \int_0^x e^{-\beta V(y)} d y}
     \intertext{and since the denominator is always a quite a large value, we know that the effective diffusion will be:}
-    D_{e ff} \ll D
+    D_{e ff} & \ll D
 \end{align}
+
+
+
+\chapter{Multiplicative noise}
+\section{MFPT final part}
+We've studied the MFPT in the last 2 lectures and we have some conclusions:
+\begin{align}
+    \langle t\rangle                            & =\int_0^{\infty} S(t) d t                                               \\
+    \left\langle t\left(x_0\right)\right\rangle & =\frac{1}{D} \int^L_{x_0} d x e^{\beta V(x)} \int^x e^{-\beta V(y)} d y
+\end{align}
+These conclusions was strictly in 1D but in higher dimensions, the particle might miss the target altogether and never be absorbed. In this case, the MFPT must depend on the size of the target since it might be unbounded if the target is too small!.
+\textbf{Examples:} 1. Forming a ring: The MFPT of one end of a long polymer chain making contact with its other end. 2. Narrow escape: The very first example that we gave of a shell with a small opening and a particle trapped inside.
+So the relationship between the size of the target $\epsilon$ and the MFPT is:
+\begin{align}
+    1D: & \propto \frac{L^2}{D}                         \\
+    2D: & \propto \frac{L^2}{D} \ln(\frac{1}{\epsilon}) \\
+    1D: & \propto \frac{L^3}{D\epsilon}
+\end{align}
+\section{Multiplicative noise}
+We have mentioned this in a previous lecture but the overall idea is that when we solve the SDE:
+\begin{align}
+    d x    & =\mu d t+\sigma d W            \\
+    \intertext{where in the overdamped limit for Brownian motion we have:}
+    \sigma & =\sqrt{\frac{2 k_B T}{\gamma}}
+\end{align}
+But when $\sigma$ is a function of x, this adds a degree of freedom in the last term of F-P. The usual F-P equation is:
+\begin{align}
+    \frac{\partial P(x, t)}{\partial f} & =-\frac{\partial}{\partial x}(\mu(x, t) \cdot P)+\frac{\partial^2}{\partial x^2}\left(\frac{\sigma^2(x)}{2} P\right)
+    \intertext{But the last term can also be of the form:}
+                                        & \frac{\sigma^2(x)}{2} \frac{\partial^2 P}{\partial x^2}                                                              \\
+                                        & \frac{1}{2} \frac{\partial}{\partial x}\left[\sigma(x) \frac{\partial}{\partial x}(\sigma(x) p)\right]
+\end{align}
+We need to re-examine the K-M expansion. The evaluation of $\ev{\Delta x}$ is as followed:
+\begin{align}
+    \langle\Delta x\rangle & =\int_t^{t+\Delta t} d s(\mu(x, s)+\phi(x) \underline{\xi(s)}) \\
+                           & = \mu(x, t) \Delta t+\sigma(x) \int_t^{t+\Delta t} \xi(s) d s
+\end{align}
+The whole problem stems the question that at which point of time between $t$ and $t+\Delta t$ do we take the value $x$ to determine $\sigma$?
+\subsection{Itoh version}
+Itoh's lemma suggests that we evaluatue $\sigma$ at the start of the time interval (at time t):
+\begin{align}
+    \sigma(x[t]) \int_t^{t+\Delta t} \xi(s) d s
+\end{align}
+since x(t) is statistically independent from $\xi(s)$ so therefore it makes the most sense mathematically.
+\subsection{Stratonovich version}
+But stratonovich suggests that maybe we should evaluate $\sigma$ in the middle of this small time interval instead:
+\begin{align}
+    \sigma(x[t + \frac{1}{2}\Delta t]) \int_t^{t+\Delta t} \xi(s) d s
+\end{align}
+\subsection{Lau,Lubensky version}
+From the two examples above, we see that recently people (physicists) have been trying to sort out this problem since they've encountered problems in using the Itoh version. They take the approach by takinga an arbitrary point in the interval for evaluating $\sigma$:
+\begin{align}
+    \sigma(x[t+\alpha \Delta t])
+\end{align}
+where $\alpha$ is bewteen 0 to 1. And then decide what value is the "best" experimentally. Lau and Lubensky concluded that $\alpha = 1$ is the best value.
+
+For all the 3 version that we've mentioned above, the corresponding F-P equations are:
+\begin{align}
+    \intertext{Itoh:($\alpha=0$)}
+    \frac{\partial P}{\partial t} & =-\frac{\partial}{\partial x}(\mu(x,t) P)+\frac{1}{2} \frac{\partial^2}{\partial x^2}\left(\sigma^2(x) \cdot P\right)
+    \intertext{Stratonovich:($\alpha=0.5$)}
+    \frac{\partial P}{\partial t} & =-\frac{\partial}{\partial x}(\mu(x,t) P)+\frac{1}{2} \frac{\partial}{\partial x}\left(\sigma(x) \frac{\partial}{\partial x}(\sigma(x) P)\right)
+    \intertext{Lau-Lubensky:($\alpha=1$)}
+    \frac{\partial P}{\partial t} & =-\frac{\partial}{\partial x}(\mu(x,t) P)+\frac{1}{2} \frac{\partial}{\partial x}\left(\sigma^2(x) \frac{\partial p}{\partial x}\right)
+\end{align}
+How do we test which one is correct experimentally? If we have a long diffusion channel where there are no potentials and a linear temperature distribution from $T_1$ on one end to $T_2$ on the other end. The intial probability P (concentraion) is constant accross the whole channel. Physicists have observed something called the Thermophoresis or Soret effect:
+\begin{align}
+    J=-D \nabla P+\alpha P(1-p) \nabla T
+\end{align}
+at low concentrations this can be approximated into:
+\begin{align}
+    J & \approx-D \nabla P+\alpha P \nabla T
+      & = T \frac{\partial p}{\partial x}+p \frac{\partial T}{\partial x}
+\end{align}
+From the 3 versions of solutions that we mentioned above, these are their predictions for J:
+\begin{align}
+    \intertext{Itoh:($\alpha=0$)}
+    J & =T \nabla P+P \nabla T
+    \intertext{Stratonovich:($\alpha=0.5$)}
+    J & =T \nabla P+P \nabla T
+    \intertext{Lau-Lubensky:($\alpha=1$)}
+    J & =T \nabla P \text{(only???)}
+\end{align}
+We see that L-L is wrong here but the issue is with the "physics" behind the SDE:
+\begin{align}
+    d x=\mu\left(x_1 t\right) \perp t+G(x) d W
+\end{align}
+The "Wiener" process $dW$ is always an \textbf{approximation} of the Brownian motion. The wiener process is built on a markov assumption which the process is memoryless but do we actually know that? Are we sure that the time intervals bewteen two impulses are actually much greater than the relaxation time for the system to "not remember" what happened? We will dive further into this issue in the next later but for the moment we have not gotten enough evidence to disprove L-L.
 
 
 
