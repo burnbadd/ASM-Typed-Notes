@@ -1298,10 +1298,133 @@ From the 3 versions of solutions that we mentioned above, these are their predic
 \end{align}
 We see that L-L is wrong here but the issue is with the "physics" behind the SDE:
 \begin{align}
-    d x=\mu\left(x_1 t\right) \perp t+G(x) d W
+    d x=\mu\left(x, t\right) d t+G(x) d W
 \end{align}
 The "Wiener" process $dW$ is always an \textbf{approximation} of the Brownian motion. The wiener process is built on a markov assumption which the process is memoryless but do we actually know that? Are we sure that the time intervals bewteen two impulses are actually much greater than the relaxation time for the system to "not remember" what happened? We will dive further into this issue in the next later but for the moment we have not gotten enough evidence to disprove L-L.
 
+\chapter{Last lecture}
+\section{Multiplicative Noise continued}
+From the discussion in the last lecture we talked about the multiplicative noise which stems from the $\sigma$ term in this integral.
+\begin{align}
+    \sigma(x[t]) \cdot \int_t^{t+\Delta t} \xi(s) d s
+\end{align}
+If we're talking about a mathematically "correct" statistical process, which $\sigma(x)$ is statistically independent from the this wiener step (the integral), then Itoh calculus follows and we should have no debate about this "multiplicative problem". Which gives us a F-P equation of:
+\begin{align}
+    \frac{\partial P(x, t)}{\partial f} & =-\frac{\partial}{\partial x}(\mu(x, t) \cdot P)+\frac{\partial^2}{\partial x^2}\left(\frac{\sigma^2(x)}{2} P\right)
+\end{align}
+\textbf{But } if the underlying stochastic process $W(t)$ is a sequence of deterministic events averaged over $\Delta t$, then the Wong-Zakai theorem applies and we must add an extra $dt$ term and rewrite our SDE: (We don't have time to derive this so sadly we'll have to take it as granted)
+\begin{align}
+    d x=\left(\mu(x, t)+\frac{1}{2} \sigma(x) \frac{\gamma \sigma}{2 x}\right) d t+\sigma(x) d W
+\end{align}
+And use this SDE to rederive the F-P equation, using mathematically rigorous Itoh assumptions about statistical independence:
+\begin{align}
+    \intertext{Notice that the second term on the RHS is the new correction term:}
+    \frac{\partial P(x, t)}{\partial t} & =-\frac{\partial}{\partial x}[\mu(x, t) P]-\frac{\partial}{\partial x}\left[\frac{1}{2} \sigma \frac{\partial \sigma}{\partial x} \cdot P\right] +\frac{1}{2} \frac{\partial^2}{\partial x^2}\left[\sigma^2 P\right]
+    \intertext{Rearranging it:}
+                                        & =-\frac{\partial}{\partial x}(\mu(x, t) p)+\frac{1}{2} \frac{\partial}{\partial x} \sigma(x)\left(\frac{\partial}{\partial x}[\epsilon(x) p)\right)
+\end{align}
+Which is exactly the Stratonovich form! This is very surprising since Stratonovich's result was proposed 50 years ago with a very simple mid-point assumption. Now with this, we can rewrite our old probability flux $J$:
+\begin{align}
+    J       & =-D e^{-\beta V(x)} \frac{\partial}{\partial x}\left(e^{\beta V(x)} \rho(x, t)\right)
+    \intertext{where we have a constant $\sigma$:}
+    \sigma  & =\sqrt{2 D}
+    \intertext{into}
+    J       & =-\frac{1}{2} \sigma(x) e^{-\beta V(x)} \cdot \frac{\partial}{\partial x}\left(\sigma(x) e^{\beta V(x)} \cdot P(x,t)\right)
+    \intertext{by using the definition of J:}
+    \dot{P} & =-\nabla J
+\end{align}
+And as long as we identify the "friction constant" as an x-dependent variable:
+\begin{align}
+    X(x) & =\frac{2 k_B T}{\sigma(x)^2}
+    \intertext{we can still write the new diffusion constant as:}
+    D(x) & =\frac{\sigma^2(x)}{2}=\frac{k_b T}{\gamma(x)}
+\end{align}
+\section{Non-Markov processes}
+Could we re-examine the Markov assumption that we have been using throughout the whole course?
+
+\bigskip
+
+\noindent \textbf{Example: Viscoelasticity (Retarded linear response)}
+
+The idea of visoelastiviy is simply a non-memoryless stress-strain relationship (which we all learned in A-level), therfore the relationship will look something like this:
+\begin{align}
+    \text { Stress }(t)=\int_{-\infty}^t G\left(t-t^{\prime}\right) \cdot \frac{\partial\operatorname{Strain\left(t^{\prime}\right)}}{\partial t^\prime} d t^{\prime}
+\end{align}
+
+\bigskip
+
+For a general retarted linear response:
+\begin{align}
+    \intertext{If F and x are conjugate thermodymic variables: (Think about internal energy in thermodynamics)}
+    dU   & = - Fdx
+    \intertext{We can write:}
+    F(t) & =-\int_{-\infty}^t g\left(t-t^{\prime}\right) \dot{x}\left(t^{\prime}\right) d t^{\prime}
+    \intertext{Or:}
+    x(t) & =\int_{-\infty}^t \alpha\left(t-t^{\prime}\right) \dot{F}\left(t^{\prime}\right) d t^{\prime}
+\end{align}
+and we call $g$ and $\alpha$ the memory kernels.
+
+\bigskip
+
+Now let's look at the two extreme forms of g.
+\begin{align}
+    \intertext{If $g(t-t^\prime)$ is a constant:}
+    g\left(t-t^{\prime}\right) & =\text { const.}(k)
+    \intertext{We get a memoryless instant response:}
+    F(t)                       & =-k x
+\end{align}
+And if $g(t-t^\prime)$ is a delta function:
+\begin{align}
+    g\left(t-t^{\prime}\right) & =\gamma \delta\left(t-t^{\prime}\right)
+    \intertext{We get an always dissapative drag:}
+    F                          & =-\gamma \dot{x}
+\end{align}
+and a generic retarded response function $g$ is a decaying function that's somewhere in between.
+
+\bigskip
+
+So in comparison to a generic brownian motion with Markov noise
+\begin{align}
+    \intertext{where we have the equation of motion like this:}
+    m \dot{v} & =-\gamma v-k x+[\text {Noise}] \ \  \left(\sigma \xi(t),\  \sigma \cdot \frac{d W}{d t},\text{ etc.}\right)
+    \intertext{Now we have:}
+    m \dot{v} & =-\int_{-\infty}^t g\left(t-t^{\prime}\right) \dot{x}(t) d t^{\prime}+\left[\text { Noise } \right]
+\end{align}
+where we can no longer say the noise is Markov. Let's quickly look at the correlation function of this noise$eta(t)$ without deriving it:
+\begin{align}
+    \left\langle\eta(t) \eta\left(t^{\prime}\right)\right\rangle=k_B \top g\left(t-t^{\prime}\right)
+\end{align}
+which is the Fluctuation-Dissipation relation.
+
+\textbf{Example: Brownian motion with inertia}
+\begin{align}
+    \dot{x} & =v                                                                        \\
+    \dot{V} & =-\frac{\gamma}{m} v-\frac{k}{m} x+\frac{\sqrt{2 k_B T \gamma}}{m} \xi(t)
+\end{align}
+Without even mentioning any memory kernel, there is already a problem with our markov assumption that we have not noticed before:
+\begin{align}
+    \intertext{First integrate to find v:}
+    v(t)    & =\int_{-\infty}^t e^{-\frac{r}{m}\left(t-t^{\prime}\right)} \cdot\left[-\frac{k}{m} x\left(t^{\prime}\right)+\frac{\sqrt{2 k_T \cdot \gamma}}{m} \xi\left(t^{\prime}\right)\right] d t^{\prime}
+    \intertext{And sub it into x:}
+    \dot{x} & =-\frac{k}{m} \int_{-\infty}^t e^{-\frac{\gamma}{m}\left(t-t^{\prime}\right)} x\left(t^{\prime}\right) d t^{\prime}+\frac{\gamma}{m} \sqrt{\frac{2 k_B T}{\gamma}} \cdot \int_{-\infty}^t e^{-\frac{\gamma}{m}\left(t-t^{\prime}\right)} \xi(t^\prime) d t^{\prime}
+\end{align}
+We can see that in both integrals, there is already a "memory like" exponential term due to the particle's own inertia with a memory time scale $\tau=m / \gamma$.
+
+\bigskip
+
+\begin{align}
+    \intertext{By using this definition of the delta function:}
+    \delta(t) & =\lim _{t \rightarrow 0} \frac{1}{\tau} e^{-t / t}
+    \intertext{We can fix the Markov assumption by going to the overdamped limit:}
+    \dot{x}   & =-\frac{k}{\gamma} x(t)+\epsilon \xi(\epsilon)
+\end{align}
+
+\noindent \textbf{Last Exercise:}
+
+By using $v(t), x(t)$ at time $\leqslant m / \gamma$, derive:
+\begin{align}
+    \langle\eta(t) \eta(s)\rangle=\ldots \frac{k_B T}{k}\left(\tau^2 e^{-\frac{t-s}{\tau}}\right)
+\end{align}
 
 
 
