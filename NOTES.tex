@@ -920,7 +920,7 @@ and we reach our kinetic equation:
     It is interesting to point out that the time scale for $v$ to reach equilibrium is much smaller than it takes for $x$. Therefore, the velocity-wise Maxwell distribution develops wayyy before the position-wise Boltzmann distribution does. So this equation actually reduces to the diffusion equation for $P(x,t)$ at t much greater than the velocity relaxation time $t\gg m/\gamma$.
 }
 
-\chapter{O-U process continued}
+\chapter{Lecture 8: O-U process continued}
 \section{Discussion before continuing}
 In the last chapter, we talked about the O-U process where the forces are linear. What happens if the force field is arbitrary: $f(x)=-\frac{\partial}{\partial x} V(x)$?
 \begin{align}
@@ -930,7 +930,7 @@ In the last chapter, we talked about the O-U process where the forces are linear
     \frac{\partial P(x, t)}{\partial t} & =-\frac{\partial}{\partial x}\left(\frac{f(x) P}{\gamma}\right)+\frac{1}{2} \frac{2 k T}{\gamma} \frac{\partial^2 P}{\partial x^2} \label{eq:KM_expansion_chp8}
     \intertext{which can be written in terms of the current/flux of P:}
                                         & =-\frac{\partial}{\partial x}(J(x, t))
-    \intertext{with a continuity eqution:}
+    \intertext{with a continuity equation:}
     \dot{P}                             & =-\operatorname{div} J
 \end{align}
 \begin{align}
@@ -939,7 +939,7 @@ In the last chapter, we talked about the O-U process where the forces are linear
     \intertext{There's also another definition of J:}
     J & =-D e^{-\beta V(x)} \frac{\partial}{\partial x}\left[e^{\beta V(x)} \cdot \rho(x,+)\right]
 \end{align}
-which is the same if you expand it with the product rule and treating $D=\frac{k_B T}{\gamma}$
+which is the same if you expand it with the product rule and treat $D=\frac{k_B T}{\gamma}$
 
 After adding in the force, let's make it even more general. What if we make the diffusion term $\xi$ x-dependent?
 \begin{align}
@@ -950,7 +950,7 @@ If we take an educated guess of the solution, we will probably want to write som
 \begin{align}
     \frac{\partial P(x, t)}{\partial t}=-\frac{\partial}{\partial x}(\mu(x, t) P(x, t)) +\frac{1}{2} \frac{\partial^2}{\partial x^2}[\sigma(x, t) \cdot P(x, t)]
 \end{align}
-But a couple of questions arises regarding the last term:
+But a couple of questions arise regarding the last term:
 \begin{align}
     \intertext{Why can't $\sigma$ be completely outside of the derivatives?:}
     \frac{1}{2} \sigma^2(x, t) \frac{\partial^2}{\partial x^2} P
@@ -964,7 +964,7 @@ The most common case is gravity, where the particle experience a constant force 
 \begin{align}
     \intertext{Let's start with a linear potential:}
     V(x)    & = fx
-    \intertext{where we can get the kinetic equation for our proability P:}
+    \intertext{where we can get the kinetic equation for our probability P:}
     \dot{P} & =\frac{f}{\gamma} P^{\prime}+\frac{k \pi}{\gamma} P^{\prime \prime}
 \end{align}
 Which can be solved to get: (remember $D = \frac{kT}{\gamma}$)
@@ -982,7 +982,7 @@ Similar to the linear potential case, we start with the kinetic equation by usin
 \end{align}
 \textbf{Note: } In both examples, we solve for the solutions for the initial condition $P(x, t)=\left.\delta\left(x-x_0\right)\right|_{t=t_0}$. And in the $t \rightarrow \infty$ limit, P follows the Boltzmann distribution.
 \section{Convection diffusion}
- (Sometimes it's called advection diffusion.) If we have a arbitrary background flow $u(x)$ of a fluid on top of the thermo Browninan motion of the particle:
+ (Sometimes it's called advection-diffusion.) If we have an arbitrary background flow $u(x)$ of fluid on top of the thermal Brownian motion of the particle:
 \begin{align}
     \intertext{The original flux equation:}
     \frac{\partial P(x, t)}{\partial t}                                           & =-\frac{\partial}{\partial x} J(x, t)                                                               \\
@@ -1003,21 +1003,21 @@ Similar to the linear potential case, we start with the kinetic equation by usin
     \frac{\partial f(x, t)}{\partial t}=-\nabla\left[\left(\frac{f(x)}{\gamma}+u(x)\right) P\right]+P \frac{\partial^2 P}{\partial x^2}
 \end{align}
 where the term in the bracket is the new effective potential $V_{\text{eff}}$.
-Now let's try to solve for problems with the most simple constant convection diffusion.
+Now let's try to solve problems with the most simple constant convection-diffusion.
 \begin{align}
-    \intertext{We have constant flow to the right:}
+    \intertext{We have a constant flow to the right:}
     u                                                                   & = \text{constant}                                        \\
     \frac{\partial P}{\partial t}+u \cdot \frac{\partial P}{\partial x} & =D \frac{\partial^2 P}{\partial x^2}
     \intertext{If the initial concentration of the particles are (concentration is interchangeable with probability in this case):}
     C                                                                   & =C_0 \delta(x)
-    \intertext{We have the trivial solution of a guassian diffusion drifting with velocity u:}
+    \intertext{We have the trivial solution of a Gaussian diffusion drifting with velocity u:}
     C(x, t)                                                             & =\frac{1}{\sqrt{4 \pi D t}} e^{-\frac{(x-u t)^2}{4 D t}}
 \end{align}
-Now let's consider the case where the initial condition is no longer a delta function but a constant source of concentration $c=c_0$ at $x=0$ at all times. In the large t limit, it's not hard to be convinced that the solution will look like a shock wave propagating to the right with a near vertical shock front. The analytical solution looks like:
+Now let's consider the case where the initial condition is no longer a delta function but a constant source of concentration $c=c_0$ at $x=0$ at all times. In the large t limit, it's not hard to be convinced that the solution will look like a shock wave propagating to the right with a near-vertical shock front. The analytical solution looks like this:
 \begin{align}
     C(x, t)=\frac{1}{2} C_0\left[\operatorname{Erfc}\left(\frac{x-u t}{\sqrt{4 D t}}\right)+e^{\frac{ux}{D}} \operatorname{Erfc}\left(\frac{x-u t}{\sqrt{4 D t}}\right)\right]
 \end{align}
-The exponential term $\exp\left(ux/D\right)$ is called the dispersivity.(There's a very long questions regarding this in the example sheet but the lecturer said that there will never be questions that long and that annoying in the actual exam.)
+The exponential term $\exp\left(ux/D\right)$ is called the dispersivity. (There's a very long question regarding this in the example sheet but the lecturer said that there will never be questions that long and that annoying in the actual exam.)
 
 
 
@@ -1025,10 +1025,10 @@ The exponential term $\exp\left(ux/D\right)$ is called the dispersivity.(There's
 
 
 
-\chapter{Mean first passage time (MFPT)}
-The idea is simple, imagine having a particle travelling at a high speed, bouncing around in a small spherical container. There is a small opening on the container with which the particle can escape. What is probability of the particle escaping in time t? And what is its mean time of escape? This questions can be asked in all kind of setting for all types of stochastic processes.
+\chapter{Lecture 9: Mean first passage time (MFPT)}
+The idea is simple, imagine having a particle travelling at a high speed, bouncing around in a small spherical container. There is a small opening in the container with which the particle can escape. What is the probability of the particle escaping in time t? And what is its meantime of escape? These questions can be asked in all kinds of setting for all types of stochastic processes.
 \begin{align}
-    \intertext{Let's bring back the concept of survival probability $S(t)$, which is the proability that the particle have not escape at time t. If the probability of the position of the particle is $P(x,t)$, then S would be:}
+    \intertext{Let's bring back the concept of survival probability $S(t)$, which is the probability that the particle has not escaped at time t. If the probability of the position of the particle is $P(x,t)$, then S would be:}
     S(t)                  & =\int_{\text {vol. inside}} P(x, t) d x
     \intertext{Let's try to derive S. Consider $S(t)-S(t+d t)$ to be the rate of escape:}
     S(t)-S(t+d t)=f(t) d t
@@ -1039,11 +1039,11 @@ The idea is simple, imagine having a particle travelling at a high speed, bounci
     \langle t\rangle      & =\int S(t) d t
 \end{align}
 \section{Examples: 1D simple diffusion}
-Consider the simple 1D diffusion where the particle starts from $x=0$ and diffuses through brownian motion:
+Consider the simple 1D diffusion where the particle starts from $x=0$ and diffuses through Brownian motion:
 \begin{align}
     P(x, t)=\frac{1}{\sqrt{4 \pi D t}} e^{-\frac{x^2}{4 D t}}
 \end{align}
-And imagining adding a little door at $x=L$ where as soon as the particle touches it, it escapes and no longer exist in the system. We call this the absorbing boundary.
+And imagining adding a little door at $x=L$ where as soon as the particle touches it, it escapes and no longer exists in the system. We call this the absorbing boundary.
 \begin{align}
     P(x=L, t)=0
 \end{align}
@@ -1057,8 +1057,8 @@ To achieve this, we try using the method of images (just like in electric fields
     \intertext{However... This gives us a diverging MFPT!}
     \text { MFPT } & =\int_0^{\infty} t f(t) d t = \int \frac{d t}{\sqrt{t}} \rightarrow \infty
 \end{align}
-The problem is that we're modelling this with two 1D diffusions where particles can freely move to the left and right freely without actually being "absorbed". The probability of $P(x=L) = 0$ is just a dellusion!
-To fix this, we add a reflective wall at $x=-a$. Now we have two relfections: the reflective wall creates symmetric images, and the absorption boundary creates antisymmetric images. And since images of images will also be created by these reflections, we now have an infinite set of images! Of course that we can just express them as infinite series but the simpler way is just to solve the diffusion equation with the boundary conditions:
+The problem is that we're modelling this with two 1D diffusions where particles can freely move to the left and right freely without actually being "absorbed". The probability of $P(x=L) = 0$ is just a delusion!
+To fix this, we add a reflective wall at $x=-a$. Now we have two reflections: the reflective wall creates symmetric images, and the absorption boundary creates antisymmetric images. And since images of images will also be created by these reflections, we now have an infinite set of images! Of course that we can just express them as infinite series but the simpler way is just to solve the diffusion equation with the boundary conditions:
 \begin{align}
     P^{\prime} & =0 \mid x=-a                                                        \\
     P          & =0\mid x=L
@@ -1072,14 +1072,14 @@ Once we have obtained $P(x, t)$ we can quickly obtain S:
     \intertext{And the MFPT will be:}
     \text { MFPT } & =\frac{L(L+2 a)}{2 D}
 \end{align}
-So in this case where the diffusion starts from x=0, if $a \rightarrow 0$ (only diffusion to the right is allowed at the origin) we can easily obtain MFPT $= L^2/2D$. But if we start at some $x=x_0$ which is not the origin, MFPT will depend on $x_0$ as well!(Imagine if we start very very close to x=L, we will expect a much shorter MFTP.)
+So in this case where the diffusion starts from x=0, if $a \rightarrow 0$ (only diffusion to the right is allowed at the origin), we can easily obtain MFPT $= L^2/2D$. But if we start at some $x=x_0$ which is not the origin, MFPT will depend on $x_0$ as well! (Imagine if we start very very close to x=L, we will expect a much shorter MFTP.)
 
 \section{MFTP of the Wiener Process}
 For a motion in an arbitrary potential $V(x)$, we have the Fokker-Planck equation:
 \begin{align}
     \frac{\partial P(x f)}{\gamma t} & =-\frac{\partial}{\partial x}\left(\frac{f(x)}{\gamma} P(x, t)\right)+D \frac{\partial^2 P}{\partial x^2} \\
                                      & =-\frac{\partial}{\partial x}(\mu(x) \cdot p)+\frac{1}{2} \sigma^2 \frac{\partial^2 p}{\partial x^2}
-    \intertext{We define a F-P opterator to simplify things:}
+    \intertext{We define an F-P operator to simplify things:}
     \hat{L}_x                        & =D \frac{\partial}{\partial x} e^{-\beta V(x)}\left(\frac{\partial}{\partial x} e^{\beta V(x)}\right)     \\
     \frac{\partial P}{\partial t}    & =-\hat{L}_x P                                                                                             \\
     \intertext{and the solution can be written in the form:}
@@ -1092,7 +1092,7 @@ For a motion in an arbitrary potential $V(x)$, we have the Fokker-Planck equatio
     \intertext{we can see that this value will only depend on $x_0$}
             & = \tau(x_0)
 \end{align}
-From this, could we find and equation that would determine $\tau$? For this, we need operators that act on $x_0$ (initial condition), which is an "adjoint F-P operator". We need the Kolmogorov-Chapman relationship:
+From this, could we find an equation that would determine $\tau$? For this, we need operators that act on $x_0$ (initial condition), which is an "adjoint F-P operator". We need the Kolmogorov-Chapman relationship:
 \begin{align}
     P\left(x, t \mid x_0, t_0\right)=\int G\left(x, t \mid y, t^{\prime}\right) P\left(y, t^{\prime} \mid x_0 t_0\right) d y
 \end{align}
@@ -1102,8 +1102,8 @@ The rest will be in the next lecture.
 
 
 
-\chapter{MFPT continued}
-From the end of the last chapter, we mentioned the Kolmogorov-Chapman equation:
+\chapter{Lecture 10: MFPT continued}
+At the end of the last chapter, we mentioned the Kolmogorov-Chapman equation:
 \begin{align}
     P\left(x, t \mid x_0, t_0\right) & =\int G\left(x, t \mid y, t^{\prime}\right) P\left(y, t^{\prime} \mid x_0 t_0\right) d y
     \intertext{And since:}
@@ -1128,7 +1128,7 @@ Let's now define what an adjoint operator is:
     \intertext{then the adjoint operator $L^\dagger$ is defined to satisfy:}
     \int d x g(x) \hat{L}_x f(x)                           & =\int d x f(x) L^\dagger_x+g(x)                                                \\
     \langle g \hat{L} f\rangle                             & =\left\langle f \hat{L}^{\dagger } g\right\rangle                              \\
-    \intertext{And we can find it by plugging in the defintion of $L_x$ and intergrate it by parts:}
+    \intertext{And we can find it by plugging in the definition of $L_x$ and integrating it by parts:}
     \int d x g(x) \frac{\partial}{\partial x}(\mu(x) f(x)) & =\cancelto{0}{[g \mu f]}-\int d x f(x) \mu(x) \frac{\partial g(x)}{\partial x}
 \end{align}
 \begin{align}
@@ -1148,7 +1148,7 @@ Now if we go back to:
     0                                                                                             & =\int\left[\frac{\partial}{\partial t+} G\left(x, t \mid y_y+t^{\prime}\right)-\hat{L}_y^{+} G\left(x, t \mid y_y, t^{\prime}\right)\right] P\left(y, t^{\prime} \mid x_0, 0\right) dy
     \intertext{and simplify it into:}
     \frac{\partial}{\partial t^\prime} G                                                          & =L_y^{\dagger} G
-    \intertext{And since we can obtain P by apply this propagator onto the initial conditions, P will obey the same equation:}
+    \intertext{And since we can obtain P by applying this propagator onto the initial conditions, P will obey the same equation:}
     \frac{\partial}{\partial t_0} P\left(x, t \mid x_0, t_0\right)                                & =\hat{L}_{x_0} P\left(x, t \mid x_0, t_0\right)
 \end{align}
 So with the adjoint operator, we can go back to the definition of $\tau(x_0)$:
@@ -1158,7 +1158,7 @@ So with the adjoint operator, we can go back to the definition of $\tau(x_0)$:
 \begin{align}
     \hat{L}^{\dag}_{x_0} \tau\left(x_0\right) & =\int d t \int d x\left(\hat{L}_{x_0}^{+} p\right)                                                              \\
                                               & =\int d t \int d x \frac{\partial}{\partial t_0} P\left(x_1 t \mid x_0 t_0\right)
-    \intertext{using the fact that we konw P is a function of $\tilde{t}=t-t_0$, we rewrite it:}
+    \intertext{using the fact that we know P is a function of $\tilde{t}=t-t_0$, we rewrite it:}
                                               & =\int d \tilde{t} \int d x\left[-\frac{\partial}{\partial \tilde{t}} P\left(x, \tilde{t} \mid x_0\right)\right]
                                               & =\int d \tilde{t} f(\tilde{t})=1
 \end{align}
@@ -1172,7 +1172,7 @@ With this, we can solve for $\tau$:
 \begin{align}
     e^{-\beta V(x)} \frac{\partial \tau(x)}{\partial x}=-\frac{1}{D} \int^x e^{-\beta V(y)} d y
 \end{align}
-\textbf{Note:} the lower limit is to be determined. Either we have a relflective boundary and use that as the lower limit, or use $-\infty$ if $V(y)$ is well behaved.
+\textbf{Note:} the lower limit is to be determined. Either we have a reflective boundary and use that as the lower limit, or use $-\infty$ if $V(y)$ is well behaved.
 And then perform a second integration:
 \begin{align}
     \tau\left(x_0\right)=-\int_D^{x_0} \frac{1}{D} e^{\beta V(x)} d x \int^x e^{-\beta V(y)} d y
@@ -1185,7 +1185,7 @@ And then perform a second integration:
 where L is the location of the absorbing boundary and $-a$ is the location of the reflecting boundary or $-\infty$.
 \section{Examples}
 \subsection{1D diffusion}
-Let's go look at our original example where the initial condition is a delta function at $x=0$ and an aborbing and reflective boundary at $x=L$ and $x=-a$.
+Let's go look at our original example where the initial condition is a delta function at $x=0$ and an absorbing and reflective boundary at $x=L$ and $x=-a$.
 \begin{align}
     \tau\left(x_0\right) & =\frac{1}{D} \int_0^L d x \int_{\substack{-a}}^x d y=\frac{1}{D} \int_0^L d x(x+a)
     =\frac{1}{D}\left(\frac{1}{2} L+a L\right)=\frac{1}{2 D} L(L+2 a)
@@ -1196,7 +1196,7 @@ A potential $V= \frac{1}{2} \omega^2 x^2$ with abosrobing boundary at $x=L$. Ple
     MFPT        & = \frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-\infty}^x e^{-\beta V(y)} d y                                            \\
                 & \approx \frac{1}{D} \cdot e^{\beta V_{\max }} \sqrt{\frac{2 \pi k T}{\omega_B^2}} \sqrt{\frac{2 \pi \cdot L \pi}{\omega_0^2}}
     MFPT        & \approx \frac{2 \pi \gamma}{\omega_0 \omega_\beta} e^{\beta V_{\text {max }}}
-    \intertext{And the escape rate will be a half of the reciprical (a half chance of being absorbed after reaching L, the other half steps to the left)}
+    \intertext{And the escape rate will be half of the reciprocal (a half chance of being absorbed after reaching L, the other half steps to the left)}
     \text{rate} & = \frac{\omega_0 \omega_\beta}{4 \pi \gamma} e^{-\beta V_{\text {max }}}
 \end{align}
 \subsection{Diffusion in arbitrary periodic potential}
@@ -1205,26 +1205,26 @@ A potential $V(x)$ that's periodic over space with the period of L. We want to f
     \intertext{start with the standard eq:}
     \tau=\frac{1}{D} \int_{x_0}^L d x e^{\beta V(x)} \int_{-a}^x e^{-\beta V(y)} d y
 \end{align}
-$x_0$ is obviously 0 and $-a=0$ as well (I'm not sure why but the lecturer said so). In the case of over a long time and a long distance travelled, the total deviation from the original position can be written into an effective diffusion:
+$x_0$ is obviously 0 and $-a=0$ as well (I'm not sure why but the lecturer said so). In the case of over a long time and a long distance travelled the total deviation from the original position can be written into an effective diffusion:
 \begin{align}
     L^2=2 D_{\text {ef }} \cdot \tau
     \intertext{so:}
     D_{e f f}=\frac{L^2 D}{2} \frac{1}{\int_0^L e^{\beta v(x)} d x \int_0^x e^{-\beta V(y)} d y}
-    \intertext{and since the denominator is always a quite a large value, we know that the effective diffusion will be:}
+    \intertext{and since the denominator is always quite a large value, we know that the effective diffusion will be:}
     D_{e ff} & \ll D
 \end{align}
 
 
 
-\chapter{Multiplicative noise}
+\chapter{Lecture 11: Multiplicative noise}
 \section{MFPT final part}
 We've studied the MFPT in the last 2 lectures and we have some conclusions:
 \begin{align}
     \langle t\rangle                            & =\int_0^{\infty} S(t) d t                                               \\
     \left\langle t\left(x_0\right)\right\rangle & =\frac{1}{D} \int^L_{x_0} d x e^{\beta V(x)} \int^x e^{-\beta V(y)} d y
 \end{align}
-These conclusions was strictly in 1D but in higher dimensions, the particle might miss the target altogether and never be absorbed. In this case, the MFPT must depend on the size of the target since it might be unbounded if the target is too small!.
-\textbf{Examples:} 1. Forming a ring: The MFPT of one end of a long polymer chain making contact with its other end. 2. Narrow escape: The very first example that we gave of a shell with a small opening and a particle trapped inside.
+These conclusions were strictly in 1D but in higher dimensions, the particle might miss the target altogether and never be absorbed. In this case, the MFPT must depend on the size of the target since it might be unbounded if the target is too small!
+\textbf{Examples:} 1. Forming a ring: The MFPT of one end of a long polymer chain makes contact with its other end. 2. Narrow escape: The very first example that we gave of a shell with a small opening and a particle trapped inside.
 So the relationship between the size of the target $\epsilon$ and the MFPT is:
 \begin{align}
     1D: & \propto \frac{L^2}{D}                         \\
@@ -1250,26 +1250,26 @@ We need to re-examine the K-M expansion. The evaluation of $\ev{\Delta x}$ is as
     \langle\Delta x\rangle & =\int_t^{t+\Delta t} d s(\mu(x, s)+\phi(x) \underline{\xi(s)}) \\
                            & = \mu(x, t) \Delta t+\sigma(x) \int_t^{t+\Delta t} \xi(s) d s
 \end{align}
-The whole problem stems the question that at which point of time between $t$ and $t+\Delta t$ do we take the value $x$ to determine $\sigma$?
+The whole problem stems from the question that at which point of time between $t$ and $t+\Delta t$ do we take the value $x$ to determine $\sigma$?
 \subsection{Itoh version}
-Itoh's lemma suggests that we evaluatue $\sigma$ at the start of the time interval (at time t):
+Itoh's lemma suggests that we evaluate $\sigma$ at the start of the time interval (at time t):
 \begin{align}
     \sigma(x[t]) \int_t^{t+\Delta t} \xi(s) d s
 \end{align}
 since x(t) is statistically independent from $\xi(s)$ so therefore it makes the most sense mathematically.
 \subsection{Stratonovich version}
-But stratonovich suggests that maybe we should evaluate $\sigma$ in the middle of this small time interval instead:
+But Stratonovich suggests that maybe we should evaluate $\sigma$ in the middle of this small time interval instead:
 \begin{align}
     \sigma(x[t + \frac{1}{2}\Delta t]) \int_t^{t+\Delta t} \xi(s) d s
 \end{align}
-\subsection{Lau,Lubensky version}
-From the two examples above, we see that recently people (physicists) have been trying to sort out this problem since they've encountered problems in using the Itoh version. They take the approach by takinga an arbitrary point in the interval for evaluating $\sigma$:
+\subsection{Lau, Lubensky version}
+From the two examples above, we see that recently people (physicists) have been trying to sort out this problem since they've encountered problems in using the Itoh version. They take the approach by taking an arbitrary point in the interval for evaluating $\sigma$:
 \begin{align}
     \sigma(x[t+\alpha \Delta t])
 \end{align}
-where $\alpha$ is bewteen 0 to 1. And then decide what value is the "best" experimentally. Lau and Lubensky concluded that $\alpha = 1$ is the best value.
+where $\alpha$ is between 0 to 1. And then decide what value is the "best" experimentally. Lau and Lubensky concluded that $\alpha = 1$ is the best value.
 
-For all the 3 version that we've mentioned above, the corresponding F-P equations are:
+For all the 3 versions that we've mentioned above, the corresponding F-P equations are:
 \begin{align}
     \intertext{Itoh:($\alpha=0$)}
     \frac{\partial P}{\partial t} & =-\frac{\partial}{\partial x}(\mu(x,t) P)+\frac{1}{2} \frac{\partial^2}{\partial x^2}\left(\sigma^2(x) \cdot P\right)
@@ -1278,11 +1278,11 @@ For all the 3 version that we've mentioned above, the corresponding F-P equation
     \intertext{Lau-Lubensky:($\alpha=1$)}
     \frac{\partial P}{\partial t} & =-\frac{\partial}{\partial x}(\mu(x,t) P)+\frac{1}{2} \frac{\partial}{\partial x}\left(\sigma^2(x) \frac{\partial p}{\partial x}\right)
 \end{align}
-How do we test which one is correct experimentally? If we have a long diffusion channel where there are no potentials and a linear temperature distribution from $T_1$ on one end to $T_2$ on the other end. The intial probability P (concentraion) is constant accross the whole channel. Physicists have observed something called the Thermophoresis or Soret effect:
+How do we test which one is correct experimentally? If we have a long diffusion channel where there are no potentials and a linear temperature distribution from $T_1$ on one end to $T_2$ on the other end. The initial probability P (concentration) is constant across the whole channel. Physicists have observed something called the Thermophoresis or Soret effect:
 \begin{align}
     J=-D \nabla P+\alpha P(1-p) \nabla T
 \end{align}
-at low concentrations this can be approximated into:
+at low concentrations, this can be approximated into:
 \begin{align}
     J & \approx-D \nabla P+\alpha P \nabla T
       & = T \frac{\partial p}{\partial x}+p \frac{\partial T}{\partial x}
@@ -1300,15 +1300,15 @@ We see that L-L is wrong here but the issue is with the "physics" behind the SDE
 \begin{align}
     d x=\mu\left(x, t\right) d t+G(x) d W
 \end{align}
-The "Wiener" process $dW$ is always an \textbf{approximation} of the Brownian motion. The wiener process is built on a markov assumption which the process is memoryless but do we actually know that? Are we sure that the time intervals bewteen two impulses are actually much greater than the relaxation time for the system to "not remember" what happened? We will dive further into this issue in the next later but for the moment we have not gotten enough evidence to disprove L-L.
+The "Wiener" process $dW$ is always an \textbf{approximation} of the Brownian motion. The wiener process is built on a Markov assumption that the process is memoryless but do we actually know that? Are we sure that the time intervals between two impulses are actually much greater than the relaxation time for the system to "not remember" what happened? We will dive further into this issue in the next later but for the moment we have not gotten enough evidence to disprove L-L.
 
-\chapter{Last lecture}
+\chapter{Lecture 12: Last lecture}
 \section{Multiplicative Noise continued}
-From the discussion in the last lecture we talked about the multiplicative noise which stems from the $\sigma$ term in this integral.
+From the discussion in the last lecture, we talked about the multiplicative noise which stems from the $\sigma$ term in this integral.
 \begin{align}
     \sigma(x[t]) \cdot \int_t^{t+\Delta t} \xi(s) d s
 \end{align}
-If we're talking about a mathematically "correct" statistical process, which $\sigma(x)$ is statistically independent from the this wiener step (the integral), then Itoh calculus follows and we should have no debate about this "multiplicative problem". Which gives us a F-P equation of:
+If we're talking about a mathematically "correct" statistical process, in which $\sigma(x)$ is statistically independent of this wiener step (the integral), then Itoh calculus follows and we should have no debate about this "multiplicative problem". Which gives us an F-P equation of:
 \begin{align}
     \frac{\partial P(x, t)}{\partial f} & =-\frac{\partial}{\partial x}(\mu(x, t) \cdot P)+\frac{\partial^2}{\partial x^2}\left(\frac{\sigma^2(x)}{2} P\right)
 \end{align}
@@ -1346,16 +1346,16 @@ Could we re-examine the Markov assumption that we have been using throughout the
 
 \noindent \textbf{Example: Viscoelasticity (Retarded linear response)}
 
-The idea of visoelastiviy is simply a non-memoryless stress-strain relationship (which we all learned in A-level), therfore the relationship will look something like this:
+The idea of viscoelasticity is simply a non-memoryless stress-strain relationship (which we all learned in A-level), therefore the relationship will look something like this:
 \begin{align}
     \text { Stress }(t)=\int_{-\infty}^t G\left(t-t^{\prime}\right) \cdot \frac{\partial\operatorname{Strain\left(t^{\prime}\right)}}{\partial t^\prime} d t^{\prime}
 \end{align}
 
 \bigskip
 
-For a general retarted linear response:
+For a general retarded linear response:
 \begin{align}
-    \intertext{If F and x are conjugate thermodymic variables: (Think about internal energy in thermodynamics)}
+    \intertext{If F and x are conjugate thermodynamic variables: (Think about internal energy in thermodynamics)}
     dU   & = - Fdx
     \intertext{We can write:}
     F(t) & =-\int_{-\infty}^t g\left(t-t^{\prime}\right) \dot{x}\left(t^{\prime}\right) d t^{\prime}
@@ -1376,14 +1376,14 @@ Now let's look at the two extreme forms of g.
 And if $g(t-t^\prime)$ is a delta function:
 \begin{align}
     g\left(t-t^{\prime}\right) & =\gamma \delta\left(t-t^{\prime}\right)
-    \intertext{We get an always dissapative drag:}
+    \intertext{We get an always dissipative drag:}
     F                          & =-\gamma \dot{x}
 \end{align}
 and a generic retarded response function $g$ is a decaying function that's somewhere in between.
 
 \bigskip
 
-So in comparison to a generic brownian motion with Markov noise
+So in comparison to a generic Brownian motion with Markov noise
 \begin{align}
     \intertext{where we have the equation of motion like this:}
     m \dot{v} & =-\gamma v-k x+[\text {Noise}] \ \  \left(\sigma \xi(t),\  \sigma \cdot \frac{d W}{d t},\text{ etc.}\right)
@@ -1401,14 +1401,14 @@ which is the Fluctuation-Dissipation relation.
     \dot{x} & =v                                                                        \\
     \dot{V} & =-\frac{\gamma}{m} v-\frac{k}{m} x+\frac{\sqrt{2 k_B T \gamma}}{m} \xi(t)
 \end{align}
-Without even mentioning any memory kernel, there is already a problem with our markov assumption that we have not noticed before:
+Without even mentioning any memory kernel, there is already a problem with our Markov assumption that we have not noticed before:
 \begin{align}
     \intertext{First integrate to find v:}
     v(t)    & =\int_{-\infty}^t e^{-\frac{r}{m}\left(t-t^{\prime}\right)} \cdot\left[-\frac{k}{m} x\left(t^{\prime}\right)+\frac{\sqrt{2 k_T \cdot \gamma}}{m} \xi\left(t^{\prime}\right)\right] d t^{\prime}
     \intertext{And sub it into x:}
     \dot{x} & =-\frac{k}{m} \int_{-\infty}^t e^{-\frac{\gamma}{m}\left(t-t^{\prime}\right)} x\left(t^{\prime}\right) d t^{\prime}+\frac{\gamma}{m} \sqrt{\frac{2 k_B T}{\gamma}} \cdot \int_{-\infty}^t e^{-\frac{\gamma}{m}\left(t-t^{\prime}\right)} \xi(t^\prime) d t^{\prime}
 \end{align}
-We can see that in both integrals, there is already a "memory like" exponential term due to the particle's own inertia with a memory time scale $\tau=m / \gamma$.
+We can see that in both integrals, there is already a "memory-like" exponential term due to the particle's own inertia with a memory time scale $\tau=m / \gamma$.
 
 \bigskip
 
@@ -1425,9 +1425,5 @@ By using $v(t), x(t)$ at time $\leqslant m / \gamma$, derive:
 \begin{align}
     \langle\eta(t) \eta(s)\rangle=\ldots \frac{k_B T}{k}\left(\tau^2 e^{-\frac{t-s}{\tau}}\right)
 \end{align}
-
-
-
-
 
 \end{document}
