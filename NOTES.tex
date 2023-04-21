@@ -735,7 +735,7 @@ By choosing the equilibrium point $x_0 = 0$ we have the usual single variable O-
 \end{align}
 The reason of the matrices $\theta_{i k},\sigma_{i k}$ is so variables can be correlated to each other so we don't just boringly have one independent ODEs for each variables. To solve this, we convolve the initial condition with the Green's function:
 \begin{align}
-x_i(t)=\int_0^t \underbrace{{e^{-\theta_{i k}(t-s)}}}_{G(t-s)} \cdot \sigma_{k e} \xi_l^{(s)} d s \label{eq:OU_mv_solution}
+    x_i(t)=\int_0^t \underbrace{{e^{-\theta_{i k}(t-s)}}}_{G(t-s)} \cdot \sigma_{k e} \xi_l^{(s)} d s \label{eq:OU_mv_solution}
 \end{align}
 If you are not quite convinced by this, you can check it by differentiation and it gives you the same as Eq.\refeq{eq:OU_mv_SDE}.
 
@@ -930,21 +930,21 @@ In the last chapter, we talked about the O-U process where the forces are linear
     \frac{\partial P(x, t)}{\partial t} & =-\frac{\partial}{\partial x}\left(\frac{f(x) P}{\gamma}\right)+\frac{1}{2} \frac{2 k T}{\gamma} \frac{\partial^2 P}{\partial x^2} \label{eq:KM_expansion_chp8}
     \intertext{which can be written in terms of the current/flux of P:}
                                         & =-\frac{\partial}{\partial x}(J(x, t))
-\intertext{with the continuity equation:}
+    \intertext{with the continuity equation:}
     \dot{P}                             & =-\operatorname{div} J
 \end{align}
 \begin{align}
     \intertext{By expanding J, here we have:}
     J & =\frac{f(x)}{\gamma} \cdot P(x, t)-\frac{k_B T}{\gamma} \frac{\partial P(x, t)}{\partial x}
     \intertext{There's also another definition of J:}
-J & =-D e^{-\beta V(x)} \frac{\partial}{\partial x}\left[e^{\beta V(x)} \cdot P(x,t)\right]
+    J & =-D e^{-\beta V(x)} \frac{\partial}{\partial x}\left[e^{\beta V(x)} \cdot P(x,t)\right]
 \end{align}
 which is the same if you expand it with the product rule and treat $D=\frac{k_B T}{\gamma}$
 
 After adding in the force, let's make it even more general. What if we make the diffusion term $\xi$ x-dependent?
 \begin{align}
     \intertext{We'll have an SDE where $\sigma$ is x-dependent:}
-d x=\mu(x, t) d t+\sigma(x, t) d w
+    d x=\mu(x, t) d t+\sigma(x, t) d w
 \end{align}
 If we take an educated guess of the solution, we will probably want to write something like Eq\refeq{eq:KM_expansion_chp8}:
 \begin{align}
@@ -965,16 +965,16 @@ The most common case is gravity, where the particle experience a constant force 
     \intertext{Let's start with a linear potential:}
     V(x)    & = fx
     \intertext{where we can get the kinetic equation for our probability P:}
-\dot{P} & =\frac{f}{\gamma} P^{\prime}+\frac{k T}{\gamma} P^{\prime \prime}
+    \dot{P} & =\frac{f}{\gamma} P^{\prime}+\frac{k T}{\gamma} P^{\prime \prime}
 \end{align}
 Which can be solved to get: (remember $D = \frac{kT}{\gamma}$)
 \begin{align}
-P(x, t) & =\frac{1}{\sqrt{4 \pi D\left(t-t_0\right)}} \cdot \exp\left[-\frac{\left(x-x_0+\frac{f_0}{\gamma}\left(t-t_0\right)\right)^2}{4 D\left(t-t_0\right)}\right]
+    P(x, t) & =\frac{1}{\sqrt{4 \pi D\left(t-t_0\right)}} \cdot \exp\left[-\frac{\left(x-x_0+\frac{f_0}{\gamma}\left(t-t_0\right)\right)^2}{4 D\left(t-t_0\right)}\right]
 \end{align}
 \subsection{Particle in a quadratic potential}
 Similar to the linear potential case, we start with the kinetic equation by using the potential $V = \frac{1}{2}\alpha x^2$ and $f = \alpha x$ :
 \begin{align}
-\dot{P}           & =\frac{\alpha}{\gamma}(x \cdot P)^{\prime}+\frac{k_s T}{\gamma} P^{\prime \prime}
+    \dot{P}           & =\frac{\alpha}{\gamma}(x \cdot P)^{\prime}+\frac{k_s T}{\gamma} P^{\prime \prime}
     \intertext{where we can solve to get:}
     P\left(x,t\right) & =\frac{1}{\sqrt{2 \pi k_B T S(t) / \alpha}} \cdot \exp \left[-\frac{\alpha\left(x-x_0 \exp\left(-\frac{\alpha}{\gamma}\left(t-t_0\right)\right)\right)}{2 k_B T S(t)}\right]
     \intertext{where:}
@@ -987,11 +987,11 @@ Similar to the linear potential case, we start with the kinetic equation by usin
     \intertext{The original flux equation:}
     \frac{\partial P(x, t)}{\partial t}                                           & =-\frac{\partial}{\partial x} J(x, t)                                                               \\
     J                                                                             & =-D e^{-\beta v(x)} \frac{\gamma}{\partial x}\left[e^{\beta v(x)} P(x, t)\right]
-\intertext{after adding on an extra convection:}
-J_{\text{extra}}                                                                             & =u \cdot P\left(x,t\right)                                                                          \\
-\frac{\partial P(x, t)}{\partial t}                                           & =\nabla\left[D e^{-\beta V} \nabla\left(e^{\beta V} \cdot P\right)\right]-\nabla(u \cdot P)
+    \intertext{after adding on an extra convection:}
+    J_{\text{extra}}                                                              & =u \cdot P\left(x,t\right)                                                                          \\
+    \frac{\partial P(x, t)}{\partial t}                                           & =\nabla\left[D e^{-\beta V} \nabla\left(e^{\beta V} \cdot P\right)\right]-\nabla(u \cdot P)
     \intertext{rearranging:}
-\frac{\partial P(x, t)}{\partial t}+\frac{\partial}{\partial x}(u(x) \cdot P) & =\nabla\left[D e^{-\beta V} \nabla\left(e^{\beta V} \cdot P\right)\right]                           \\
+    \frac{\partial P(x, t)}{\partial t}+\frac{\partial}{\partial x}(u(x) \cdot P) & =\nabla\left[D e^{-\beta V} \nabla\left(e^{\beta V} \cdot P\right)\right]                           \\
                                                                                   & =-\frac{\partial}{\partial x}\left(\frac{f(x)}{\gamma} p\right)+D \frac{\partial^2 p}{\partial x^2}
 \end{align}
 \begin{align}
@@ -1030,14 +1030,14 @@ The exponential term $\exp\left(ux/D\right)$ is called the dispersivity. (There'
 The idea is simple, imagine having a particle travelling at a high speed, bouncing around in a small spherical container. There is a small opening in the container with which the particle can escape. What is the probability of the particle escaping in time t? And what is its meantime of escape? These questions can be asked in all kinds of setting for all types of stochastic processes.
 \begin{align}
     \intertext{Let's bring back the concept of survival probability $S(t)$, which is the probability that the particle has not escaped at time t. If the probability of the position of the particle is $P(x,t)$, then S would be:}
-    S(t)                  & =\int_{\text {vol. inside}} P(x, t) d x
+    S(t)              & =\int_{\text {vol. inside}} P(x, t) d x
     \intertext{Let's try to derive S. Consider $S(t)-S(t+d t)$ to be the rate of escape:}
-    S(t)-S(t+d t)&=f(t) d t
+    S(t)-S(t+d t)     & =f(t) d t
     \intertext{Which we can see that f is the probability density of escaping in time t:}
-    f(t)                  & =-\frac{\partial S(t)}{\partial t}\\
+    f(t)              & =-\frac{\partial S(t)}{\partial t}      \\
     \langle{t}\rangle & =\int_0^{\infty} t f(t) d t
     \intertext{and if intergrate by parts:}
-    \langle t\rangle      & =\int S(t) d t
+    \langle t\rangle  & =\int S(t) d t
 \end{align}
 \section{Examples: 1D simple diffusion}
 Consider the simple 1D diffusion where the particle starts from $x=0$ and diffuses through Brownian motion:
@@ -1062,7 +1062,7 @@ The problem is that we're modelling this with two 1D diffusions where particles 
 To fix this, we add a reflective wall at $x=-a$ to confine the particle. Now we have two reflections: the reflective wall creates symmetric images, and the absorption boundary creates antisymmetric images. And since images of images will also be created by these reflections, we now have an infinite set of images! Of course that we can just express them as infinite series but the simpler way is just to solve the diffusion equation with the boundary conditions:
 \begin{align}
     P^{\prime} & =0 \mid x=-a                                                        \\
-    P          & =0\mid x=L\\
+    P          & =0\mid x=L                                                          \\
     P          & =\delta(x) \text { at } t=0
     \intertext{where the solution will be the infinite series of the form (C is a constant):}
     P          & = \sum_n^\theta \sin \left(\frac{n \pi x-C}{a+L}\right) e^{-(n Dt)}
@@ -1079,16 +1079,16 @@ So in this case where the diffusion starts from x=0: if $a \rightarrow 0$ (only 
 For a motion in an arbitrary potential $V(x)$, we have the Fokker-Planck equation:
 \begin{align}
     \frac{\partial P(x ,t)}{\partial t} & =-\frac{\partial}{\partial x}\left(\frac{f(x)}{\gamma} P(x, t)\right)+D \frac{\partial^2 P}{\partial x^2} \\
-                                     & =-\frac{\partial}{\partial x}(\mu(x) \cdot P)+\frac{1}{2} \sigma^2 \frac{\partial^2 P}{\partial x^2}
+                                        & =-\frac{\partial}{\partial x}(\mu(x) \cdot P)+\frac{1}{2} \sigma^2 \frac{\partial^2 P}{\partial x^2}
     \intertext{We define an F-P operator to simplify things:}
-    \hat{L}_x                        & =D \frac{\partial}{\partial x} e^{-\beta V(x)}\left(\frac{\partial}{\partial x} e^{\beta V(x)}\right)     \\
-    \frac{\partial P}{\partial t}    & =-\hat{L}_x P                                                                                             \\
+    \hat{L}_x                           & =D \frac{\partial}{\partial x} e^{-\beta V(x)}\left(\frac{\partial}{\partial x} e^{\beta V(x)}\right)     \\
+    \frac{\partial P}{\partial t}       & =-\hat{L}_x P                                                                                             \\
     \intertext{and the solution can be written in the form:}
-    P(x, t)                          & =e^{-\hat{L}_x \cdot t} P(x, 0)
+    P(x, t)                             & =e^{-\hat{L}_x \cdot t} P(x, 0)
 \end{align}
 \begin{align}
     \intertext{If we now want to calculate MFPT:}
-    M F P T & =\int_0^{\infty} S(t) d t                                               \\
+    M F P T & =\int_0^{\infty} S(t) d t                                                   \\
             & =\int_0^{\infty} d t \int_{\text{vol}} d x P\left(x, t \mid x_0, t=0\right)
     \intertext{we can see that this value will only depend on $x_0$}
             & = \tau(x_0)
@@ -1108,15 +1108,15 @@ At the end of the last chapter, we mentioned the Kolmogorov-Chapman equation:
 \begin{align}
     P\left(x, t \mid x_0, t_0\right) & =\int G\left(x, t \mid y, t^{\prime}\right) P\left(y, t^{\prime} \mid x_0 t_0\right) d y
     \intertext{And since: (K-M Operator)}
-    \frac{\partial P}{\partial t}&=-\hat{L}_x p
+    \frac{\partial P}{\partial t}    & =-\hat{L}_x p
     \intertext{We can get this relation since the only entry of t and x is in G:}
     \frac{\partial G}{\partial t}    & =-\hat{L}_x G
 \end{align}
 But what if we differentiate w.r.t. $t^\prime$?
 We get:
 \begin{align}
-    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0,0}\right)       & =0                                                                                                                                                                                                                                                 \\
-                                                                               & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,+^{\prime}\right) d y+\int G\left(x,t\mid y,t^{\prime}\right) \frac{\partial}{\partial t^\prime} P\left(y, t^{\prime} \mid x_0, 0\right) d y
+    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0,0}\right) & =0                                                                                                                                                                                                                                                 \\
+                                                                         & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,+^{\prime}\right) d y+\int G\left(x,t\mid y,t^{\prime}\right) \frac{\partial}{\partial t^\prime} P\left(y, t^{\prime} \mid x_0, 0\right) d y
 \end{align}
 \begin{align}
     \intertext{where with the K-C equation, the time derivative of P in the second integral can be written in:}
@@ -1135,19 +1135,19 @@ Let's now define what an adjoint operator is:
     \intertext{And we can find it by plugging in the definition of $L_x$ and integrating it by parts:}
     \int d x g(x) \frac{\partial}{\partial x}(\mu(x) f(x)) & =\cancelto{0}{[g \mu f]}-\int d x f(x) \mu(x) \frac{\partial g(x)}{\partial x}
     \intertext{Therefore find the adjoint:}
-    L_x^{\dag}&=\mu(x) \frac{\partial}{\partial x}-D \frac{\partial^2}{\partial x^2}
+    L_x^{\dag}                                             & =\mu(x) \frac{\partial}{\partial x}-D \frac{\partial^2}{\partial x^2}
 \end{align}
 \begin{align}
     \intertext{So if:}
-    \dot{P}       & =-\hat{L}_x P
+    \dot{P}          & =-\hat{L}_x P
     \intertext{The adjoint operator to be:}
     \hat{L}_x^{\dag} & =D e^{\beta V(x)} \frac{\partial}{\partial x}\left(e^{-\beta V(x)} \frac{\partial}{\partial x}\right)
 \end{align}
 Now if we go back to:
 \begin{align}
-    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0},0\right)                          & =0                                                                                                                                                                                     \\
-                                                                                                  & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,t^{\prime}\right) d y                                                            \\
-                                                                                                  & -\int G\left(x,t\mid y,t^{\prime}\right) \hat{L}_y P\left(y, t^{\prime} \mid x_0, 0\right) d y                                                                                         \\
+    \frac{\partial}{\partial t^{\prime}} P\left(x, t \mid x_{0},0\right)                          & =0                                                                                                                                                                                          \\
+                                                                                                  & =\int P\left(y, t^{\prime} \mid x_0, 0\right) \frac{\partial}{\partial t^{\prime}} G\left(x, t \mid y,t^{\prime}\right) d y                                                                 \\
+                                                                                                  & -\int G\left(x,t\mid y,t^{\prime}\right) \hat{L}_y P\left(y, t^{\prime} \mid x_0, 0\right) d y                                                                                              \\
     \intertext{using the definition of the adjoint operator:}
     \int G\left(x,t\mid y,t^{\prime}\right) \hat{L}_y P\left(y, t^{\prime} \mid x_0, 0\right) d y & = \int P\left(y, t^{\prime} \mid x_0, 0\right) \hat{L}_y^{\dag} G\left(x, t \mid y, t^{\prime}\right) d y
     \intertext{we can write it like:}
@@ -1162,7 +1162,7 @@ So with the adjoint operator, we can go back to the definition of $\tau(x_0)$:
     \hat{L}^{\dag}_{x_0}\left[\tau\left(x_0\right)=\int d t \int_{\text{vol.}} P\left(x,t \mid x_0, t_0\right) d x\right] \\
 \end{align}
 \begin{align}
-    \hat{L}^{\dag}_{x_0} \tau\left(x_0\right) & =\int d t \int d x\left(\hat{L}_{x_0}^{\dag} p\right)                                                              \\
+    \hat{L}^{\dag}_{x_0} \tau\left(x_0\right) & =\int d t \int d x\left(\hat{L}_{x_0}^{\dag} p\right)                                                               \\
                                               & =\int d t \int d x \frac{\partial}{\partial t_0} P\left(x, t \mid x_0 t_0\right)
     \intertext{using the fact that we know P is a function of $\tilde{t}=t-t_0$, we rewrite it:}
                                               & =\int d \tilde{t} \int d x\left[\frac{\partial}{\partial \tilde{t}} P\left(x, \tilde{t} \mid x_0, t_0\right)\right] \\
@@ -1213,9 +1213,9 @@ A potential $V(x)$ that's periodic over space with the period of L. We want to f
 \end{align}
 $x_0$ is obviously 0 and $-a=0$ as well (I'm not sure why but the lecturer said so). In the case of over a long time and a long distance travelled the total deviation from the original position can be written into an effective diffusion:
 \begin{align}
-    L^2&=2 D_{\text {eff}} \cdot \tau
+    L^2            & =2 D_{\text {eff}} \cdot \tau
     \intertext{so:}
-    D_{\text{eff}}&=\frac{L^2 D}{2} \frac{1}{\int_0^L e^{\beta v(x)} d x \int_0^x e^{-\beta V(y)} d y}
+    D_{\text{eff}} & =\frac{L^2 D}{2} \frac{1}{\int_0^L e^{\beta v(x)} d x \int_0^x e^{-\beta V(y)} d y}
     \intertext{and since the denominator is always quite a large value, we know that the effective diffusion will be:}
     D_{\text{eff}} & \ll D
 \end{align}
@@ -1245,7 +1245,7 @@ We have mentioned this in a previous lecture but the overall idea is that when w
     \intertext{where in the overdamped limit for Brownian motion we have:}
     \sigma & =\sqrt{\frac{2 k_B T}{\gamma}}
 \end{align}
-But when $\sigma$ is a function of x, this adds a degree of freedom in the last term of F-P. 
+But when $\sigma$ is a function of x, this adds a degree of freedom in the last term of F-P.
 
 The usual F-P equation is:
 \begin{align}
@@ -1256,7 +1256,7 @@ The usual F-P equation is:
 \end{align}
 We need to re-examine the K-M expansion. The evaluation of $\ev{\Delta x}$ is as followed:
 \begin{align}
-    \langle\Delta x\rangle & =\int_t^{t+\Delta t} d s(\mu(x, s)+\sigma(x) \xi(s)) \\
+    \langle\Delta x\rangle & =\int_t^{t+\Delta t} d s(\mu(x, s)+\sigma(x) \xi(s))          \\
                            & = \mu(x, t) \Delta t+\sigma(x) \int_t^{t+\Delta t} \xi(s) d s
 \end{align}
 The whole problem stems from the question that at which point of time between $t$ and $t+\Delta t$ do we take the value $x$ to determine $\sigma$?
@@ -1346,7 +1346,7 @@ And as long as we identify the "friction constant" as an x-dependent variable:
 \begin{align}
     \gamma(x) & =\frac{2 k_B T}{\sigma(x)^2}
     \intertext{we can still write the new diffusion constant as:}
-    D(x) & =\frac{\sigma^2(x)}{2}=\frac{k_B T}{\gamma(x)}
+    D(x)      & =\frac{\sigma^2(x)}{2}=\frac{k_B T}{\gamma(x)}
 \end{align}
 \section{Non-Markov processes}
 Could we re-examine the Markov assumption that we have been using throughout the whole course?
@@ -1399,7 +1399,7 @@ So in comparison to a generic Brownian motion with Markov noise
     \intertext{Now we have:}
     m \dot{v} & =-\int_{-\infty}^t g\left(t-t^{\prime}\right) \dot{x}(t) d t^{\prime}+\left[\text { Noise } \right]
 \end{align}
-where we can no longer say the noise is Markov. Let's quickly look at the correlation function of this noise $\eta(t)$ without deriving it:
+where we can no longer say the noise is Markov. Let's quickly look at the correlation function of this noiserr $\eta(t)$ without deriving it:
 \begin{align}
     \left\langle\eta(t) \eta\left(t^{\prime}\right)\right\rangle=k_B T g\left(t-t^{\prime}\right)
 \end{align}
