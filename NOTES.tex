@@ -1165,14 +1165,14 @@ So with the adjoint operator, we can go back to the definition of $\tau(x_0)$:
     \hat{L}^{\dag}_{x_0} \tau\left(x_0\right) & =\int d t \int d x\left(\hat{L}_{x_0}^{\dag} p\right)                                                               \\
                                               & =\int d t \int d x \frac{\partial}{\partial t_0} P\left(x, t \mid x_0 t_0\right)
     \intertext{using the fact that we know P is a function of $\tilde{t}=t-t_0$, we rewrite it:}
-                                              & =\int d \tilde{t} \int d x\left[\frac{\partial}{\partial \tilde{t}} P\left(x, \tilde{t} \mid x_0, t_0\right)\right] \\
-                                              & =\int d \tilde{t} f(\tilde{t})=-1
+                                              & =-\int d \tilde{t} \int d x\left[\frac{\partial}{\partial \tilde{t}} P\left(x, \tilde{t} \mid x_0, t_0\right)\right] \\
+                                              & =-\int d \tilde{t} f(\tilde{t})=1
 \end{align}
 \begin{align}
     \intertext{we have simplified everything into:}
-    \hat{L}_{x_0} \tau\left(x_0\right)                                                                           & =-1
+    -\hat{L}_{x_0} \tau\left(x_0\right)                                                                           & =1
     \intertext{or :}
-    D e^{\beta v(x)} \frac{\partial}{\partial x}\left(e^{-\beta v(x)} \frac{\partial \tau(x)}{\partial x}\right) & =-1
+    -D e^{\beta v(x)} \frac{\partial}{\partial x}\left(e^{-\beta v(x)} \frac{\partial \tau(x)}{\partial x}\right) & =1
 \end{align}
 With this, we can solve for $\tau$:
 \begin{align}

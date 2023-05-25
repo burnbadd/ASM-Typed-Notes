@@ -4,5 +4,3 @@ These are my typed notes for the Part III Physics ASM course at University of Ca
 Click on the NOTES.pdf file above and press the download button on the right.
 ## Source codes
 All the latex source codes are included in the repo, with all the templates and macros in the preamble/macros/letterfonts tex files. These are very good templates that I found, you are more than welcome to use them and make your own notes.
-# UPDATE(16/02/2023):
-I have decided not to update the notes weekly since they take wayyy too much time. I will start updating them again during the Easter break or when I'm free.
